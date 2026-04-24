@@ -1,1 +1,1 @@
-# necro-system
+# NecroSystem
