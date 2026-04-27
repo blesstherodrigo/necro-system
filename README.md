@@ -1,18 +1,6 @@
 <h1 align="center">NecroSystem</h1>
 <p align="center">⚠️ NÃO É APENAS UM JOGO. É O ÚLTIMO SISTEMA QUE RESTA!</p>
 
-<p align="center">
-> SISTEMA INICIADO...
->
-> AMBIENTE: APOCALIPSE
->
-> AMEAÇA: ZUMBIS
->
-> OBJETIVO: SOBREVIVER
-> 
-> STATUS: DESCONHECIDO
-</p>
-
 > SISTEMA INICIADO...
 >
 > AMBIENTE: APOCALIPSE
