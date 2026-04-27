@@ -1,7 +1,5 @@
 <h1 align="center">NecroSystem</h1>
----
-
-⚠️ NÃO É APENAS UM JOGO. É O ÚLTIMO SISTEMA QUE RESTA!
+<h1 align="center">⚠️ NÃO É APENAS UM JOGO. É O ÚLTIMO SISTEMA QUE RESTA!</h1>
 
 > SISTEMA INICIADO...
 >
