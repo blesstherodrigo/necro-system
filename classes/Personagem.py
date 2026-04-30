@@ -4,5 +4,3 @@ class Personagem:
         self.vida = vida
         self.defesa = defesa
         self.velocidade  = velocidade
-    
-    # métodos da classe Personagem aqui
