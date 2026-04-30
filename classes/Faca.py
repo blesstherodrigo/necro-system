@@ -1,4 +1,4 @@
-from classes.Arma import Arma
+from classes.arma import Arma
 
 # (Herança) Faca filha de Arma
 class Faca(Arma):
