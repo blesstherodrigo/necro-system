@@ -1,6 +1,0 @@
-from classes.entidades.personagem import Personagem
-
-# subclasse de Personagem
-class Jogador(Personagem):
-    def __init__(self, nome, vida, vida_max, dano):
-        super().__init__(nome, vida, vida_max, dano)
