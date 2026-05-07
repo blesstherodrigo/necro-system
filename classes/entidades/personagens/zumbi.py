@@ -1,5 +1,6 @@
-from classes.entities.personagem import Personagem
+from classes.entidades.personagem import Personagem
 
-class Boss(Personagem):
+# subclasse de Personagem
+class Zumbi(Personagem):
     def __init__(self, nome, vida, vida_max, dano):
         super().__init__(nome, vida, vida_max, dano)
