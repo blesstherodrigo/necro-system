@@ -4,3 +4,9 @@ class Personagem:
         self.vida = vida
         self.vida_max = vida_max
         self.dano = dano
+
+    def atacar(dano):
+
+        # exemplo
+
+        return
