@@ -5,8 +5,10 @@ class Personagem:
         self.vida_max = vida_max
         self.dano = dano
 
-    def atacar(dano):
+    def atacar(self, alvo):
+        alvo.vida -= self.dano
+        if alvo.vida < 0:
+            alvo.vida = 0
 
-        # exemplo
-
-        return
+    def esta_vivo(self):
+        return self.vida > 0
