@@ -1,4 +1,4 @@
-# game/menus.py
+# scripts/menus.py
 
 def mostrar_menu():
     print("\n=== NECROSYSTEM ===")

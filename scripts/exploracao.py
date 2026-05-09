@@ -1,7 +1,7 @@
-# game/exploracao.py
+# scripts/exploracao.py
 
-from objetos.zumbis import criar_fases
-from game.combate import combate
+from data.zumbis import criar_fases
+from scripts.combate import combate
 
 fases = criar_fases()
 fase_atual = 0

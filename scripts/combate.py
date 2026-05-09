@@ -1,4 +1,4 @@
-# game/combate.py
+# scripts/combate.py
 
 def combate(jogador, inimigo):
     print(f"\nCombate contra {inimigo.nome}!")

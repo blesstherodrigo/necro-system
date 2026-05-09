@@ -1,8 +1,8 @@
-# game/jogo.py
+# scripts/jogo.py
 
 from classes.personagens.jogador import Jogador
-from game.menus import mostrar_menu, mostrar_status, mostrar_mochila
-from game.exploracao import explorar
+from scripts.menus import mostrar_menu, mostrar_status, mostrar_mochila
+from scripts.exploracao import explorar
 
 class Jogo:
     def __init__(self):
