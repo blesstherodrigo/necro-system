@@ -6,7 +6,6 @@ from scripts.combate import combate
 fases = criar_fases()
 fase_atual = 0
 
-
 def explorar(jogador):
     global fase_atual
 
