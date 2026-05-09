@@ -1,7 +1,7 @@
 # game/menus.py
 
 def mostrar_menu():
-    print("\n=== NECRO SYSTEM ===")
+    print("\n=== NECROSYSTEM ===")
     print("1. Explorar")
     print("2. Status")
     print("3. Mochila")

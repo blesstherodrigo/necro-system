@@ -1,4 +1,4 @@
-from game.engine import Game
+from game.jogo import Jogo
 
-jogo = Game()
+jogo = Jogo()
 jogo.iniciar()
