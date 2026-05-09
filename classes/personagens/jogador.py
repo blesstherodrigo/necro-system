@@ -1,3 +1,5 @@
+# classes/personagens/jogador.py
+
 from classes.personagens.personagem import Personagem
 
 # subclasse de Personagem

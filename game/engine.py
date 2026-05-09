@@ -1,7 +1,8 @@
+# game/engine.py
+
 from classes.personagens.jogador import Jogador
 from game.menus import mostrar_menu, mostrar_status, mostrar_mochila
 from game.exploracao import explorar
-
 
 class Game:
     def __init__(self):

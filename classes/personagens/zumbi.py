@@ -1,3 +1,5 @@
+# classes/personagens/zumbi.py
+
 from classes.personagens.personagem import Personagem
 
 # subclasse de Personagem

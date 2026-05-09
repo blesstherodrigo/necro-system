@@ -1,12 +1,13 @@
-from objetos.zumbis import zumbis
-from game.combate import combate
+# game/exploracao.py
 
+from objetos.zumbis import zumbis_fase_hospital
+from game.combate import combate
 
 def explorar(jogador):
     print("\nVocê começa a explorar...")
 
-    print(f"Um {zumbis[0].nome} apareceu!")
-    resultado = combate(jogador, zumbis[0])
+    print(f"Um {zumbis_fase_hospital[0].nome} apareceu!")
+    resultado = combate(jogador, zumbis_fase_hospital[0])
 
     if resultado == "morreu":
         return "morreu"
@@ -14,6 +15,6 @@ def explorar(jogador):
     print("O lugar ficou silencioso...")
     print("Apareceu outro zumbi.")
 
-    resultado = combate(jogador, zumbis[1])
+    resultado = combate(jogador, zumbis_fase_hospital[1])
 
     return resultado

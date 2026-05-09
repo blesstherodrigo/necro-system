@@ -1,3 +1,5 @@
+# classes/personagens/personagem.py
+
 class Personagem:
     def __init__(self, nome, vida, vida_max, dano):
         self.nome = nome

@@ -1,3 +1,5 @@
+# classes/personagens/boss.py
+
 from classes.personagens.personagem import Personagem
 
 # subclasse de Personagem
