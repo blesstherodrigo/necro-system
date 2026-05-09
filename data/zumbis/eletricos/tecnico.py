@@ -1,7 +1,7 @@
 from classes.personagens.zumbi import Zumbi
 
-auxiliar_eletrico = Zumbi(
-    "Auxiliar Eletrico",
+tecnico_eletrico = Zumbi(
+    "Técnico Elétrico",
     10, 10, 5,
     [
         "imagem"
