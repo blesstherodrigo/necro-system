@@ -5,7 +5,7 @@ def combate(jogador, inimigo):
 
     while jogador.esta_vivo() and inimigo.esta_vivo():
         print(f"\nSua vida: {jogador.vida}/{jogador.vida_max}")
-        print(f"Vida do zumbi {inimigo.nome}: {inimigo.vida}/{inimigo.vida_max}")
+        print(f"Vida de {inimigo.nome}: {inimigo.vida}/{inimigo.vida_max}")
 
         print("\n1. Atacar")
         print("2. Fugir")
