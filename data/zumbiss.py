@@ -10,8 +10,8 @@ def criar_fases():
             "nome": "Hospital Abandonado",
             "descricao": "Corredores escuros, macas quebradas e gritos ao longe.",
             "inimigos": [
-                Zumbi("Médica Infectada", 120, 120, 12, "imagem"),
-                Zumbi("Paciente Zumbi", 140, 140, 14, "imagem"),
+                Zumbi("Médica Infectada", 12, 12, 12, "imagem"),
+                Zumbi("Paciente Zumbi", 14, 14, 14, "imagem"),
             ],
         },
         {
@@ -19,9 +19,9 @@ def criar_fases():
             "nome": "Rua Destruída",
             "descricao": "Carros queimados bloqueiam o caminho enquanto zumbis cercam a avenida.",
             "inimigos": [
-                Zumbi("Zumbi Corredor", 160, 160, 16, "imagem"),
-                Zumbi("Zumbi Policial", 180, 180, 18, "imagem"),
-                Boss("Brutamontes da Rua", 260, 260, 24, "imagem"),
+                Zumbi("Zumbi Corredor", 16, 16, 16, "imagem"),
+                Zumbi("Zumbi Policial", 18, 18, 18, "imagem"),
+                Boss("Brutamontes da Rua", 26, 26, 24, "imagem"),
             ],
         },
         {
@@ -29,9 +29,9 @@ def criar_fases():
             "nome": "Laboratório Secreto",
             "descricao": "Tanques quebrados e experimentos falhos revelam a origem da infecção.",
             "inimigos": [
-                Zumbi("Cientista Infectado", 200, 200, 20, "imagem"),
-                Zumbi("Segurança Mutante", 220, 220, 22, "imagem"),
-                Boss("Experimento Alfa", 340, 340, 30, "imagem"),
+                Zumbi("Cientista Infectado", 20, 20, 20, "imagem"),
+                Zumbi("Segurança Mutante", 22, 22, 22, "imagem"),
+                Boss("Experimento Alfa", 34, 34, 30, "imagem"),
             ],
         },
         {
@@ -39,9 +39,9 @@ def criar_fases():
             "nome": "Centro de Controle",
             "descricao": "O último sistema ainda funciona, mas o maior perigo está protegendo a saída.",
             "inimigos": [
-                Zumbi("Operador Infectado", 240, 240, 24, "imagem"),
-                Zumbi("Soldado Zumbi", 260, 260, 26, "imagem"),
-                Boss("NecroBoss", 450, 450, 38, "imagem"),
+                Zumbi("Operador Infectado", 24, 24, 24, "imagem"),
+                Zumbi("Soldado Zumbi", 26, 26, 26, "imagem"),
+                Boss("NecroBoss", 45, 45, 38, "imagem"),
             ],
         },
     ]
