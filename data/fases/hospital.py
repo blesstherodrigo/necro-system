@@ -11,7 +11,7 @@ boss = doutor_infectado
 fase_hospital = {
     "numero": 1,
     "nome": "Hospital",
-    "descricao": "",
+    "descricao": "Corredores escuros, macas quebradas e gritos ao longe.",
     "inimigos": [
         zumbi_1,
         zumbi_2,
