@@ -1,26 +1,49 @@
-from data.inimigos.infectados.paciente import paciente_infectado
-from data.inimigos.infectados.enfermeira import enfermeira_infectada
-from data.inimigos.infectados.doutor import doutor_infectado
+
+from data.zumbis.infectados import paciente, enfermeira, doutor
+
+hospital_zumbi_1 = paciente.paciente_infectado
+hospital_zumbi_2 = enfermeira.enfermeira_infectada
+hospital_boss = doutor.doutor_infectado
 
 fases = {
     {
+        "numero": 1,
         "nome": "Hospital",
-        "inimigos": [paciente_infectado, enfermeira_infectada, doutor_infectado],
         "descricao": "",
+        "inimigos": [
+            "paciente",
+            "enfermeira",
+            "doutor"
+        ]
     },
     {
+        "numero": 2,
         "nome": "Estação de Energia",
-        "inimigos": ["zumbi_eletrico", "tecnico_energizado", "gerador_vivo"],
         "descricao": "",
+        "inimigos": [
+            "zumbi_eletrico",
+            "tecnico_energizado",
+            "gerador_vivo"
+        ]
     },
     {
+        "numero": 3,
         "nome": "Laboratório",
-        "inimigos": ["zumbi_acido", "cobaia_derretida", "experimento_corrosivo"],
         "descricao": "",
+        "inimigos": [
+            "zumbi_acido",
+            "cobaia_derretida",
+            "experimento_corrosivo"
+        ]
     },
     {
+        "numero": 4,
         "nome": "Usina Nuclear",
-        "inimigos": ["zumbi_radioativo", "operario_do_reator", "nucleo_infectado"],
         "descricao": "",
+        "inimigos": [
+            "zumbi_radioativo",
+            "operario_do_reator",
+            "nucleo_infectado"
+        ]
     }
 }

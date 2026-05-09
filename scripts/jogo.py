@@ -13,7 +13,7 @@ class Jogo:
         # escolher genero do jogador ???
         
         nome = input("Digite seu nome: ")
-        self.jogador = Jogador(nome, 1000, 1000, 50)
+        self.jogador = Jogador(nome, 1000, 1000, 50, "imagem")
 
     def iniciar(self):
         self.criar_jogador()
