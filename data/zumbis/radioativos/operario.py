@@ -1,3 +1,4 @@
+# # # data/zumbis/radioativos/operario.py
 from classes.personagens.zumbi import Zumbi
 
 operario_radioativo = Zumbi(

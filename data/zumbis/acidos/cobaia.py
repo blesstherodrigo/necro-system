@@ -1,3 +1,4 @@
+# data/zumbis/acidos/cobaia.py
 from classes.personagens.zumbi import Zumbi
 
 cobaia_acida = Zumbi(

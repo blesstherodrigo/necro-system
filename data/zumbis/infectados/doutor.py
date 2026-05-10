@@ -1,3 +1,4 @@
+# data/zumbis/infectados/doutor.py
 from classes.personagens.boss import Boss
 
 doutor_infectado = Boss(

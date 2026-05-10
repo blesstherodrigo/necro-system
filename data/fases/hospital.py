@@ -1,5 +1,4 @@
 # data/fases/hospital.py
-
 from data.zumbis.infectados import paciente, enfermeira, doutor
 
 zumbi_1 = paciente.paciente_infectado

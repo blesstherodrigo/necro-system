@@ -1,4 +1,4 @@
-# scripts/jogo.py
+# game/carregarJogo.py
 from classes.jogo import Jogo
 from data.fases import hospital, estacaoEnergia, laboratorio, usinaNuclear
 

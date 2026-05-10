@@ -1,5 +1,4 @@
 # data/fases/laboratorio.py
-
 from data.zumbis.acidos import cobaia, analista, cientista
 
 zumbi_1 = cobaia.cobaia_acida

@@ -1,3 +1,4 @@
+# data/zumbis/acidos/cientista.py
 from classes.personagens.boss import Boss
 
 cientista_acido = Boss(

@@ -1,3 +1,4 @@
+# # data/zumbis/radioativos/administrador.py
 from classes.personagens.zumbi import Zumbi
 
 administrador_radioativo = Zumbi(

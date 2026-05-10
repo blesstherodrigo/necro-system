@@ -1,5 +1,4 @@
 # data/fases/usinaNuclear.py
-
 from data.zumbis.radioativos import operario, administrador, seguranca
 
 zumbi_1 = operario.operario_radioativo

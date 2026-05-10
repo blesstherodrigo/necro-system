@@ -1,3 +1,4 @@
+# data/zumbis/eletricos/auxiliar.py
 from classes.personagens.zumbi import Zumbi
 
 auxiliar_eletrico = Zumbi(

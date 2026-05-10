@@ -1,3 +1,4 @@
+# # data/zumbis/infectados/paciente.py
 from classes.personagens.zumbi import Zumbi
 
 paciente_infectado = Zumbi(

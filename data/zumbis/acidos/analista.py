@@ -1,3 +1,4 @@
+# data/zumbis/acidos/analista.py
 from classes.personagens.zumbi import Zumbi
 
 analista_acido = Zumbi(
