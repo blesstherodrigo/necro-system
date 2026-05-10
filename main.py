@@ -1,6 +1,4 @@
 # necro-system/
+from game import carregarJogo
 
-from scripts.jogo import Jogo
-
-jogo = Jogo()
-jogo.iniciar()
+carregarJogo.carregar()

@@ -1,14 +1,12 @@
-# scripts/jogo.py
-
+# classes/jogo.py
 from classes.personagens.jogador import Jogador
-from scripts.menus import mostrar_menu, mostrar_status, mostrar_mochila
-from data.fases import hospital, estacaoEnergia, laboratorio, usinaNuclear
+from game.menus import mostrar_menu, mostrar_status, mostrar_mochila
 
 class Jogo:
-    def __init__(self):
+    def __init__(self, fases):
         self.jogador = None
         self.rodando = True
-        self.fases = self.criar_fases()
+        self.fases = fases
         self.fase_atual = 0
 
     def criar_jogador(self):
@@ -26,13 +24,9 @@ class Jogo:
         nome = input("Digite seu nome: ")
         self.jogador = Jogador(nome, 1000, 1000, 50, imagem)
 
-    def criar_fases(self):
-        return [
-            hospital.fase_hospital,
-            estacaoEnergia.fase_estacao_de_energia,
-            laboratorio.fase_laboratorio,
-            usinaNuclear.fase_usina_nuclear
-        ]
+    def criar_fases(self, vetor_fases):
+        self.fases = vetor_fases
+        return self.fases
 
     def combate(self, jogador, inimigo):
         print(f"\nCombate contra {inimigo.nome}!")
@@ -98,7 +92,6 @@ class Jogo:
 
     def iniciar(self):
         # >Introdução do jogo AQUI<
-
         
         self.criar_jogador()
 
@@ -123,59 +116,3 @@ class Jogo:
 
             else:
                 print("Opção inválida.")
-
-
-
-
-
-
-
-
-
-# from classes.personagens.jogador import Jogador
-# from scripts.menus import mostrar_menu, mostrar_status, mostrar_mochila
-# from scripts.exploracao import explorar
-
-# class Jogo:
-#     def __init__(self):
-#         self.jogador = None
-#         self.rodando = True
-    
-#     def criar_jogador(self):
-#         print("[1] Homem | [2] Mulher")
-#         personagem = input("> ")
-#         if personagem == "1":
-#             imagem = "Homem"
-#         elif personagem == "2":
-#             imagem = "Mulher"
-#         else:
-#             print("Opção inválida")
-        
-#         nome = input("Digite seu nome: ")
-#         self.jogador = Jogador(nome, 1000, 1000, 50, imagem)
-    
-#     def iniciar(self):
-#         self.criar_jogador()
-
-#         while self.rodando:
-#             # >Introdução do jogo AQUI<
-
-#             mostrar_menu()
-#             escolha = input("> ")
-
-#             if escolha == "1":
-#                 resultado = explorar(self.jogador)
-#                 if resultado == "morreu":
-#                     self.rodando = False
-            
-#             elif escolha == "2":
-#                 mostrar_status(self.jogador)
-            
-#             elif escolha == "3":
-#                 mostrar_mochila()
-            
-#             elif escolha == "4":
-#                 self.rodando = False
-            
-#             else:
-#                 print("Opção inválida.")
