@@ -1,4 +1,4 @@
-# data/fases/estacaoEnergia.py
+# data/fases/estacao_energia.py
 from data.zumbis.eletricos import auxiliar_eletrico, tecnico_eletrico, engenheiro_eletrico
 
 zumbi_1 = auxiliar_eletrico
