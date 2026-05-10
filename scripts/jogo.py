@@ -10,10 +10,17 @@ class Jogo:
         self.rodando = True
     
     def criar_jogador(self):
-        # escolher genero do jogador ???
+        print("[1] Homem | [2] Mulher")
+        personagem = input("> ")
+        if personagem == "1":
+            imagem = "Homem"
+        elif personagem == "2":
+            imagem = "Mulher"
+        else:
+            print("Opção inválida")
         
         nome = input("Digite seu nome: ")
-        self.jogador = Jogador(nome, 1000, 1000, 50, "imagem")
+        self.jogador = Jogador(nome, 1000, 1000, 50, imagem)
 
     def iniciar(self):
         self.criar_jogador()

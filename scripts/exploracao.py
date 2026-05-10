@@ -1,6 +1,6 @@
 # scripts/exploracao.py
 
-from data.zumbiss import criar_fases
+from data.gerarFases import criar_fases
 from scripts.combate import combate
 
 fases = criar_fases()
