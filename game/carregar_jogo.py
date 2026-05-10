@@ -1,13 +1,13 @@
 # game/carregarJogo.py
 from classes.jogo import Jogo
-from data.fases import hospital, estacaoEnergia, laboratorio, usinaNuclear
+from data.fases import estacao_energia, hospital, laboratorio, usina_nuclear
 
 def carregar():
     fases_jogo = [
         hospital.fase_hospital,
-        estacaoEnergia.fase_estacao_de_energia,
+        estacao_energia.fase_estacao_de_energia,
         laboratorio.fase_laboratorio,
-        usinaNuclear.fase_usina_nuclear
+        usina_nuclear.fase_usina_nuclear
     ]
 
     jogo = Jogo(fases_jogo)

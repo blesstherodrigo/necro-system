@@ -1,4 +1,4 @@
 # necro-system/
-from game import carregarJogo
+from game import carregar_jogo
 
-carregarJogo.carregar()
+carregar_jogo.carregar()
