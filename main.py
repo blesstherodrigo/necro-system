@@ -1,3 +1,5 @@
+# necro-system/
+
 from scripts.jogo import Jogo
 
 jogo = Jogo()
