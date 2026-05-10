@@ -3,7 +3,7 @@ from data.zumbis.radioativos import operario, administrador, seguranca
 
 zumbi_1 = operario.operario_radioativo
 zumbi_2 = administrador.administrador_radioativo
-boss = seguranca.operario_radioativo
+boss = seguranca.seguranca_radioativo
 
 fase_usina_nuclear = {
     "numero": 4,
