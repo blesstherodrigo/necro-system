@@ -1,6 +1,12 @@
 # classes/jogo.py
 from classes.personagens.jogador import Jogador
-from game.menus import mostrar_menu, mostrar_status, mostrar_mochila
+from game.menus import (
+    mostrar_menu,
+    mostrar_status,
+    mostrar_mochila,
+    limpar_tela,
+    pausar
+)
 
 class Jogo:
     def __init__(self, fases):
@@ -29,14 +35,18 @@ class Jogo:
         return self.fases
 
     def combate(self, jogador, inimigo):
-        print(f"\nCombate contra {inimigo.nome}!")
-
         while jogador.esta_vivo() and inimigo.esta_vivo():
-            print(f"\nSua vida: {jogador.vida}/{jogador.vida_max}")
-            print(f"Vida de {inimigo.nome}: {inimigo.vida}/{inimigo.vida_max}")
+            limpar_tela()
 
-            print("\n1. Atacar")
+            print(f"=== COMBATE CONTRA {inimigo.nome.upper()} ===")
+            print()
+            print(f"Sua vida: {jogador.vida}/{jogador.vida_max}")
+            print(f"Vida de {inimigo.nome}: {inimigo.vida}/{inimigo.vida_max}")
+            print("-" * 30)
+            print("1. Atacar")
             print("2. Fugir")
+            print("-" * 30)
+
             escolha = input("> ")
 
             if escolha == "1":
@@ -45,32 +55,44 @@ class Jogo:
                 if inimigo.esta_vivo():
                     inimigo.atacar(jogador)
 
+                pausar()
+
             elif escolha == "2":
                 print("Você fugiu do combate.")
+                pausar()
                 return "fugiu"
 
             else:
                 print("Opção inválida.")
+                pausar()
 
         if jogador.esta_vivo():
             print(f"\nVocê derrotou {inimigo.nome}!")
+            pausar()
             return "venceu"
 
         print("\nVocê morreu.")
+        pausar()
         return "morreu"
 
     def explorar(self, jogador):
+        limpar_tela()
+
         if self.fase_atual >= len(self.fases):
             print("\nVocê já concluiu todas as fases disponíveis!")
             return "finalizado"
 
         fase = self.fases[self.fase_atual]
 
-        print(f"\n=== FASE {fase['numero']}: {fase['nome'].upper()} ===")
+        print(f"=== FASE {fase['numero']}: {fase['nome'].upper()} ===")
         print(fase["descricao"])
+        pausar()
 
         for inimigo in fase["inimigos"]:
-            print(f"\nUm {inimigo.nome} apareceu!")
+            limpar_tela()
+            print(f"Um {inimigo.nome} apareceu!")
+            pausar()
+
             resultado_do_combate = self.combate(jogador, inimigo)
 
             if resultado_do_combate == "morreu":
@@ -80,7 +102,8 @@ class Jogo:
                 print("\nVocê recuou. A fase continuará daqui quando explorar novamente.")
                 return "fugiu"
 
-        print(f"\nVocê concluiu a Fase {fase['numero']}: {fase['nome']}!")
+        limpar_tela()
+        print(f"Você concluiu a Fase {fase['numero']}: {fase['nome']}!")
         self.fase_atual += 1
 
         if self.fase_atual >= len(self.fases):
@@ -92,11 +115,17 @@ class Jogo:
 
     def iniciar(self):
         # >Introdução do jogo AQUI<
-        
+
+        limpar_tela()
         self.criar_jogador()
 
         while self.rodando:
-            mostrar_menu()
+            mostrar_menu(
+                self.jogador,
+                self.fase_atual,
+                len(self.fases)
+            )
+
             escolha = input("> ")
 
             if escolha == "1":
@@ -104,6 +133,8 @@ class Jogo:
 
                 if resultado == "morreu":
                     self.rodando = False
+                else:
+                    pausar()
 
             elif escolha == "2":
                 mostrar_status(self.jogador)
@@ -112,7 +143,10 @@ class Jogo:
                 mostrar_mochila()
 
             elif escolha == "4":
+                limpar_tela()
+                print("Saindo do jogo...")
                 self.rodando = False
 
             else:
                 print("Opção inválida.")
+                pausar()
