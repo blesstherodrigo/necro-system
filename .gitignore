@@ -209,3 +209,4 @@ __marimo__/
 # Pastas e arquivos para ignorar
 .idea/
 __init__.py
+.DS_Store
