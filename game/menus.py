@@ -18,7 +18,7 @@ def mostrar_menu(jogador=None, fase_atual=None, total_fases=None):
         print(f"Dano: {jogador.dano}")
 
     if fase_atual is not None and total_fases is not None:
-        print(f"Fase: {fase_atual + 1}/{total_fases}")
+        print(f"Fase: {fase_atual}/{total_fases}")
 
     print("-" * 25)
     print("1. Explorar")
@@ -31,7 +31,7 @@ def mostrar_status(jogador):
     limpar_tela()
 
     print("=== STATUS ===")
-    print(f"Nome: {jogador.nome}")
+    print(f"Jogador: {jogador.nome}")
     print(f"Vida: {jogador.vida}/{jogador.vida_max}")
     print(f"Dano: {jogador.dano}")
 
