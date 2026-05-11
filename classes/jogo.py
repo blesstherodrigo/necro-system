@@ -16,14 +16,17 @@ class Jogo:
         self.fase_atual = 0
 
     def criar_jogador(self):
+        # aqui deve mostrar a imagem dos personagens Homem e Mulher
         print("[1] Homem | [2] Mulher")
         personagem = input("> ")
 
+        # >fazer um loop(while) caso o jogador escolher errado<
         if personagem == "1":
             imagem = "Homem"
         elif personagem == "2":
             imagem = "Mulher"
         else:
+            # por enquanto, ao escolher errado fica Homem como padrão
             print("Opção inválida. Personagem definido como Homem por padrão.")
             imagem = "Homem"
 
@@ -75,7 +78,7 @@ class Jogo:
         pausar()
         return "morreu"
 
-    def explorar(self, jogador):
+    def explorar_fases(self, jogador):
         limpar_tela()
 
         if self.fase_atual >= len(self.fases):
@@ -129,7 +132,7 @@ class Jogo:
             escolha = input("> ")
 
             if escolha == "1":
-                resultado = self.explorar(self.jogador)
+                resultado = self.explorar_fases(self.jogador)
 
                 if resultado == "morreu":
                     self.rodando = False
