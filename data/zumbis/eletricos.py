@@ -2,15 +2,15 @@
 from classes.personagens.zumbi import Zumbi
 from classes.personagens.boss import Boss
 
-auxiliar_eletrico = Zumbi(
-    "Auxiliar Eletrico",
+zumbi_eletrico_1 = Zumbi(
+    "Auxiliar Elétrico",
     10, 10, 5,
     [
         "imagem"
     ]
 )
 
-tecnico_eletrico = Zumbi(
+zumbi_eletrico_2 = Zumbi(
     "Técnico Elétrico",
     10, 10, 5,
     [
@@ -18,7 +18,7 @@ tecnico_eletrico = Zumbi(
     ]
 )
 
-engenheiro_eletrico = Boss(
+boss_eletrico = Boss(
     "Engenheiro Elétrico",
     20, 20, 10,
     [

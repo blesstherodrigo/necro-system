@@ -1,17 +1,13 @@
 # data/fases/estacao_energia.py
-from data.zumbis.eletricos import auxiliar_eletrico, tecnico_eletrico, engenheiro_eletrico
-
-zumbi_1 = auxiliar_eletrico
-zumbi_2 = tecnico_eletrico
-boss = engenheiro_eletrico
+from data.zumbis.eletricos import zumbi_eletrico_1, zumbi_eletrico_2, boss_eletrico
 
 fase_estacao_de_energia = {
     "numero": 2,
     "nome": "Estação de Energia",
     "descricao": "",
     "inimigos": [
-        zumbi_1,
-        zumbi_2,
-        boss
+        zumbi_eletrico_1,
+        zumbi_eletrico_2,
+        boss_eletrico
     ]
 }

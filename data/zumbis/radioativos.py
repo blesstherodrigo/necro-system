@@ -2,7 +2,7 @@
 from classes.personagens.zumbi import Zumbi
 from classes.personagens.boss import Boss
 
-operario_radioativo = Zumbi(
+zumbi_radioativo_1 = Zumbi(
     "Operario Radioativo",
     10, 10, 5,
     [
@@ -10,7 +10,7 @@ operario_radioativo = Zumbi(
     ]
 )
 
-administrador_radioativo = Zumbi(
+zumbi_radioativo_2 = Zumbi(
     "Administrador Radioativo",
     10, 10, 5,
     [
@@ -18,7 +18,7 @@ administrador_radioativo = Zumbi(
     ]
 )
 
-seguranca_radioativo = Boss(
+boss_radioativo = Boss(
     "Segurança Radioativo",
     20, 20, 10,
     [

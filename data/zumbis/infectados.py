@@ -2,7 +2,7 @@
 from classes.personagens.zumbi import Zumbi
 from classes.personagens.boss import Boss
 
-paciente_infectado = Zumbi(
+zumbi_infectado_1 = Zumbi(
     "Paciente Infectado",
     10, 10, 5,
     [
@@ -10,7 +10,7 @@ paciente_infectado = Zumbi(
     ]
 )
 
-enfermeira_infectada = Zumbi(
+zumbi_infectada_2 = Zumbi(
     "Enfermeira Infectada",
     10, 10, 5,
     [
@@ -81,7 +81,7 @@ enfermeira_infectada = Zumbi(
     ]
 )
 
-doutor_infectado = Boss(
+boss_infectado = Boss(
     "Doutor Infectado",
     20, 20, 10,
     [
