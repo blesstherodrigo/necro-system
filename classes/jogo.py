@@ -61,8 +61,7 @@ class Jogo:
                 pausar()
 
             elif escolha == "2":
-                print("Você fugiu do combate.")
-                pausar()
+                print("\nVocê recuou. A fase continuará daqui quando explorar novamente.")
                 return "fugiu"
 
             else:
@@ -73,7 +72,7 @@ class Jogo:
             print(f"\nVocê derrotou {inimigo.nome}!")
             pausar()
             return "venceu"
-
+        
         print("\nVocê morreu.")
         pausar()
         return "morreu"
@@ -102,7 +101,6 @@ class Jogo:
                 return "morreu"
 
             if resultado_do_combate == "fugiu":
-                print("\nVocê recuou. A fase continuará daqui quando explorar novamente.")
                 return "fugiu"
 
         limpar_tela()
@@ -137,7 +135,7 @@ class Jogo:
                 if resultado == "morreu":
                     self.rodando = False
                 else:
-                    pausar()
+                    pausar()    # para que serve este else???
 
             elif escolha == "2":
                 mostrar_status(self.jogador)

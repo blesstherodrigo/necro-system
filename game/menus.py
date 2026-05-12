@@ -4,6 +4,9 @@ import os
 def limpar_tela():
     os.system("cls" if os.name == "nt" else "clear")
 
+def enter_voltar():
+    input("\nPressione Enter para voltar...")
+
 def pausar():
     input("\nPressione Enter para continuar...")
 
@@ -35,7 +38,7 @@ def mostrar_status(jogador):
     print(f"Vida: {jogador.vida}/{jogador.vida_max}")
     print(f"Dano: {jogador.dano}")
 
-    pausar()
+    enter_voltar()
 
 def mostrar_mochila():
     limpar_tela()
@@ -43,4 +46,4 @@ def mostrar_mochila():
     print("=== MOCHILA ===")
     print("Mochila aqui")
 
-    pausar()
+    enter_voltar()
