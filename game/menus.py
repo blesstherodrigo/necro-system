@@ -7,28 +7,40 @@ def limpar_tela():
 def enter_voltar():
     input("\nPressione Enter para voltar...")
 
-def pausar():
+def enter_continuar():
     input("\nPressione Enter para continuar...")
 
-def mostrar_menu(jogador=None, fase_atual=None, total_fases=None):
+def mostrar_menu(nome, vida, vida_max, dano, fase_atual, total_fases):
     limpar_tela()
 
     print("=== NECROSYSTEM ===")
-
-    if jogador:
-        print(f"Jogador: {jogador.nome}")
-        print(f"Vida: {jogador.vida}/{jogador.vida_max}")
-        print(f"Dano: {jogador.dano}")
-
-    if fase_atual is not None and total_fases is not None:
-        print(f"Fase: {fase_atual}/{total_fases}")
-
+    print(f"Jogador: {nome}")
+    print(f"Vida: {vida}/{vida_max}")
+    print(f"Dano: {dano}")
+    print(f"Fase: {fase_atual}/{total_fases}")
+    
     print("-" * 25)
     print("1. Explorar")
     print("2. Status")
     print("3. Mochila")
     print("4. Sair")
     print("-" * 25)
+
+def mostrar_combate(
+        nome_inimigo,
+        vida_inimigo,
+        vida_max_inimigo,
+        vida_jogador,
+        vida_max_jogador
+    ):
+    print(f"=== COMBATE CONTRA {nome_inimigo.upper()} ===\n")
+    print(f"Sua vida: {vida_jogador}/{vida_max_jogador}")
+    print(f"Vida de {nome_inimigo}: {vida_inimigo}/{vida_max_inimigo}")
+    
+    print("-" * 30)
+    print("1. Atacar")
+    print("2. Fugir")
+    print("-" * 30)
 
 def mostrar_status(jogador):
     limpar_tela()
