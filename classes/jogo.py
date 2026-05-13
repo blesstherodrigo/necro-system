@@ -1,5 +1,6 @@
 # classes/jogo.py
 from classes.personagens.jogador import Jogador
+from data.fases import fase_1, fase_2, fase_3, fase_4
 from game.menus import (
     mostrar_menu,
     mostrar_status,
@@ -10,26 +11,26 @@ from game.menus import (
 )
 
 class Jogo:
-    def __init__(self, fases):
+    def __init__(self):
         self.jogador = None
         self.inimigo = None
         self.rodando = True
-        self.fases = fases
+        self.fases = [fase_1, fase_2, fase_3, fase_4]
         self.fase_atual = 0
 
     def criar_jogador(self):
-        # aqui deve mostrar a imagem dos personagens Homem e Mulher
+        # aqui deve mostrar a imagem dos personagens, Homem e Mulher
 
         while True:
             print("[1] Homem | [2] Mulher")
-            personagem = input("> ")
+            escolher_personagem = input("> ")
             
             limpar_tela()
 
-            if personagem == "1":
+            if escolher_personagem == "1":
                 imagem = "Homem"
                 break
-            elif personagem == "2":
+            elif escolher_personagem == "2":
                 imagem = "Mulher"
                 break
             else:
@@ -38,11 +39,7 @@ class Jogo:
         nome = input("Digite seu nome: ")
         self.jogador = Jogador(nome, 1000, 1000, 50, imagem)
 
-    # tentar inplementar este método
-    def criar_fases(self, vetor_fases):
-        self.fases = vetor_fases
-        return self.fases
-
+    # criar combates para tipos diferentes de inimigos (zumbi comum e boss)
     def combate(self, inimigo):
         while self.jogador.esta_vivo() and inimigo.esta_vivo():
             limpar_tela()
@@ -104,6 +101,7 @@ class Jogo:
             print(f"Um {buscar_inimigo.nome} apareceu!")
             enter_continuar()
 
+            # criar combates para tipos diferentes de inimigos (zumbi comum e boss)
             resultado_do_combate = self.combate(buscar_inimigo)
 
             if resultado_do_combate == "morreu":
