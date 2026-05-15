@@ -87,6 +87,7 @@ class Jogo:
 
         if self.fase_atual >= len(self.fases):
             print("\nVocê já concluiu todas as fases disponíveis!")
+            enter_continuar()
             return "finalizado"
 
         fase = self.fases[self.fase_atual]
@@ -115,8 +116,8 @@ class Jogo:
         self.fase_atual += 1
 
         if self.fase_atual >= len(self.fases):
-            print("\nParabéns! Você sobreviveu a todas as fases do NecroSystem!")
-            return "finalizado"
+            print("\nParabéns! Você sobreviveu ao NecroSystem!")
+            enter_continuar()
 
         print("\nUma nova área foi desbloqueada.")
         return "venceu"
