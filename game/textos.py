@@ -20,6 +20,17 @@ def opcao_invalida():
 
 # menu principal ...
 
+def escolher_personagem():
+    limpar_tela()
+    print("[1] Homem | [2] Mulher")
+    escolha_personagem = input("> ")
+    return escolha_personagem
+
+def digitar_nome_do_jogdor():
+    limpar_tela()
+    nome_jogador = input("Digite seu nome: ")
+    return nome_jogador
+
 def mostrar_menu(nome, vida, vida_max, dano, fase_atual, total_fases):
     limpar_tela()
 
