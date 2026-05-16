@@ -11,7 +11,8 @@ from game.textos import (
     confirmacao_sair_do_jogo,
     saindo_do_jogo,
     mostrar_combate,
-    recuou_do_combate
+    recuou_do_combate,
+    introducao_fase
 )
 
 class Jogo:
@@ -80,6 +81,10 @@ class Jogo:
         
         return "morreu"
 
+    def buscar_fases(self):
+        buscar_fase_atual = self.fases[self.fase_atual]
+        return buscar_fase_atual
+
     def explorar_fases(self):
         if self.fase_atual >= len(self.fases):
             limpar_tela()
@@ -87,16 +92,12 @@ class Jogo:
             enter_continuar()
             return "finalizado"
 
-        fase = self.fases[self.fase_atual]
+        jogar_fase = self.buscar_fases()
 
-        limpar_tela()
-        print(f"=== FASE {fase['numero']}: {fase['nome'].upper()} ===")
-        print(fase["descricao"])
-        enter_continuar()
+        introducao_fase(jogar_fase['numero'], jogar_fase['nome'], jogar_fase["descricao"])
 
         # fazer um metodo separado para buscar os inimigos de cada fase ????
-
-        for buscar_inimigo in fase["inimigos"]:
+        for buscar_inimigo in jogar_fase["inimigos"]:
             self.inimigo = buscar_inimigo
 
             limpar_tela()
@@ -113,15 +114,15 @@ class Jogo:
                 return "fugiu"
 
         limpar_tela()
-        print(f"Você concluiu a Fase {fase['numero']}: {fase['nome']}!")
+        print(f"Você concluiu a Fase {jogar_fase['numero']}: {jogar_fase['nome']}!")
         enter_continuar()
         self.fase_atual += 1
 
         if self.fase_atual >= len(self.fases):
-            print("\nParabéns! Você sobreviveu ao NecroSystem!")
+            print("Parabéns! Você sobreviveu ao NecroSystem!")
             enter_continuar()
 
-        print("\nUma nova área foi desbloqueada.")
+        print("Uma nova área foi desbloqueada.")
         enter_continuar()
         return "venceu"
 

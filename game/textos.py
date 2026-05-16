@@ -69,6 +69,15 @@ def saindo_do_jogo():
     print("Saindo do jogo...")
 
 
+# fase ...
+
+def introducao_fase(numero_fase, nome_fase, descricao_fase):
+    limpar_tela()
+    print(f"=== FASE {numero_fase}: {nome_fase.upper()} ===")
+    print(descricao_fase)
+    enter_continuar()
+
+
 # combate ...
 
 def mostrar_combate(
