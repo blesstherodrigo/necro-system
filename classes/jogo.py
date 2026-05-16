@@ -12,7 +12,8 @@ from game.textos import (
     saindo_do_jogo,
     mostrar_combate,
     recuou_do_combate,
-    introducao_fase
+    introducao_fase,
+    confirmacao_recomecar_jogo
 )
 
 class Jogo:
@@ -27,6 +28,7 @@ class Jogo:
         # aqui deve mostrar a imagem dos personagens, Homem e Mulher
 
         while True:
+            limpar_tela()
             print("[1] Homem | [2] Mulher")
             escolher_personagem = input("> ")
 
@@ -41,49 +43,64 @@ class Jogo:
 
         limpar_tela()
         nome = input("Digite seu nome: ")
-        self.jogador = Jogador(nome, 1000, 1000, 50, imagem)
+        self.jogador = Jogador(nome, 1, 1000, 1, imagem)
 
-    # criar combates para tipos diferentes de inimigos (zumbi comum e boss)
-    def combate(self):
-        while self.jogador.esta_vivo() and self.inimigo.esta_vivo():
-            opcao_combate_escolhida = mostrar_combate(
-                self.inimigo.nome,
-                self.inimigo.vida,
-                self.inimigo.vida_max,
-                self.jogador.vida,
-                self.jogador.vida_max
-            )
-
-            if opcao_combate_escolhida == "1":
-                limpar_tela()
-                self.jogador.atacar(self.inimigo)
-
-                if self.inimigo.esta_vivo():
-                    self.inimigo.atacar(self.jogador)
-
-                enter_continuar()
-
-            elif opcao_combate_escolhida == "2":
-                recuou_do_combate()
-                return "fugiu"
-
-            else:
-                opcao_invalida()
-
-        if self.jogador.esta_vivo():
-            print(f"\nVocê derrotou {self.inimigo.nome}!")
-            enter_continuar()
-            
-            return "venceu"
-        
-        print("\nVocê morreu.")
-        enter_continuar()
-        
-        return "morreu"
+    def reiniciar_jogo(self):
+        self.jogador = None
+        self.inimigo = None
+        self.fase_atual = 0
+        self.rodando = True
+        self.criar_jogador()
 
     def buscar_fases(self):
         buscar_fase_atual = self.fases[self.fase_atual]
         return buscar_fase_atual
+
+    # criar combates para tipos diferentes de inimigos (zumbi comum e boss)
+    def combate(self):
+        inimigos_fase = self.buscar_fases()
+
+        for buscar_inimigo in inimigos_fase["inimigos"]:
+            self.inimigo = buscar_inimigo
+
+            limpar_tela()
+            print(f"Um {self.inimigo.nome} apareceu!")
+            enter_continuar()
+
+            while self.jogador.esta_vivo() and self.inimigo.esta_vivo():
+                opcao_combate_escolhida = mostrar_combate(
+                    self.inimigo.nome,
+                    self.inimigo.vida,
+                    self.inimigo.vida_max,
+                    self.jogador.vida,
+                    self.jogador.vida_max
+                )
+
+                if opcao_combate_escolhida == "1":
+                    limpar_tela()
+                    self.jogador.atacar(self.inimigo)
+
+                    if self.inimigo.esta_vivo():
+                        self.inimigo.atacar(self.jogador)
+
+                    enter_continuar()
+
+                elif opcao_combate_escolhida == "2":
+                    recuou_do_combate()
+                    return "fugiu"
+
+                else:
+                    opcao_invalida()
+
+            if not self.jogador.esta_vivo():
+                print("\nVocê morreu.")
+                enter_continuar()
+                return "morreu"
+
+            print(f"\nVocê derrotou {self.inimigo.nome}!")
+            enter_continuar()
+
+        return "venceu"
 
     def explorar_fases(self):
         if self.fase_atual >= len(self.fases):
@@ -96,22 +113,14 @@ class Jogo:
 
         introducao_fase(jogar_fase['numero'], jogar_fase['nome'], jogar_fase["descricao"])
 
-        # fazer um metodo separado para buscar os inimigos de cada fase ????
-        for buscar_inimigo in jogar_fase["inimigos"]:
-            self.inimigo = buscar_inimigo
+        # combate aqui
+        resultado_combate = self.combate()
 
-            limpar_tela()
-            print(f"Um {self.inimigo.nome} apareceu!")
-            enter_continuar()
+        if resultado_combate == "morreu":
+            return "morreu"
 
-            # criar combates para tipos diferentes de inimigos (zumbi comum e boss)
-            resultado_do_combate = self.combate()
-
-            if resultado_do_combate == "morreu":
-                return "morreu"
-
-            if resultado_do_combate == "fugiu":
-                return "fugiu"
+        if resultado_combate == "fugiu":
+            return "fugiu"
 
         limpar_tela()
         print(f"Você concluiu a Fase {jogar_fase['numero']}: {jogar_fase['nome']}!")
@@ -145,7 +154,20 @@ class Jogo:
                 resultado = self.explorar_fases()
 
                 if resultado == "morreu":
-                    self.rodando = False
+                    while True:
+                        opcao_recomecar_escolhida = confirmacao_recomecar_jogo()
+
+                        if opcao_recomecar_escolhida == "1":
+                            self.reiniciar_jogo()
+                            break
+
+                        elif opcao_recomecar_escolhida == "2":
+                            saindo_do_jogo()
+                            self.rodando = False
+                            break
+
+                        else:
+                            opcao_invalida()
 
             elif opcao_menu_escolhida == "2":
                 mostrar_status(
