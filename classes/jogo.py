@@ -1,21 +1,16 @@
 # classes/jogo.py
 from classes.personagens.jogador import Jogador
 from data.fases import fase_1, fase_2, fase_3, fase_4
-from game.textos import (
-    limpar_tela,
-    enter_continuar,
-    opcao_invalida,
-    saindo_do_jogo,
-    mostrar_menu,
-    mostrar_status,
-    mostrar_mochila,
-    confirmacao_sair_do_jogo,
-    confirmacao_recomecar_jogo,
-    introducao_fase,
-    mostrar_combate,
-    recuou_do_combate,
-    escolher_personagem,
-    digitar_nome_do_jogdor
+
+from game.textos.menus import menu_combate, menu_principal, menu_status, menu_mochila
+from game.textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
+from game.textos.inputs import receber_escolha_personagem, receber_nome_do_jogdor
+from game.textos.introducoes import introducao_fase
+from game.textos.mensagens import (
+    mensagem_opcao_invalida, mensagem_apareceu_inimigo,
+    mensagem_concluiu_fase, mensagem_nova_fase_desbloqueada,
+    mensagem_venceu, mensagem_morreu, mensagem_recuou,
+    mensagem_zerou_jogo, mensagem_saindo_do_jogo
 )
 
 class Jogo:
@@ -30,19 +25,19 @@ class Jogo:
         # aqui deve mostrar a imagem dos personagens, Homem e Mulher
 
         while True:
-            escolha = escolher_personagem()
+            personagem_escolhido = receber_escolha_personagem()
 
-            if escolha == "1":
+            if personagem_escolhido == "1":
                 imagem = "imgem do jogador homem aqui"
                 break
-            elif escolha == "2":
+            elif personagem_escolhido == "2":
                 imagem = "imagem do jogador mulher aqui"
                 break
             else:
-                opcao_invalida()
+                mensagem_opcao_invalida()
 
-        nome = digitar_nome_do_jogdor()
-        self.jogador = Jogador(nome, 1, 1000, 1, imagem)
+        nome = receber_nome_do_jogdor()
+        self.jogador = Jogador(nome, 1000, 1000, 50, imagem)
 
     def buscar_fases(self):
         buscar_fase_atual = self.fases[self.fase_atual]
@@ -55,12 +50,10 @@ class Jogo:
         for buscar_inimigo in inimigos_fase["inimigos"]:
             self.inimigo = buscar_inimigo
 
-            limpar_tela()
-            print(f"Um {self.inimigo.nome} apareceu!")
-            enter_continuar()
+            mensagem_apareceu_inimigo(self.inimigo.nome)
 
             while self.jogador.esta_vivo() and self.inimigo.esta_vivo():
-                opcao_combate_escolhida = mostrar_combate(
+                opcao_combate_escolhida = menu_combate(
                     self.inimigo.nome,
                     self.inimigo.vida,
                     self.inimigo.vida_max,
@@ -69,41 +62,35 @@ class Jogo:
                 )
 
                 if opcao_combate_escolhida == "1":
-                    limpar_tela()
                     self.jogador.atacar(self.inimigo)
 
                     if self.inimigo.esta_vivo():
                         self.inimigo.atacar(self.jogador)
 
-                    enter_continuar()
-
                 elif opcao_combate_escolhida == "2":
-                    recuou_do_combate()
+                    mensagem_recuou()
                     return "fugiu"
 
                 else:
-                    opcao_invalida()
+                    mensagem_opcao_invalida()
 
             if not self.jogador.esta_vivo():
-                print("\nVocê morreu.")
-                enter_continuar()
+                mensagem_morreu()
                 return "morreu"
 
-            print(f"\nVocê derrotou {self.inimigo.nome}!")
-            enter_continuar()
-
+            mensagem_venceu(self.inimigo.nome)
         return "venceu"
 
     def explorar_fases(self):
         if self.fase_atual >= len(self.fases):
-            limpar_tela()
-            print("\nVocê já concluiu todas as fases disponíveis!")
-            enter_continuar()
+            mensagem_zerou_jogo()
             return "finalizado"
 
         jogar_fase = self.buscar_fases()
+
         introducao_fase(jogar_fase['numero'], jogar_fase['nome'], jogar_fase["descricao"])
-        resultado_combate = self.combate()      # combate aqui
+
+        resultado_combate = self.combate()      # iniciar combate
 
         if resultado_combate == "morreu":
             return "morreu"
@@ -111,18 +98,14 @@ class Jogo:
         if resultado_combate == "fugiu":
             return "fugiu"
 
-        limpar_tela()
-        print(f"Você concluiu a Fase {jogar_fase['numero']}: {jogar_fase['nome']}!")
-        enter_continuar()
+        mensagem_concluiu_fase(jogar_fase["numero"], jogar_fase["nome"])
         self.fase_atual += 1
 
         if self.fase_atual >= len(self.fases):
-            print("Parabéns! Você sobreviveu ao NecroSystem!")
-            enter_continuar()
-
-        print("Uma nova área foi desbloqueada.")
-        enter_continuar()
-        return "venceu"
+            mensagem_zerou_jogo()
+        else:
+            mensagem_nova_fase_desbloqueada()
+            return "venceu"
 
     def reiniciar_jogo(self):
         self.rodando = True
@@ -137,7 +120,7 @@ class Jogo:
         self.criar_jogador()
 
         while self.rodando:
-            opcao_menu_escolhida = mostrar_menu(
+            opcao_menu_escolhida = menu_principal(
                 self.jogador.nome,
                 self.jogador.vida,
                 self.jogador.vida_max,
@@ -157,14 +140,14 @@ class Jogo:
                             self.reiniciar_jogo()
                             break
                         elif opcao_recomecar_escolhida == "2":
-                            saindo_do_jogo()
+                            mensagem_saindo_do_jogo()
                             self.rodando = False
                             break
                         else:
-                            opcao_invalida()
+                            mensagem_opcao_invalida()
 
             elif opcao_menu_escolhida == "2":
-                mostrar_status(
+                menu_status(
                     self.jogador.nome,
                     self.jogador.vida,
                     self.jogador.vida_max,
@@ -172,20 +155,20 @@ class Jogo:
                 )
 
             elif opcao_menu_escolhida == "3":
-                mostrar_mochila()
+                menu_mochila()
 
             elif opcao_menu_escolhida == "4":
                 while True:
                     opcao_sair_escolhida = confirmacao_sair_do_jogo()
 
                     if opcao_sair_escolhida == "1":
-                        saindo_do_jogo()
+                        mensagem_saindo_do_jogo()
                         self.rodando = False
                         break
                     elif opcao_sair_escolhida == "2":
                         break
                     else:
-                        opcao_invalida()
+                        mensagem_opcao_invalida()
 
             else:
-                opcao_invalida()
+                mensagem_opcao_invalida()
