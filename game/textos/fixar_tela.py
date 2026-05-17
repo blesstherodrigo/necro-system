@@ -1,4 +1,4 @@
-# game/fixar_tela.py
+# game/textos/fixar_tela.py
 import os
 
 def limpar_tela():

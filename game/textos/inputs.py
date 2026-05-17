@@ -1,3 +1,4 @@
+# game/textos/inputs.py
 from game.textos.fixar_tela import limpar_tela
 
 def receber_escolha_personagem():

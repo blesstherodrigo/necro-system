@@ -1,3 +1,4 @@
+# game/textos/confirmacoes.py
 from game.textos.fixar_tela import limpar_tela
 
 def confirmacao_recomecar_jogo():

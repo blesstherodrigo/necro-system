@@ -1,3 +1,4 @@
+# game/textos/mensagens.py
 from game.textos.fixar_tela import limpar_tela, enter_continuar, enter_voltar
 
 def mensagem_opcao_invalida():
