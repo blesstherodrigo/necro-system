@@ -1,6 +1,6 @@
 # classes/itens/mochila.py
 
-class Mochila():
+class Mochila:
     def __init__(self, antidoto, kit_medico, adrenalina, soro, municao1, municao2, municao3, municao4):
         self.antidoto = antidoto
         self.kit_medico = kit_medico

@@ -1,6 +1,6 @@
 # classes/itens/medicina.py
 
-class Medicina():
+class Medicina:
     def __init__(self, nome, especialidade, multiplicador):
         self.nome = nome
         self.especialidade = especialidade
