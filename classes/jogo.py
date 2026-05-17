@@ -44,7 +44,7 @@ class Jogo:
         return buscar_fase_atual
 
     # criar combates para tipos diferentes de inimigos (zumbi comum e boss)
-    def combate(self):
+    def iniciar_combate(self):
         inimigos_fase = self.buscar_fases()
 
         for buscar_inimigo in inimigos_fase["inimigos"]:
@@ -90,7 +90,7 @@ class Jogo:
 
         introducao_fase(jogar_fase['numero'], jogar_fase['nome'], jogar_fase["descricao"])
 
-        resultado_combate = self.combate()      # iniciar combate
+        resultado_combate = self.iniciar_combate()      # inicia o combate
 
         if resultado_combate == "morreu":
             return "morreu"
