@@ -7,7 +7,7 @@ zumbi_radioativo_1 = Zumbi(
     10, 10, 5,
     [
         "Imagem"
-    ]
+    ], "Incendiária", []
 )
 
 zumbi_radioativo_2 = Zumbi(
@@ -15,7 +15,7 @@ zumbi_radioativo_2 = Zumbi(
     10, 10, 5,
     [
         "Imagem"
-    ]
+    ], "Incendiária", []
 )
 
 boss_radioativo = Boss(
@@ -23,5 +23,5 @@ boss_radioativo = Boss(
     20, 20, 10,
     [
         "Imagem"
-    ]
+    ], "Incendiária", []
 )

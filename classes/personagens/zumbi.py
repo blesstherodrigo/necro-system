@@ -1,12 +1,6 @@
 # classes/personagens/zumbi.py
-from classes.personagens.personagem import Personagem
-from game.textos.fixar_tela import enter_continuar
+from classes.personagens.inimigo import Inimigo
 
-class Zumbi(Personagem):
-    def __init__(self, nome, vida, vida_max, dano, imagem):
-        super().__init__(nome, vida, vida_max, dano, imagem)
-
-    def atacar(self, inimigo):
-        super().atacar(inimigo)
-        print(f"{self.nome} te arranhou e causou {self.dano} de dano")
-        enter_continuar()
+class Zumbi(Inimigo):
+    def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
+        super().__init__(nome, vida, vida_max, dano, imagem, fraqueza, imune)

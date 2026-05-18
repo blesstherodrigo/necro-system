@@ -8,10 +8,10 @@ class Personagem:
         self.dano = dano
         self.imagem = imagem
 
-    def atacar(self, inimigo):
-        inimigo.vida -= self.dano
-        if inimigo.vida < 0:
-            inimigo.vida = 0
+    def receber_dano(self, dano):
+        self.vida -= dano
+        if self.vida < 0:
+            self.vida = 0
 
     def esta_vivo(self):
         return self.vida > 0

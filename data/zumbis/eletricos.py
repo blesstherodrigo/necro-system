@@ -7,7 +7,7 @@ zumbi_eletrico_1 = Zumbi(
     10, 10, 5,
     [
         "imagem"
-    ]
+    ], "Incendiária", []
 )
 
 zumbi_eletrico_2 = Zumbi(
@@ -15,7 +15,7 @@ zumbi_eletrico_2 = Zumbi(
     10, 10, 5,
     [
         "imagem"
-    ]
+    ], "Incendiária", []
 )
 
 boss_eletrico = Boss(
@@ -23,5 +23,5 @@ boss_eletrico = Boss(
     20, 20, 10,
     [
         "imagem"
-    ]
+    ], "Incendiária", []
 )

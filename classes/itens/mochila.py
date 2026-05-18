@@ -1,14 +1,28 @@
 # classes/itens/mochila.py
+from game.textos.fixar_tela import enter_voltar
 
 class Mochila:
-    def __init__(self, antidoto, kit_medico, adrenalina, soro, municao1, municao2, municao3, municao4):
-        self.antidoto = antidoto
-        self.kit_medico = kit_medico
-        self.adrenalina = adrenalina
-        self.soro = soro
-        self.municao1 = municao1
-        self.municao2 = municao2
-        self.municao3 = municao3
-        self.municao4 = municao4
+    def __init__(self):
+        self.itens = {}
 
-    # municao 1, 2, 3, 4 porque ainda não foi definido os nomes de cada tipo de munição
+    def add_municao(self, municao_nome, quantidade):
+        if municao_nome not in self.itens:
+            self.itens[municao_nome] = 0
+        self.itens[municao_nome] += quantidade
+
+    def usar_municao(self, municao_nome):
+        if self.itens.get(municao_nome, 0) > 0:
+            self.itens[municao_nome] -= 1
+            return True
+        return False
+
+    def mostrar(self):
+        print("\n=== Mochila ===")
+        if not self.itens:
+            print("Você não tem munições.")
+            return
+
+        for municao_nome, quantidade in self.itens.items():
+            print(f"{municao_nome}: {quantidade}")
+
+        enter_voltar()

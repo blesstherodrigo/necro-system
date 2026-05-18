@@ -11,8 +11,9 @@ def menu_principal(nome, vida, vida_max, dano, fase_atual, total_fases):
     print("-" * 25)
     print("1. Explorar")
     print("2. Status")
-    print("3. Mochila")
-    print("4. Sair")
+    print("3. Loja")
+    print("4. Mochila")
+    print("5. Sair")
     print("-" * 25)
     opcao_menu = input("> ")
     return opcao_menu

@@ -1,5 +1,9 @@
 # classes/jogo.py
+import random
 from classes.personagens.jogador import Jogador
+from classes.loja import Loja
+from classes.itens.municao import Municao
+from classes.itens.mochila import Mochila
 from data.fases import fase_1, fase_2, fase_3, fase_4
 
 from game.textos.menus import menu_combate, menu_principal, menu_status, menu_mochila
@@ -9,7 +13,7 @@ from game.textos.introducoes import introducao_fase
 from game.textos.mensagens import (
     mensagem_opcao_invalida, mensagem_apareceu_inimigo,
     mensagem_concluiu_fase, mensagem_nova_fase_desbloqueada,
-    mensagem_venceu, mensagem_morreu, mensagem_recuou,
+    mensagem_venceu, mensagem_morreu, mensagem_recuou, ganhou_moedas,
     mensagem_zerou_jogo, mensagem_saindo_do_jogo
 )
 
@@ -37,14 +41,42 @@ class Jogo:
                 mensagem_opcao_invalida()
 
         nome = receber_nome_do_jogdor()
-        self.jogador = Jogador(nome, 1000, 1000, 50, imagem)
+        self.jogador = Jogador(nome, 1000, 1000, 50, imagem, Mochila(), 50)
 
     def buscar_fases(self):
         buscar_fase_atual = self.fases[self.fase_atual]
         return buscar_fase_atual
 
+    def escolher_municao(self, catalogo_municao):
+        municao_disponivel = [
+            nome_municao
+            for nome_municao, quantidade in self.jogador.mochila.itens.items()
+            if quantidade > 0
+        ]
+
+        if not municao_disponivel:
+            print("Você não tem munição!")
+            return None
+
+        print("\nEscolha a munição:")
+        for indice, nome_municao in enumerate(municao_disponivel, start=1):
+            quantidade = self.jogador.mochila.itens[nome_municao]
+            print(f"{indice}. {nome_municao} ({quantidade})")
+
+        try:
+            escolha = int(input("> ")) - 1
+            nome_municao = municao_disponivel[escolha]
+        except (ValueError, IndexError):
+            print("Escolha inválida.")
+            return None
+
+        if self.jogador.mochila.usar_municao(nome_municao):
+            return catalogo_municao[nome_municao]
+
+        return None
+
     # criar combates para tipos diferentes de inimigos (zumbi comum e boss)
-    def iniciar_combate(self):
+    def iniciar_combate(self, catalogo_municao):
         inimigos_fase = self.buscar_fases()
 
         for buscar_inimigo in inimigos_fase["inimigos"]:
@@ -62,10 +94,12 @@ class Jogo:
                 )
 
                 if opcao_combate_escolhida == "1":
-                    self.jogador.atacar(self.inimigo)
+                    municao = self.escolher_municao(catalogo_municao)
 
-                    if self.inimigo.esta_vivo():
-                        self.inimigo.atacar(self.jogador)
+                    if municao is None:
+                        continue
+
+                    self.inimigo.receber_dano(municao)
 
                 elif opcao_combate_escolhida == "2":
                     mensagem_recuou()
@@ -74,14 +108,21 @@ class Jogo:
                 else:
                     mensagem_opcao_invalida()
 
-            if not self.jogador.esta_vivo():
+                if self.inimigo.esta_vivo():
+                    self.jogador.receber_dano(self.inimigo.dano)
+
+            if self.jogador.esta_vivo():
+                recompensa = random.randint(15, 35)
+                self.jogador.moedas += recompensa
+                mensagem_venceu(self.inimigo.nome)
+                ganhou_moedas(recompensa)
+            else:
                 mensagem_morreu()
                 return "morreu"
 
-            mensagem_venceu(self.inimigo.nome)
         return "venceu"
 
-    def explorar_fases(self):
+    def explorar_fases(self, catalogo_municao):
         if self.fase_atual >= len(self.fases):
             mensagem_zerou_jogo()
             return "finalizado"
@@ -90,7 +131,7 @@ class Jogo:
 
         introducao_fase(jogar_fase['numero'], jogar_fase['nome'], jogar_fase["descricao"])
 
-        resultado_combate = self.iniciar_combate()      # inicia o combate
+        resultado_combate = self.iniciar_combate(catalogo_municao)      # inicia o combate
 
         if resultado_combate == "morreu":
             return "morreu"
@@ -118,6 +159,16 @@ class Jogo:
         # >Introdução do jogo AQUI<
 
         self.criar_jogador()
+        self.jogador.mochila.add_municao("Comum", 5)
+
+        catalogo_municao = {
+            "Comum": Municao("Comum", 10, 15, 5),
+            "Incendiária": Municao("Incendiária", 8, 30, 12),
+            "Elétrica": Municao("Elétrica", 7, 35, 14),
+            "Prata": Municao("Prata", 9, 40, 16),
+        }
+
+        loja = Loja(catalogo_municao)
 
         while self.rodando:
             opcao_menu_escolhida = menu_principal(
@@ -130,7 +181,7 @@ class Jogo:
             )
 
             if opcao_menu_escolhida == "1":
-                resultado = self.explorar_fases()
+                resultado = self.explorar_fases(catalogo_municao)
 
                 if resultado == "morreu":
                     while True:
@@ -155,9 +206,13 @@ class Jogo:
                 )
 
             elif opcao_menu_escolhida == "3":
-                menu_mochila()
+                loja.comprar_itens(self.jogador)
 
             elif opcao_menu_escolhida == "4":
+                self.jogador.mochila.mostrar()
+                # menu_mochila()
+
+            elif opcao_menu_escolhida == "5":
                 while True:
                     opcao_sair_escolhida = confirmacao_sair_do_jogo()
 
