@@ -88,3 +88,5 @@ boss_infectado = Boss(
         "imagem"
     ], "Ferro", "Cobre"
 )
+
+infectados = [zumbi_infectado_1, zumbi_infectada_2, boss_infectado]

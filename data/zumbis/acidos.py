@@ -25,3 +25,5 @@ boss_acido = Boss(
         "Imagem"
     ], "Titânio", "Ferro"
 )
+
+acidos = [zumbi_acido_1, zumbi_acido_2, boss_acido]

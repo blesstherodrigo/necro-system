@@ -25,3 +25,5 @@ boss_eletrico = Boss(
         "imagem"
     ], "Cobre", "Chumbo"
 )
+
+eletricos = [zumbi_eletrico_1, zumbi_eletrico_2, boss_eletrico]

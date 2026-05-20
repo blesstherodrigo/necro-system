@@ -25,3 +25,5 @@ boss_radioativo = Boss(
         "Imagem"
     ], "Chumbo", "Titânio"
 )
+
+radioativos = [zumbi_radioativo_1, zumbi_radioativo_2, boss_radioativo]

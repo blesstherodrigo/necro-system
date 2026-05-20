@@ -1,11 +1,9 @@
 # classes/jogo.py
 import random
-
 from data.municoes import municao_ferro
 from classes.personagens.jogador import Jogador
 from classes.loja import Loja
-from data.fases import fase_1, fase_2, fase_3, fase_4
-
+from data.fases import fases
 from game.textos.menus import menu_combate, menu_principal, menu_status
 from game.textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
 from game.textos.introducoes import introducao_fase
@@ -21,7 +19,7 @@ class Jogo:
         self.rodando = True
         self.jogador = None
         self.inimigo = None
-        self.fases = [fase_1, fase_2, fase_3, fase_4]
+        self.fases = fases
         self.fase_atual = 0
 
     def preparar_jogador(self):

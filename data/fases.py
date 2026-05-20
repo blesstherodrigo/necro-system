@@ -1,33 +1,25 @@
 # data/fases.py
 from classes.fase import Fase
 
-from data.zumbis.infectados import zumbi_infectado_1, zumbi_infectada_2, boss_infectado
-from data.zumbis.eletricos import zumbi_eletrico_1, zumbi_eletrico_2, boss_eletrico
-from data.zumbis.acidos import zumbi_acido_1, zumbi_acido_2, boss_acido
-from data.zumbis.radioativos import zumbi_radioativo_1, zumbi_radioativo_2, boss_radioativo
+from data.zumbis.infectados import infectados
+from data.zumbis.eletricos import eletricos
+from data.zumbis.acidos import acidos
+from data.zumbis.radioativos import radioativos
 
 fase_1 = Fase(
     1,
     "Hospital",
     "Corredores escuros, macas quebradas e gritos ao longe.",
     10,
-    [
-        zumbi_infectado_1,
-        zumbi_infectada_2,
-        boss_infectado
-    ]
+    infectados
 )
 
 fase_2 = Fase(
     2,
     "Estação de Energia",
-    "colocar uma descrição",
+    "colocar uma descrição",    # colocar em arquivos .txt e importar ???
     10,
-    [
-        zumbi_eletrico_1,
-        zumbi_eletrico_2,
-        boss_eletrico
-    ]
+    eletricos
 )
 
 fase_3 = Fase(
@@ -35,11 +27,7 @@ fase_3 = Fase(
     "Laboratório",
     "colocar uma descrição",
     10,
-    [
-        zumbi_acido_1,
-        zumbi_acido_2,
-        boss_acido
-    ]
+    acidos
 )
 
 fase_4 = Fase(
@@ -47,9 +35,7 @@ fase_4 = Fase(
     "Usina Nuclear",
     "colocar uma descrição",
     10,
-    [
-        zumbi_radioativo_1,
-        zumbi_radioativo_2,
-        boss_radioativo
-    ]
+    radioativos
 )
+
+fases = [fase_1, fase_2, fase_3, fase_4]
