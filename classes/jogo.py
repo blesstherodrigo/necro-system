@@ -1,9 +1,10 @@
 # classes/jogo.py
 import random
-from instancias.municoes import municao_ferro
 from classes.personagens.jogador import Jogador
 from classes.loja import Loja
 from instancias.fases import fases
+from instancias.municoes import municao_ferro   # iniciar com munição padrão ???
+from textos.artes.artes import imprimir_arte
 from textos.menus import menu_combate, menu_principal, menu_status
 from textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
 from textos.introducoes import introducao_fase
@@ -47,6 +48,9 @@ class Jogo:
                     self.jogador.vida,
                     self.jogador.vida_max
                 )
+
+                # imprimir_arte(self.inimigo.imagem)
+                # solucionar posição das imagens no combate
 
                 if opcao_combate_escolhida == "1":
                     municao = self.jogador.escolher_municao()
@@ -126,6 +130,7 @@ class Jogo:
 
     def iniciar_jogo(self):
         # >Introdução do jogo AQUI<
+        imprimir_arte("logo.txt")
 
         self.preparar_jogador()
         loja = Loja()
