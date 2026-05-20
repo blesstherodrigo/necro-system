@@ -1,4 +1,9 @@
 # main.py
-from game import carregar_jogo
+from classes.jogo import Jogo
 
-carregar_jogo.carregar()
+def main():
+    jogo = Jogo()
+    jogo.iniciar_jogo()
+
+if __name__ == "__main__":
+    main()

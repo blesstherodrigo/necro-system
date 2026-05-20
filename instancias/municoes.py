@@ -1,4 +1,4 @@
-# data/municoes.py
+# instancias/municoes.py
 from classes.itens.municao import Municao
 
 # Ferro (Melhor contra Infectado | Pior contra Ácido)
@@ -19,7 +19,6 @@ municoes = [
     municao_titanio,
     municao_chumbo
 ]
-
 
 # | Categoria    | Melhor metal | Pior metal |
 # | -------------| ------------ | -----------|

@@ -1,5 +1,5 @@
-# game/textos/introducoes.py
-from game.textos.fixar_tela import limpar_tela, enter_continuar
+# textos/introducoes.py
+from textos.fixar_tela import limpar_tela, enter_continuar
 
 def introducao_fase(numero_fase, nome_fase, descricao_fase):
     limpar_tela()

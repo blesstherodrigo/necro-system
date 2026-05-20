@@ -1,10 +1,10 @@
-# data/fases.py
+# instancias/fases.py
 from classes.fase import Fase
 
-from data.zumbis.infectados import infectados
-from data.zumbis.eletricos import eletricos
-from data.zumbis.acidos import acidos
-from data.zumbis.radioativos import radioativos
+from instancias.zumbis.infectados import infectados
+from instancias.zumbis.eletricos import eletricos
+from instancias.zumbis.acidos import acidos
+from instancias.zumbis.radioativos import radioativos
 
 fase_1 = Fase(
     1,

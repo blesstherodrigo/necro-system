@@ -1,13 +1,13 @@
 # classes/jogo.py
 import random
-from data.municoes import municao_ferro
+from instancias.municoes import municao_ferro
 from classes.personagens.jogador import Jogador
 from classes.loja import Loja
-from data.fases import fases
-from game.textos.menus import menu_combate, menu_principal, menu_status
-from game.textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
-from game.textos.introducoes import introducao_fase
-from game.textos.mensagens import (
+from instancias.fases import fases
+from textos.menus import menu_combate, menu_principal, menu_status
+from textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
+from textos.introducoes import introducao_fase
+from textos.mensagens import (
     mensagem_opcao_invalida, mensagem_apareceu_inimigo,
     mensagem_concluiu_fase, mensagem_nova_fase_desbloqueada,
     mensagem_venceu, mensagem_morreu, mensagem_recuou, mensagem_ganhou_moedas,
@@ -110,7 +110,7 @@ class Jogo:
         self.inimigo = None
         self.fase_atual = 0
 
-    def iniciar(self):
+    def iniciar_jogo(self):
         # >Introdução do jogo AQUI<
 
         self.preparar_jogador()

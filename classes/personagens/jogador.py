@@ -1,9 +1,9 @@
 # classes/personagens/jogador.py
 from classes.personagens.personagem import Personagem
 from classes.itens.mochila import Mochila
-from game.textos.inputs import input_escolha_personagem, input_nome_do_jogdor
-from game.textos.mensagens import mensagem_opcao_invalida
-from game.textos.fixar_tela import enter_continuar, enter_voltar
+from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
+from textos.mensagens import mensagem_opcao_invalida
+from textos.fixar_tela import enter_continuar, enter_voltar
 
 class Jogador(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, mochila, moedas):

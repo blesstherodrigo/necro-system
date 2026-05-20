@@ -1,6 +1,6 @@
 # classes/personagens/inimigos/inimigo.py
 from classes.personagens.personagem import Personagem
-from game.textos.fixar_tela import enter_continuar, limpar_tela
+from textos.fixar_tela import enter_continuar, limpar_tela
 
 class Inimigo(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):

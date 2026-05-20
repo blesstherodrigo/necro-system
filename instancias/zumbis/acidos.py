@@ -1,4 +1,4 @@
-# data/zumbis/acidos.py
+# instancias/zumbis/acidos.py
 from classes.personagens.inimigos.zumbi import Zumbi
 from classes.personagens.inimigos.boss import Boss
 

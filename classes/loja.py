@@ -1,6 +1,6 @@
 # classes/loja.py
-from data.municoes import municoes
-from game.textos.fixar_tela import limpar_tela
+from instancias.municoes import municoes
+from textos.fixar_tela import limpar_tela
 
 class Loja:
     def __init__(self):

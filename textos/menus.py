@@ -1,5 +1,5 @@
-# game/textos/menus.py
-from game.textos.fixar_tela import limpar_tela, enter_voltar
+# textos/menus.py
+from textos.fixar_tela import limpar_tela, enter_voltar
 
 def menu_principal(nome, vida, vida_max, dano, fase_atual, total_fases):
     limpar_tela()

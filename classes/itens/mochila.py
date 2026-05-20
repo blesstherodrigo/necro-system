@@ -1,5 +1,5 @@
 # classes/itens/mochila.py
-from game.textos.fixar_tela import enter_voltar
+from textos.fixar_tela import enter_voltar
 
 class Mochila:
     def __init__(self):

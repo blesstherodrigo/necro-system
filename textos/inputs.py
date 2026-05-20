@@ -1,5 +1,5 @@
-# game/textos/inputs.py
-from game.textos.fixar_tela import limpar_tela
+# textos/inputs.py
+from textos.fixar_tela import limpar_tela
 
 def input_escolha_personagem():
     limpar_tela()

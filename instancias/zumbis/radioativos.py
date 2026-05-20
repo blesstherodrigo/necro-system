@@ -1,4 +1,4 @@
-# data/zumbis/radioativos.py
+# instancias/zumbis/radioativos.py
 from classes.personagens.inimigos.zumbi import Zumbi
 from classes.personagens.inimigos.boss import Boss
 
