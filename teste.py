@@ -121,11 +121,11 @@ class Shop:
                 print("Você não tem dinheiro suficiente.")
             else:
                 player.money -= total_price
-                player.inventory.add_municao(ammo.name, quantity)
+                player.inventory.adicionar_municao(ammo.name, quantity)
                 print(f"Você comprou {quantity}x {ammo.name}.")
 
 def choose_ammo(player, ammo_catalog):
-    player.inventory.mostrar()
+    player.inventory.mostrar_mochila()
 
     available_ammo = [
         ammo_name
@@ -177,7 +177,7 @@ def battle(player, enemy, ammo_catalog):
             enemy.take_damage(ammo)
 
         elif choice == "2":
-            player.inventory.mostrar()
+            player.inventory.mostrar_mochila()
             continue
 
         elif choice == "3":

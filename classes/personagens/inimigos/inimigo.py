@@ -1,4 +1,4 @@
-# classes/personagens/inimigo.py
+# classes/personagens/inimigos/inimigo.py
 from classes.personagens.personagem import Personagem
 from game.textos.fixar_tela import enter_continuar, limpar_tela
 
@@ -14,18 +14,18 @@ class Inimigo(Personagem):
             return
 
         if municao.tipo in self.imune:
-            damage = 0
+            dano_recebido = 0
             limpar_tela()
             print(f"{self.nome} é imune a munição {municao.tipo}!")
         elif municao.tipo in self.fraqueza:
-            damage = municao.dano_vantajoso
+            dano_recebido = municao.dano_vantajoso
             limpar_tela()
             print(f"Dano crítico! Munição {municao.tipo} é muito efetiva contra {self.nome}!")
         else:
-            damage = municao.dano_base
+            dano_recebido = municao.dano_base
             limpar_tela()
             print(f"Munição {municao.tipo} causou dano normal.")
 
-        super().receber_dano(damage)
-        print(f"{self.nome} recebeu {damage} de dano. Vida restante: {self.vida}")
+        super().receber_dano(dano_recebido)
+        print(f"\n{self.nome} recebeu {dano_recebido} de dano. Vida restante: {self.vida}")
         enter_continuar()

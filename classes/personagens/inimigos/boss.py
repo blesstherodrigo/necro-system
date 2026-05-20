@@ -1,5 +1,5 @@
-# classes/personagens/boss.py
-from classes.personagens.inimigo import Inimigo
+# classes/personagens/inimigos/boss.py
+from classes.personagens.inimigos.inimigo import Inimigo
 
 class Boss(Inimigo):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):

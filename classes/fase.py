@@ -1,3 +1,5 @@
+# classes/fase.py
+
 class Fase:
     def __init__(self, numero, nome, descricao, recompensa, inimigos):
         self.numero = numero

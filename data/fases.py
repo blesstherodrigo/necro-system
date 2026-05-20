@@ -1,49 +1,55 @@
 # data/fases.py
+from classes.fase import Fase
+
 from data.zumbis.infectados import zumbi_infectado_1, zumbi_infectada_2, boss_infectado
 from data.zumbis.eletricos import zumbi_eletrico_1, zumbi_eletrico_2, boss_eletrico
 from data.zumbis.acidos import zumbi_acido_1, zumbi_acido_2, boss_acido
 from data.zumbis.radioativos import zumbi_radioativo_1, zumbi_radioativo_2, boss_radioativo
 
-fase_1 = {
-    "numero": 1,
-    "nome": "Hospital",
-    "descricao": "Corredores escuros, macas quebradas e gritos ao longe.",
-    "inimigos": [
+fase_1 = Fase(
+    1,
+    "Hospital",
+    "Corredores escuros, macas quebradas e gritos ao longe.",
+    10,
+    [
         zumbi_infectado_1,
         zumbi_infectada_2,
         boss_infectado
     ]
-}
+)
 
-fase_2 = {
-    "numero": 2,
-    "nome": "Estação de Energia",
-    "descricao": "",
-    "inimigos": [
+fase_2 = Fase(
+    2,
+    "Estação de Energia",
+    "colocar uma descrição",
+    10,
+    [
         zumbi_eletrico_1,
         zumbi_eletrico_2,
         boss_eletrico
     ]
-}
+)
 
-fase_3 = {
-    "numero": 3,
-    "nome": "Laboratório",
-    "descricao": "",
-    "inimigos": [
+fase_3 = Fase(
+    3,
+    "Laboratório",
+    "colocar uma descrição",
+    10,
+    [
         zumbi_acido_1,
         zumbi_acido_2,
         boss_acido
     ]
-}
+)
 
-fase_4 = {
-    "numero": 4,
-    "nome": "Usina Nuclear",
-    "descricao": "",
-    "inimigos": [
+fase_4 = Fase(
+    4,
+    "Usina Nuclear",
+    "colocar uma descrição",
+    10,
+    [
         zumbi_radioativo_1,
         zumbi_radioativo_2,
         boss_radioativo
     ]
-}
+)

@@ -1,13 +1,15 @@
+# classes/loja.py
+from data.municoes import municoes
 from game.textos.fixar_tela import limpar_tela
 
 class Loja:
-    def __init__(self, catalogo_municao):
-        self.catalogo_municao = catalogo_municao
+    def __init__(self):
+        self.catalogo_municao = municoes
 
-    def mostrar_itens(self):
+    def mostrar_itens_loja(self):
         limpar_tela()
         print("\n=== Loja do Mercante ===")
-        for indice, municao in enumerate(self.catalogo_municao.values(), start=1):
+        for indice, municao in enumerate(self.catalogo_municao, start=1):
             print(
                 f"{indice}. {municao.tipo} | "
                 f"Dano: {municao.dano_base} | "
@@ -17,7 +19,7 @@ class Loja:
 
     def comprar_itens(self, jogador):
         while True:
-            self.mostrar_itens()
+            self.mostrar_itens_loja()
             print(f"\nSeu dinheiro: {jogador.moedas}")
             print("0. Sair da loja")
 
@@ -26,7 +28,7 @@ class Loja:
             if escolha == "0":
                 break
 
-            lista_de_municao = list(self.catalogo_municao.values())
+            lista_de_municao = list(self.catalogo_municao)
 
             try:
                 indice_escolha = int(escolha) - 1
@@ -47,5 +49,5 @@ class Loja:
                 print("Você não tem dinheiro suficiente.")
             else:
                 jogador.moedas -= preco_total
-                jogador.mochila.add_municao(municao.tipo, quantidade)
+                jogador.mochila.adicionar_municao(municao, quantidade)
                 print(f"Você comprou {quantidade}x {municao.tipo}.")

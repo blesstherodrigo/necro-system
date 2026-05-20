@@ -1,13 +1,13 @@
 # data/zumbis/infectados.py
-from classes.personagens.zumbi import Zumbi
-from classes.personagens.boss import Boss
+from classes.personagens.inimigos.zumbi import Zumbi
+from classes.personagens.inimigos.boss import Boss
 
 zumbi_infectado_1 = Zumbi(
     "Paciente Infectado",
     10, 10, 5,
     [
         "imagem"
-    ], "Incendiária", []
+    ], "Ferro", "Cobre"
 )
 
 zumbi_infectada_2 = Zumbi(
@@ -78,7 +78,7 @@ zumbi_infectada_2 = Zumbi(
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠐⠠⠑⠐⡈⠄⢂⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠀⡈⠠⠐⢀⠁⠠⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠈⠀⠀⠐⠐⠨⢘⠌⠢⠪⠌⠔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠈⠀⡀⠄⡁⡁⠐⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-    ], "Incendiária", []
+    ], "Ferro", "Cobre"
 )
 
 boss_infectado = Boss(
@@ -86,5 +86,5 @@ boss_infectado = Boss(
     20, 20, 10,
     [
         "imagem"
-    ], "Incendiária", []
+    ], "Ferro", "Cobre"
 )

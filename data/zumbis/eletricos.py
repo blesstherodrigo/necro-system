@@ -1,13 +1,13 @@
 # data/zumbis/eletricos.py
-from classes.personagens.zumbi import Zumbi
-from classes.personagens.boss import Boss
+from classes.personagens.inimigos.zumbi import Zumbi
+from classes.personagens.inimigos.boss import Boss
 
 zumbi_eletrico_1 = Zumbi(
     "Auxiliar Elétrico",
     10, 10, 5,
     [
         "imagem"
-    ], "Incendiária", []
+    ], "Cobre", "Chumbo"
 )
 
 zumbi_eletrico_2 = Zumbi(
@@ -15,7 +15,7 @@ zumbi_eletrico_2 = Zumbi(
     10, 10, 5,
     [
         "imagem"
-    ], "Incendiária", []
+    ], "Cobre", "Chumbo"
 )
 
 boss_eletrico = Boss(
@@ -23,5 +23,5 @@ boss_eletrico = Boss(
     20, 20, 10,
     [
         "imagem"
-    ], "Incendiária", []
+    ], "Cobre", "Chumbo"
 )

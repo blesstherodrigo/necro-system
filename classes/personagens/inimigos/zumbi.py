@@ -1,5 +1,5 @@
-# classes/personagens/zumbi.py
-from classes.personagens.inimigo import Inimigo
+# classes/personagens/inimigos/zumbi.py
+from classes.personagens.inimigos.inimigo import Inimigo
 
 class Zumbi(Inimigo):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):

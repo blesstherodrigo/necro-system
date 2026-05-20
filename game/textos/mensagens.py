@@ -19,8 +19,8 @@ def mensagem_venceu(nome_inimigo):
     print(f"\nVocê derrotou {nome_inimigo}!")
     enter_continuar()
 
-def ganhou_moedas(recompensa):
-    print(f"Ganhou {recompensa} moedas.")
+def mensagem_ganhou_moedas(recompensa):
+    print(f"\nGanhou {recompensa} moedas.")
     enter_continuar()
 
 def mensagem_zerou_jogo():

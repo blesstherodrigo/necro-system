@@ -1,13 +1,13 @@
 # data/zumbis/acidos.py
-from classes.personagens.zumbi import Zumbi
-from classes.personagens.boss import Boss
+from classes.personagens.inimigos.zumbi import Zumbi
+from classes.personagens.inimigos.boss import Boss
 
 zumbi_acido_1 = Zumbi(
     "Cobaia Ácida",
     10, 10, 5,
     [
         "Imagem"
-    ], "Incendiária", []
+    ], "Titânio", "Ferro"
 )
 
 zumbi_acido_2 = Zumbi(
@@ -15,7 +15,7 @@ zumbi_acido_2 = Zumbi(
     10, 10, 5,
     [
         "Imagem"
-    ], "Incendiária", []
+    ], "Titânio", "Ferro"
 )
 
 boss_acido = Boss(
@@ -23,5 +23,5 @@ boss_acido = Boss(
     20, 20, 10,
     [
         "Imagem"
-    ], "Incendiária", []
+    ], "Titânio", "Ferro"
 )
