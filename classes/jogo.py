@@ -24,7 +24,7 @@ class Jogo:
 
     def preparar_jogador(self):
         self.jogador = Jogador.criar_jogador()
-        self.jogador.mochila.adicionar_municao(municao_ferro, 5)
+        self.jogador.mochila.adicionar_item(municao_ferro, 5)
 
     def buscar_fase(self):
         buscar_fase_atual = self.fases[self.fase_atual]
@@ -57,17 +57,31 @@ class Jogo:
                     self.inimigo.receber_dano(municao)
 
                 elif opcao_combate_escolhida == "2":
+                    self.jogador.atacar_com_faca(self.inimigo)
+
+                elif opcao_combate_escolhida == "3":
+                    medicina = self.jogador.escolher_medicina()
+
+                    if medicina is None:
+                        continue
+
+                    self.jogador.usar_medicina(medicina)
+
+                elif opcao_combate_escolhida == "4":
                     mensagem_recuou()
+                    self.jogador.resetar_efeitos_luta()
                     return "fugiu"
 
                 else:
                     mensagem_opcao_invalida()
 
                 if self.inimigo.esta_vivo():
+                    self.jogador.regenerar()
                     self.jogador.receber_dano(self.inimigo.dano)
 
             # recompensas por fase ou por combate???
             if self.jogador.esta_vivo():
+                self.jogador.resetar_efeitos_luta()
                 recompensa = random.randint(15, 35)
                 self.jogador.moedas += recompensa
                 mensagem_venceu(self.inimigo.nome)
@@ -153,7 +167,7 @@ class Jogo:
                 )
 
             elif opcao_menu_escolhida == "3":
-                loja.comprar_itens(self.jogador)
+                loja.abrir_loja(self.jogador)
 
             elif opcao_menu_escolhida == "4":
                 self.jogador.mochila.mostrar_mochila()

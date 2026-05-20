@@ -29,3 +29,8 @@ class Inimigo(Personagem):
         super().receber_dano(dano_recebido)
         print(f"\n{self.nome} recebeu {dano_recebido} de dano. Vida restante: {self.vida}")
         enter_continuar()
+
+    def receber_dano_bruto(self, dano):
+        super().receber_dano(dano)
+        print(f"\n{self.nome} recebeu {dano} de dano. Vida restante: {self.vida}")
+        enter_continuar()

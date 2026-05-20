@@ -5,24 +5,31 @@ class Mochila:
     def __init__(self):
         self.itens = {}
 
-    def adicionar_municao(self, municao, quantidade):
-        if municao not in self.itens:
-            self.itens[municao] = 0
-        self.itens[municao] += quantidade
+    def adicionar_item(self, item, quantidade):
+        if item not in self.itens:
+            self.itens[item] = 0
+        self.itens[item] += quantidade
 
-    def usar_municao(self, municao):
-        if self.itens.get(municao, 0) > 0:
-            self.itens[municao] -= 1
+    def remover_item(self, item, quantidade):
+        if self.itens.get(item, 0) >= quantidade:
+            self.itens[item] -= quantidade
+
+            if self.itens[item] <= 0:
+                del self.itens[item]
+
             return True
+
         return False
 
     def mostrar_mochila(self):
         print("\n=== Mochila ===")
+
         if not self.itens:
-            print("Você não tem munições.")
+            print("Você não tem itens.")
             return
 
-        for municao, quantidade in self.itens.items():
-            print(f"{municao.tipo}: {quantidade}")
+        for item, quantidade in self.itens.items():
+            nome = getattr(item, "tipo", getattr(item, "nome", "Item"))
+            print(f"{nome}: {quantidade}")
 
         enter_voltar()

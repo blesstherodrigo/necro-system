@@ -1,6 +1,8 @@
 # classes/personagens/jogador.py
 from classes.personagens.personagem import Personagem
 from classes.itens.mochila import Mochila
+from classes.itens.municao import Municao
+from classes.itens.medicina import Medicina
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida
 from textos.fixar_tela import enter_continuar, enter_voltar
@@ -10,6 +12,9 @@ class Jogador(Personagem):
         super().__init__(nome, vida, vida_max, dano, imagem)
         self.mochila = mochila
         self.moedas = moedas
+        self.dano_bonus = 0
+        self.defesa_bonus = 0
+        self.regeneracao = 0
 
     @staticmethod
     def criar_jogador():
@@ -33,9 +38,9 @@ class Jogador(Personagem):
 
     def escolher_municao(self):
         municao_disponivel = [
-            municao
-            for municao, quantidade in self.mochila.itens.items()
-            if quantidade > 0
+            item
+            for item, quantidade in self.mochila.itens.items()
+            if isinstance(item, Municao) and quantidade > 0
         ]
 
         if not municao_disponivel:
@@ -55,12 +60,91 @@ class Jogador(Personagem):
             print("Escolha inválida.")
             return None
 
-        if self.mochila.usar_municao(municao):
+        if self.mochila.remover_item(municao, 1):
             return municao
 
         return None
 
+    def escolher_medicina(self):
+        medicinas_disponiveis = [
+            item
+            for item, quantidade in self.mochila.itens.items()
+            if isinstance(item, Medicina) and quantidade > 0
+        ]
+
+        if not medicinas_disponiveis:
+            print("Você não tem medicinas!")
+            enter_voltar()
+            return None
+
+        print("\nEscolha a medicina:")
+        for indice, medicina in enumerate(medicinas_disponiveis, start=1):
+            quantidade = self.mochila.itens[medicina]
+            print(
+                f"{indice}. {medicina.nome} "
+                f"({quantidade}) | Efeito: {medicina.tipo} | Valor: {medicina.valor}"
+            )
+
+        try:
+            escolha = int(input("> ")) - 1
+            medicina = medicinas_disponiveis[escolha]
+        except (ValueError, IndexError):
+            print("Escolha inválida.")
+            enter_voltar()
+            return None
+
+        if self.mochila.remover_item(medicina, 1):
+            return medicina
+
+        return None
+
     def receber_dano(self, dano):
-        super().receber_dano(dano)
-        print(f"\nVocê recebeu {dano} de dano. Sua vida: {self.vida}")
+        dano_final = dano - self.defesa_bonus
+
+        if dano_final < 0:
+            dano_final = 0
+
+        super().receber_dano(dano_final)
+        print(f"\nVocê recebeu {dano_final} de dano. Sua vida: {self.vida}")
+        enter_continuar()
+
+    def dano_total(self):
+        return self.dano + self.dano_bonus
+
+    def atacar_com_faca(self, inimigo):
+        dano = self.dano_total()
+        inimigo.receber_dano_bruto(dano)
+
+    def curar(self, quantidade):
+        self.vida += quantidade
+        if self.vida > self.vida_max:
+            self.vida = self.vida_max
+
+    def regenerar(self):
+        if self.regeneracao > 0:
+            self.curar(self.regeneracao)
+            print(f"\nVocê regenerou {self.regeneracao} de vida. Vida atual: {self.vida}/{self.vida_max}")
+
+    def resetar_efeitos_luta(self):
+        self.dano_bonus = 0
+        self.defesa_bonus = 0
+        self.regeneracao = 0
+
+    def usar_medicina(self, medicina):
+        if medicina.tipo == "buff_dano":
+            self.dano_bonus += medicina.valor
+            print(f"\nVocê usou {medicina.nome}. Dano aumentado em {medicina.valor} pelo resto da luta.")
+
+        elif medicina.tipo == "cura_instantanea":
+            self.curar(medicina.valor)
+            print(f"\nVocê usou {medicina.nome}. Recuperou {medicina.valor} de vida.")
+
+        elif medicina.tipo == "regeneracao":
+            self.regeneracao += medicina.valor
+            print(f"\nVocê usou {medicina.nome}. Vai regenerar {medicina.valor} de vida por turno.")
+
+        elif medicina.tipo == "buff_defesa":
+            self.defesa_bonus += medicina.valor
+            print(f"\nVocê usou {medicina.nome}. Defesa aumentada em {medicina.valor} pelo resto da luta.")
+
         enter_continuar()
