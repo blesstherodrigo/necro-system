@@ -15,15 +15,12 @@ class Inimigo(Personagem):
 
         if municao.tipo in self.imune:
             dano_recebido = 0
-            limpar_tela()
             print(f"{self.nome} é imune a munição {municao.tipo}!")
         elif municao.tipo in self.fraqueza:
             dano_recebido = municao.dano_vantajoso
-            limpar_tela()
             print(f"Dano crítico! Munição {municao.tipo} é muito efetiva contra {self.nome}!")
         else:
             dano_recebido = municao.dano_base
-            limpar_tela()
             print(f"Munição {municao.tipo} causou dano normal.")
 
         super().receber_dano(dano_recebido)
