@@ -1,3 +1,4 @@
+# instancias/medicinas.py
 from classes.itens.medicina import Medicina
 
 adrenalina = Medicina(
