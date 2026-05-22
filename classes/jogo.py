@@ -1,4 +1,5 @@
 # classes/jogo.py
+from textos.sons.musica import tocar_musica
 import random
 from classes.personagens.jogador import Jogador
 from classes.loja import Loja
@@ -130,6 +131,7 @@ class Jogo:
 
     def iniciar_jogo(self):
         # >Introdução do jogo AQUI<
+        tocar_musica("The_Last_Observation.mp3")
         imprimir_arte("logo.txt")
 
         self.preparar_jogador()
