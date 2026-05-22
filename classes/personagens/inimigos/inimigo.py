@@ -1,6 +1,7 @@
 # classes/personagens/inimigos/inimigo.py
 from classes.personagens.personagem import Personagem
-from textos.fixar_tela import enter_continuar, limpar_tela
+from textos.fixar_tela import enter_continuar
+from textos.mensagens import mensagem_recebeu_dano
 
 class Inimigo(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
@@ -24,10 +25,11 @@ class Inimigo(Personagem):
             print(f"Munição {municao.tipo} causou dano normal.")
 
         super().receber_dano(dano_recebido)
-        print(f"\n{self.nome} recebeu {dano_recebido} de dano. Vida restante: {self.vida}")
+        mensagem_recebeu_dano(self.nome, dano_recebido)
         enter_continuar()
 
+    # tem como juntar essa função ???
     def receber_dano_bruto(self, dano):
         super().receber_dano(dano)
-        print(f"\n{self.nome} recebeu {dano} de dano. Vida restante: {self.vida}")
+        mensagem_recebeu_dano(self.nome, dano)
         enter_continuar()

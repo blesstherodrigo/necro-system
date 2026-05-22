@@ -3,9 +3,10 @@ from classes.personagens.personagem import Personagem
 from classes.itens.mochila import Mochila
 from classes.itens.municao import Municao
 from classes.itens.medicina import Medicina
-from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
-from textos.mensagens import mensagem_opcao_invalida
+
 from textos.fixar_tela import enter_continuar, enter_voltar
+from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
+from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
 
 class Jogador(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, mochila, moedas):
@@ -56,7 +57,7 @@ class Jogador(Personagem):
             escolha = int(input("> ")) - 1
             municao = municao_disponivel[escolha]
         except (ValueError, IndexError):
-            print("Escolha inválida.")
+            mensagem_opcao_invalida()
             return None
 
         if self.mochila.remover_item(municao, 1):
@@ -88,7 +89,7 @@ class Jogador(Personagem):
             escolha = int(input("> ")) - 1
             medicina = medicinas_disponiveis[escolha]
         except (ValueError, IndexError):
-            print("Escolha inválida.")
+            mensagem_opcao_invalida()
             enter_voltar()
             return None
 
@@ -104,7 +105,7 @@ class Jogador(Personagem):
             dano_final = 0
 
         super().receber_dano(dano_final)
-        print(f"\nVocê recebeu {dano_final} de dano. Sua vida: {self.vida}")
+        mensagem_recebeu_dano(self.nome, dano_final)
         enter_continuar()
 
     def dano_total(self):
@@ -122,7 +123,7 @@ class Jogador(Personagem):
     def regenerar(self):
         if self.regeneracao > 0:
             self.curar(self.regeneracao)
-            print(f"\nVocê regenerou {self.regeneracao} de vida. Vida atual: {self.vida}/{self.vida_max}")
+            print(f"\n{self.nome} regenerou {self.regeneracao} de vida.")
 
     def resetar_efeitos_luta(self):
         self.dano_bonus = 0
@@ -132,18 +133,18 @@ class Jogador(Personagem):
     def usar_medicina(self, medicina):
         if medicina.tipo == "buff_dano":
             self.dano_bonus += medicina.valor
-            print(f"\nVocê usou {medicina.nome}. Dano aumentado em {medicina.valor} pelo resto da luta.")
+            print(f"\n{self.nome} usou {medicina.nome}. Dano aumentado em {medicina.valor} pelo resto da luta.")
 
         elif medicina.tipo == "cura_instantanea":
             self.curar(medicina.valor)
-            print(f"\nVocê usou {medicina.nome}. Recuperou {medicina.valor} de vida.")
+            print(f"\n{self.nome} usou {medicina.nome}. Recuperou {medicina.valor} de vida.")
 
         elif medicina.tipo == "regeneracao":
             self.regeneracao += medicina.valor
-            print(f"\nVocê usou {medicina.nome}. Vai regenerar {medicina.valor} de vida por turno.")
+            print(f"\n{self.nome} {medicina.nome}. Vai regenerar {medicina.valor} de vida por turno.")
 
         elif medicina.tipo == "buff_defesa":
             self.defesa_bonus += medicina.valor
-            print(f"\nVocê usou {medicina.nome}. Defesa aumentada em {medicina.valor} pelo resto da luta.")
+            print(f"\n{self.nome} {medicina.nome}. Defesa aumentada em {medicina.valor} pelo resto da luta.")
 
         enter_continuar()
