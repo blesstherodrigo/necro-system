@@ -18,7 +18,7 @@ class Inimigo(Personagem):
             print(f"{self.nome} é imune a munição {municao.tipo}!")
         elif municao.tipo in self.fraqueza:
             dano_recebido = municao.dano_vantajoso
-            print(f"Dano crítico! Munição {municao.tipo} é muito efetiva contra {self.nome}!")
+            print(f"Dano crítico! Munição de {municao.tipo} é muito efetiva contra {self.nome}!")
         else:
             dano_recebido = municao.dano_base
             print(f"Munição {municao.tipo} causou dano normal.")

@@ -18,8 +18,9 @@ class Jogador(Personagem):
 
     @staticmethod
     def criar_jogador():
-        # aqui deve mostrar a imagem dos personagens, Homem e Mulher
+        nome = input_nome_do_jogdor()
 
+        # aqui deve mostrar a imagem dos personagens, Homem e Mulher
         while True:
             escolha = input_escolha_personagem()
 
@@ -31,8 +32,6 @@ class Jogador(Personagem):
                 break
             else:
                 mensagem_opcao_invalida()
-
-        nome = input_nome_do_jogdor()
 
         return Jogador(nome, 100, 100, 10, imagem, Mochila(), 50)
 

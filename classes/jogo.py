@@ -1,14 +1,13 @@
 # classes/jogo.py
-from textos.sons.musica import tocar_musica
 import random
 from classes.personagens.jogador import Jogador
 from classes.loja import Loja
 from instancias.fases import fases
-from instancias.municoes import municao_ferro   # iniciar com munição padrão ???
-from textos.artes.artes import imprimir_arte
+from instancias.municoes import municao_ferro
+from instancias.medicinas import antidoto
 from textos.menus import menu_combate, menu_principal, menu_status
 from textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
-from textos.introducoes import introducao_fase
+from textos.introducoes import introducao_jogo, introducao_fase
 from textos.mensagens import (
     mensagem_opcao_invalida, mensagem_apareceu_inimigo,
     mensagem_concluiu_fase, mensagem_nova_fase_desbloqueada,
@@ -27,6 +26,7 @@ class Jogo:
     def preparar_jogador(self):
         self.jogador = Jogador.criar_jogador()
         self.jogador.mochila.adicionar_item(municao_ferro, 5)
+        self.jogador.mochila.adicionar_item(antidoto, 1)
 
     def buscar_fase(self):
         buscar_fase_atual = self.fases[self.fase_atual]
@@ -49,9 +49,6 @@ class Jogo:
                     self.jogador.vida,
                     self.jogador.vida_max
                 )
-
-                # imprimir_arte(self.inimigo.imagem)
-                # solucionar posição das imagens no combate
 
                 if opcao_combate_escolhida == "1":
                     municao = self.jogador.escolher_municao()
@@ -130,10 +127,7 @@ class Jogo:
         self.fase_atual = 0
 
     def iniciar_jogo(self):
-        # >Introdução do jogo AQUI<
-        tocar_musica("The_Last_Observation.mp3")
-        imprimir_arte("logo.txt")
-
+        introducao_jogo()
         self.preparar_jogador()
         loja = Loja()
 
