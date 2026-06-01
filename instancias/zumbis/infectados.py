@@ -1,6 +1,5 @@
 # instancias/zumbis/infectados.py
 from classes.personagens.inimigos.Lista_de_Zumbis.zumbi_infectado import Zumbi_Infectado
-from classes.personagens.inimigos.Lista_de_Boss.boss_infectado import Boss_Infectado
 
 zumbi_infectado_1 = Zumbi_Infectado(
     "Paciente Infectado",
@@ -14,13 +13,7 @@ zumbi_infectada_2 = Zumbi_Infectado(
     "enfermeira.txt", "Ferro", "Cobre"
 )
 
-boss_infectado = Boss_Infectado(
-    "Doutor Infectado",
-    20, 20, 10,
-    "imagem", "Ferro", "Cobre"
-)
-
-infectados = [zumbi_infectado_1, zumbi_infectada_2, boss_infectado]
+infectados = [zumbi_infectado_1, zumbi_infectada_2]
 
 
 ''' MOVIMENTOS
