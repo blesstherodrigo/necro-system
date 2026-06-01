@@ -6,5 +6,5 @@ class Zumbi(Inimigo):
         super().__init__(nome, vida, vida_max, dano, imagem, fraqueza, imune)
         
     def realizar_ataque(self):
-        print(f"{self.nome} desferiu um golpe padrão!")
+        print(f"{self.nome} arranhou e causou {self.dano} de dano!")
         return self.dano
