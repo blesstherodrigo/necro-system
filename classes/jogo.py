@@ -3,7 +3,7 @@ import random
 from classes.personagens.jogador import Jogador
 from classes.loja import Loja
 from instancias.fases import fases
-from instancias.municoes import municao_ferro
+from instancias.municoes import municao_bronze
 from instancias.medicinas import antidoto
 from textos.menus import menu_combate, menu_principal, menu_status
 from textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
@@ -25,7 +25,7 @@ class Jogo:
 
     def preparar_jogador(self):
         self.jogador = Jogador.criar_jogador()
-        self.jogador.mochila.adicionar_item(municao_ferro, 5)
+        self.jogador.mochila.adicionar_item(municao_bronze, 5)
         self.jogador.mochila.adicionar_item(antidoto, 1)
 
     def buscar_fase(self):
