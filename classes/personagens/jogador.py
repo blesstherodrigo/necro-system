@@ -48,22 +48,27 @@ class Jogador(Personagem):
             enter_voltar()
             return None
 
-        print("\nEscolha a munição:")
-        for indice, municao in enumerate(municao_disponivel, start=1):
-            quantidade = self.mochila.itens[municao]
-            print(f"{indice}. {municao.tipo} ({quantidade})")
+        while True:
+            print("\nEscolha a munição:")
 
-        try:
-            escolha = int(input("> ")) - 1
-            municao = municao_disponivel[escolha]
-        except (ValueError, IndexError):
-            mensagem_opcao_invalida()
+            print("0. Voltar")
+            for indice, municao in enumerate(municao_disponivel, start=1):
+                quantidade = self.mochila.itens[municao]
+                print(f"{indice}. {municao.tipo} ({quantidade})")
+
+            try:
+                escolha = int(input("> "))
+                if escolha == 0:
+                    break
+                municao = municao_disponivel[escolha - 1]
+            except (ValueError, IndexError):
+                mensagem_opcao_invalida()
+                return None
+
+            if self.mochila.remover_item(municao, 1):
+                return municao
+
             return None
-
-        if self.mochila.remover_item(municao, 1):
-            return municao
-
-        return None
 
     def escolher_medicina(self):
         medicinas_disponiveis = [
