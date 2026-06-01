@@ -7,6 +7,7 @@ def introducao_jogo():
     limpar_tela()
     tocar_audio("intro.mp3")
     imprimir_arte("logo.txt")
+    enter_continuar()
 
 def introducao_fase(numero_fase, nome_fase, descricao_fase):
     limpar_tela()

@@ -4,10 +4,7 @@ from textos.fixar_tela import limpar_tela, enter_voltar
 def menu_principal(nome, vida, vida_max, dano, fase_atual, total_fases):
     limpar_tela()
     print("=== NECROSYSTEM ===")
-    print(f"Jogador: {nome}")
-    print(f"Vida: {vida}/{vida_max}")
-    print(f"Dano: {dano}")
-    print(f"Fases: {fase_atual}/{total_fases}")
+    print(f"Fases Concluídas: {fase_atual}/{total_fases}")
     print("-" * 25)
     print("1. Explorar")
     print("2. Status")
