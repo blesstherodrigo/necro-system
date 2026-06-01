@@ -38,49 +38,52 @@ class Jogo:
 
         for inimigo_atual in inimigos_da_fase.inimigos:
             self.inimigo = inimigo_atual
-
             mensagem_apareceu_inimigo(self.inimigo.nome)
 
             while self.jogador.esta_vivo() and self.inimigo.esta_vivo():
-                opcao_combate_escolhida = menu_combate(
-                    self.inimigo.nome,
-                    self.inimigo.vida,
-                    self.inimigo.vida_max,
-                    self.jogador.vida,
-                    self.jogador.vida_max
-                )
+                while True:
+                    opcao_combate_escolhida = menu_combate(
+                        self.inimigo.nome,
+                        self.inimigo.vida,
+                        self.inimigo.vida_max,
+                        self.jogador.vida,
+                        self.jogador.vida_max
+                    )
 
-                if opcao_combate_escolhida == "1":
-                    municao = self.jogador.escolher_municao()
+                    if opcao_combate_escolhida == "1":
+                        municao = self.jogador.escolher_municao()
 
-                    if municao is None:
-                        continue
+                        if municao is None:
+                            continue
 
-                    self.inimigo.receber_dano(municao)
+                        self.inimigo.receber_dano(municao)
+                        break
 
-                elif opcao_combate_escolhida == "2":
-                    self.jogador.atacar_com_faca(self.inimigo)
+                    elif opcao_combate_escolhida == "2":
+                        self.jogador.atacar_com_faca(self.inimigo)
+                        break
 
-                elif opcao_combate_escolhida == "3":
-                    medicina = self.jogador.escolher_medicina()
+                    elif opcao_combate_escolhida == "3":
+                        medicina = self.jogador.escolher_medicina()
 
-                    if medicina is None:
-                        continue
+                        if medicina is None:
+                            continue
 
-                    self.jogador.usar_medicina(medicina)
+                        self.jogador.usar_medicina(medicina)
+                        break
 
-                elif opcao_combate_escolhida == "4":
-                    mensagem_recuou()
-                    self.jogador.resetar_efeitos_luta()
-                    return "fugiu"
+                    elif opcao_combate_escolhida == "4":
+                        mensagem_recuou()
+                        self.jogador.resetar_efeitos_luta()
+                        return "fugiu"
 
-                else:
-                    mensagem_opcao_invalida()
+                    else:
+                        mensagem_opcao_invalida()
 
                 if self.inimigo.esta_vivo():
                     self.jogador.regenerar()
-                    dano_do_ataque = self.inimigo.realizar_ataque()# Mudanças para utilizar ataques únicos de cada zumbi existente
-                    self.jogador.receber_dano(dano_do_ataque)# 
+                    dano_do_ataque = self.inimigo.realizar_ataque() # Mudanças para utilizar ataques únicos de cada zumbi existente
+                    self.jogador.receber_dano(dano_do_ataque)
 
             # recompensas por fase ou por combate???
             if self.jogador.esta_vivo():

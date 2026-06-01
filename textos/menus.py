@@ -23,12 +23,6 @@ def menu_status(nome, vida, vida_max, dano):
     print(f"Dano: {dano}")
     enter_voltar()
 
-# def menu_mochila():
-#     limpar_tela()
-#     print("=== MOCHILA ===")
-#     print("Mochila aqui")
-#     enter_voltar()
-
 def menu_mochila(itens):
     print("\n=== Mochila ===")
 

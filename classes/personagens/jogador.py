@@ -82,26 +82,31 @@ class Jogador(Personagem):
             enter_voltar()
             return None
 
-        print("\nEscolha a medicina:")
-        for indice, medicina in enumerate(medicinas_disponiveis, start=1):
-            quantidade = self.mochila.itens[medicina]
-            print(
-                f"{indice}. {medicina.nome} "
-                f"({quantidade}) | Efeito: {medicina.tipo} | Valor: {medicina.valor}"
-            )
+        while True:
+            print("\nEscolha a medicina:")
 
-        try:
-            escolha = int(input("> ")) - 1
-            medicina = medicinas_disponiveis[escolha]
-        except (ValueError, IndexError):
-            mensagem_opcao_invalida()
-            enter_voltar()
+            print("0. Voltar")
+            for indice, medicina in enumerate(medicinas_disponiveis, start=1):
+                quantidade = self.mochila.itens[medicina]
+                print(
+                    f"{indice}. {medicina.nome} "
+                    f"({quantidade}) | Efeito: {medicina.tipo} | Valor: {medicina.valor}"
+                )
+
+            try:
+                escolha = int(input("> "))
+                if escolha == 0:
+                    break
+                medicina = medicinas_disponiveis[escolha - 1]
+            except (ValueError, IndexError):
+                mensagem_opcao_invalida()
+                enter_voltar()
+                return None
+
+            if self.mochila.remover_item(medicina, 1):
+                return medicina
+
             return None
-
-        if self.mochila.remover_item(medicina, 1):
-            return medicina
-
-        return None
 
     def receber_dano(self, dano):
         dano_final = dano - self.defesa_bonus
@@ -120,6 +125,7 @@ class Jogador(Personagem):
         dano = self.dano_total()
         inimigo.receber_dano_bruto(dano)
 
+    # cura nao completa vida total se a vida estiver perto do limite
     def curar(self, quantidade):
         self.vida += quantidade
         if self.vida > self.vida_max:

@@ -46,6 +46,7 @@ class Loja:
                 enter_continuar()
                 continue
 
+            # repetido???
             if quantidade <= 0:
                 print("Quantidade inválida.")
                 enter_continuar()

@@ -28,7 +28,7 @@ class Inimigo(Personagem):
         mensagem_recebeu_dano(self.nome, dano_recebido)
         enter_continuar()
 
-    # tem como juntar essa função ???
+    # teria como juntar essa função ???
     def receber_dano_bruto(self, dano):
         super().receber_dano(dano)
         mensagem_recebeu_dano(self.nome, dano)
