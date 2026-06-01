@@ -4,6 +4,7 @@ from audios.audio import tocar_audio
 from textos.artes.artes import imprimir_arte
 
 def introducao_jogo():
+    limpar_tela()
     tocar_audio("intro.mp3")
     imprimir_arte("logo.txt")
 
