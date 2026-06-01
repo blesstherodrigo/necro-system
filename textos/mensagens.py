@@ -9,11 +9,6 @@ def mensagem_opcao_invalida():
 def mensagem_recebeu_dano(nome, dano):
     print(f"\n{nome} recebeu {dano} de dano.")
 
-def mensagem_recuou():
-    limpar_tela()
-    print("Você recuou do combate.")
-    enter_continuar()
-
 def mensagem_morreu():
     print("\nVocê morreu.")
     enter_continuar()

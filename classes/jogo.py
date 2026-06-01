@@ -11,7 +11,7 @@ from textos.introducoes import introducao_jogo, introducao_fase
 from textos.mensagens import (
     mensagem_opcao_invalida, mensagem_apareceu_inimigo,
     mensagem_concluiu_fase, mensagem_nova_fase_desbloqueada,
-    mensagem_venceu, mensagem_morreu, mensagem_recuou, mensagem_ganhou_moedas,
+    mensagem_venceu, mensagem_morreu, mensagem_ganhou_moedas,
     mensagem_zerou_jogo, mensagem_saindo_do_jogo
 )
 
@@ -71,11 +71,6 @@ class Jogo:
 
                         self.jogador.usar_medicina(medicina)
                         break
-
-                    elif opcao_combate_escolhida == "4":
-                        mensagem_recuou()
-                        self.jogador.resetar_efeitos_luta()
-                        return "fugiu"
 
                     else:
                         mensagem_opcao_invalida()

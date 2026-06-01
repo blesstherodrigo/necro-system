@@ -45,7 +45,6 @@ def menu_combate(nome_inimigo, vida_inimigo, vida_max_inimigo, vida_jogador, vid
     print("1. Atacar com arma")
     print("2. Atacar com faca")
     print("3. Usar medicina")
-    print("4. Fugir")
     print("-" * 30)
     opcao_combate = input("> ")
     return opcao_combate
