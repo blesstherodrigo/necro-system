@@ -79,7 +79,8 @@ class Jogo:
 
                 if self.inimigo.esta_vivo():
                     self.jogador.regenerar()
-                    self.jogador.receber_dano(self.inimigo.dano)
+                    dano_do_ataque = self.inimigo.realizar_ataque()# Mudanças para utilizar ataques únicos de cada zumbi existente
+                    self.jogador.receber_dano(dano_do_ataque)# 
 
             # recompensas por fase ou por combate???
             if self.jogador.esta_vivo():
