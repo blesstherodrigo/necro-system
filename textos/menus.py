@@ -1,10 +1,10 @@
 # textos/menus.py
 from textos.fixar_tela import limpar_tela, enter_voltar
 
-def menu_principal(nome, vida, vida_max, dano, fase_atual, total_fases):
+def menu_principal(fase_atual, total_fases):
     limpar_tela()
     print("=== NECROSYSTEM ===")
-    print(f"Fases Concluídas: {fase_atual}/{total_fases}")
+    print(f"FASES: {fase_atual}/{total_fases}")
     print("-" * 25)
     print("1. Explorar")
     print("2. Status")
@@ -23,10 +23,23 @@ def menu_status(nome, vida, vida_max, dano):
     print(f"Dano: {dano}")
     enter_voltar()
 
-def menu_mochila():
-    limpar_tela()
-    print("=== MOCHILA ===")
-    print("Mochila aqui")
+# def menu_mochila():
+#     limpar_tela()
+#     print("=== MOCHILA ===")
+#     print("Mochila aqui")
+#     enter_voltar()
+
+def menu_mochila(itens):
+    print("\n=== Mochila ===")
+
+    if not itens:
+        print("Você não tem itens.")
+        return
+
+    for item, quantidade in itens.items():
+        nome = getattr(item, "tipo", getattr(item, "nome", "Item"))
+        print(f"{nome}: {quantidade}")
+
     enter_voltar()
 
 def menu_combate(nome_inimigo, vida_inimigo, vida_max_inimigo, vida_jogador, vida_max_jogador):

@@ -1,9 +1,12 @@
 # classes/itens/mochila.py
-from textos.fixar_tela import enter_voltar
+from textos.menus import menu_mochila
 
 class Mochila:
     def __init__(self):
         self.itens = {}
+
+    def mostrar_mochila(self):
+        menu_mochila(self.itens)
 
     def adicionar_item(self, item, quantidade):
         if item not in self.itens:
@@ -20,16 +23,3 @@ class Mochila:
             return True
 
         return False
-
-    def mostrar_mochila(self):
-        print("\n=== Mochila ===")
-
-        if not self.itens:
-            print("Você não tem itens.")
-            return
-
-        for item, quantidade in self.itens.items():
-            nome = getattr(item, "tipo", getattr(item, "nome", "Item"))
-            print(f"{nome}: {quantidade}")
-
-        enter_voltar()

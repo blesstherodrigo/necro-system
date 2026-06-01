@@ -134,10 +134,6 @@ class Jogo:
 
         while self.rodando:
             opcao_menu_escolhida = menu_principal(
-                self.jogador.nome,
-                self.jogador.vida,
-                self.jogador.vida_max,
-                self.jogador.dano,
                 self.fase_atual,
                 len(self.fases)
             )
