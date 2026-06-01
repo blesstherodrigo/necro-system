@@ -3,7 +3,7 @@ from classes.itens.medicina import Medicina
 
 adrenalina = Medicina(
     "Adrenalina",
-    "buff_dano",
+    "+ Dano Duradouro",
     5,
     20,
     "luta"
@@ -11,7 +11,7 @@ adrenalina = Medicina(
 
 antidoto = Medicina(
     "Antídoto",
-    "cura_instantanea",
+    "Cura Instantânea",
     30,
     15,
     "instantaneo"
@@ -19,7 +19,7 @@ antidoto = Medicina(
 
 soro = Medicina(
     "Soro",
-    "regeneracao",
+    "Regeneração Duradouro",
     5,
     25,
     "luta"
@@ -27,7 +27,7 @@ soro = Medicina(
 
 analgesico = Medicina(
     "Analgésico",
-    "buff_defesa",
+    "+ Defesa Duradouro",
     3,
     20,
     "luta"

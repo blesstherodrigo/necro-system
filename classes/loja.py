@@ -73,8 +73,8 @@ class Loja:
             for indice, medicina in enumerate(self.catalogo_medicina, start=1):
                 print(
                     f"{indice}. {medicina.nome} | "
-                    f"Efeito: {medicina.tipo} | "
-                    f"Valor: {medicina.valor} | "
+                    f"Efeito: {medicina.efeito} | "
+                    f"Bônus: {medicina.bonus} | "
                     f"Preço: {medicina.preco}"
                 )
 
@@ -117,7 +117,7 @@ class Loja:
 
             enter_continuar()
 
-    def menu_comprar(self, jogador):
+    def menu_comprar_itens(self, jogador):
         while True:
             limpar_tela()
             print("=== Comprar ===")
@@ -218,7 +218,7 @@ class Loja:
     def abrir_loja(self, jogador):
         while True:
             limpar_tela()
-            print("=== Loja do Mercante ===")
+            print("=== LOJA ===")
             print(f"Suas moedas: {jogador.moedas}")
             print("-" * 25)
             print("1. Comprar")
@@ -229,7 +229,7 @@ class Loja:
             escolha = input("> ")
 
             if escolha == "1":
-                self.menu_comprar(jogador)
+                self.menu_comprar_itens(jogador)
             elif escolha == "2":
                 self.menu_vender(jogador)
             elif escolha == "0":
@@ -237,49 +237,3 @@ class Loja:
             else:
                 print("Opção inválida.")
                 enter_continuar()
-
-    def mostrar_itens_loja(self):
-        limpar_tela()
-        print("\n=== Loja do Mercante ===")
-        for indice, municao in enumerate(self.catalogo_municao, start=1):
-            print(
-                f"{indice}. {municao.tipo} | "
-                f"Dano: {municao.dano_base} | "
-                f"Crítico: {municao.dano_vantajoso} | "
-                f"Preço: {municao.preco}"
-            )
-
-    def comprar_itens(self, jogador):
-        while True:
-            self.mostrar_itens_loja()
-            print(f"\nSeu dinheiro: {jogador.moedas}")
-            print("0. Sair da loja")
-
-            escolha = input("Escolha uma munição para comprar: ")
-
-            if escolha == "0":
-                break
-
-            lista_de_municao = list(self.catalogo_municao)
-
-            try:
-                indice_escolha = int(escolha) - 1
-                municao = lista_de_municao[indice_escolha]
-            except (ValueError, IndexError):
-                print("Escolha inválida.")
-                continue
-
-            try:
-                quantidade = int(input("Quantidade: "))
-            except ValueError:
-                print("Quantidade inválida.")
-                continue
-
-            preco_total = municao.preco * quantidade
-
-            if preco_total > jogador.moedas:
-                print("Você não tem dinheiro suficiente.")
-            else:
-                jogador.moedas -= preco_total
-                jogador.mochila.adicionar_municao(municao, quantidade)
-                print(f"Você comprou {quantidade}x {municao.tipo}.")

@@ -90,7 +90,7 @@ class Jogador(Personagem):
                 quantidade = self.mochila.itens[medicina]
                 print(
                     f"{indice}. {medicina.nome} "
-                    f"({quantidade}) | Efeito: {medicina.tipo} | Valor: {medicina.valor}"
+                    f"({quantidade}) | Efeito: {medicina.efeito} | Bônus: {medicina.bonus}"
                 )
 
             try:
@@ -142,20 +142,20 @@ class Jogador(Personagem):
         self.regeneracao = 0
 
     def usar_medicina(self, medicina):
-        if medicina.tipo == "buff_dano":
-            self.dano_bonus += medicina.valor
-            print(f"\n{self.nome} usou {medicina.nome}. Dano aumentado em {medicina.valor} pelo resto da luta.")
+        if medicina.nome == "Adrenalina":
+            self.dano_bonus += medicina.bonus
+            print(f"\n{self.nome} usou {medicina.nome}. Dano aumentado em {medicina.bonus} pelo resto da luta.")
 
-        elif medicina.tipo == "cura_instantanea":
-            self.curar(medicina.valor)
-            print(f"\n{self.nome} usou {medicina.nome}. Recuperou {medicina.valor} de vida.")
+        elif medicina.nome == "Antídoto":
+            self.curar(medicina.bonus)
+            print(f"\n{self.nome} usou {medicina.nome}. Recuperou {medicina.bonus} de vida.")
 
-        elif medicina.tipo == "regeneracao":
-            self.regeneracao += medicina.valor
-            print(f"\n{self.nome} {medicina.nome}. Vai regenerar {medicina.valor} de vida por turno.")
+        elif medicina.nome == "Soro":
+            self.regeneracao += medicina.bonus
+            print(f"\n{self.nome} {medicina.nome}. Vai regenerar {medicina.bonus} de vida por turno.")
 
-        elif medicina.tipo == "buff_defesa":
-            self.defesa_bonus += medicina.valor
-            print(f"\n{self.nome} {medicina.nome}. Defesa aumentada em {medicina.valor} pelo resto da luta.")
+        elif medicina.nome == "Analgésico":
+            self.defesa_bonus += medicina.bonus
+            print(f"\n{self.nome} {medicina.nome}. Defesa aumentada em {medicina.bonus} pelo resto da luta.")
 
         enter_continuar()
