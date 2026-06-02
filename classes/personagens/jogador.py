@@ -4,9 +4,10 @@ from classes.itens.mochila import Mochila
 from classes.itens.municao import Municao
 from classes.itens.medicina import Medicina
 
-from textos.fixar_tela import enter_continuar, enter_voltar
+from textos.fixar_tela import enter_continuar, enter_voltar, limpar_tela
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
+from textos.artes.artes import imprimir_arte
 
 class Jogador(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, mochila, moedas):
@@ -23,13 +24,16 @@ class Jogador(Personagem):
 
         # aqui deve mostrar a imagem dos personagens, Homem e Mulher
         while True:
+            limpar_tela()
+            imprimir_arte("homem.txt")
+            imprimir_arte("mulher.txt")
             escolha = input_escolha_personagem()
 
             if escolha == "1":
-                imagem = "imagem do jogador homem aqui"
+                imagem = "homem.txt"
                 break
             elif escolha == "2":
-                imagem = "imagem do jogador mulher aqui"
+                imagem = "mulher.txt"
                 break
             else:
                 mensagem_opcao_invalida()

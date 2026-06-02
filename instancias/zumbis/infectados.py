@@ -4,17 +4,16 @@ from classes.personagens.inimigos.Lista_de_Zumbis.zumbi_infectado import Zumbi_I
 zumbi_infectado_1 = Zumbi_Infectado(
     "Paciente Infectado",
     10, 10, 5,
-    "imagem", "Ferro", "Cobre"
+    "paciente_infectado.txt", "Ferro", "Cobre"
 )
 
 zumbi_infectada_2 = Zumbi_Infectado(
     "Enfermeira Infectada",
     10, 10, 5,
-    "enfermeira.txt", "Ferro", "Cobre"
+    "enfermeira_infectada.txt", "Ferro", "Cobre"
 )
 
 infectados = [zumbi_infectado_1, zumbi_infectada_2]
-
 
 ''' MOVIMENTOS
 Zumbi Comum
@@ -28,7 +27,4 @@ Boss:
     Triagem Cruel: Ataca com uma Seringa Gigante causando 30 de dano
 
     Tratamento de Choque: Ele ataca com um desfribilador quebrado juntando cabos, causa dano mas ele tambem perde sua vida
-
-
-
 '''

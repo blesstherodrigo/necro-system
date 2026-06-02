@@ -2,7 +2,7 @@
 from textos.fixar_tela import limpar_tela
 
 def input_escolha_personagem():
-    limpar_tela()
+    #limpar_tela()
     print("[1] Homem | [2] Mulher")
     escolha_personagem = input("> ")
     return escolha_personagem
