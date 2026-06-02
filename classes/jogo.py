@@ -33,6 +33,12 @@ class Jogo:
         buscar_fase_atual = self.fases[self.fase_atual]
         return buscar_fase_atual
 
+    def reiniciar_jogo(self):
+        self.rodando = True
+        self.jogador = None
+        self.inimigo = None
+        self.fase_atual = 0
+
     # combates para tipos diferentes de inimigos (zumbi comum e boss)???
     def realizar_combate(self):
         inimigos_da_fase = self.buscar_fase()
@@ -97,7 +103,18 @@ class Jogo:
     def explorar_fases(self):
         if self.fase_atual >= len(self.fases):
             mensagem_zerou_jogo()
-            return "finalizado"
+            while True:
+                opcao_recomecar_escolhida = confirmacao_recomecar_jogo()
+
+                if opcao_recomecar_escolhida == "1":
+                    introducao_jogo()
+                    self.reiniciar_jogo()
+                    self.preparar_jogador()
+                    break
+                elif opcao_recomecar_escolhida == "2":
+                    return "zerou"
+                else:
+                    mensagem_opcao_invalida()
 
         jogar_fase = self.buscar_fase()
 
@@ -121,12 +138,6 @@ class Jogo:
             exemplo_cutscene()
             return "venceu"
 
-    def reiniciar_jogo(self):
-        self.rodando = True
-        self.jogador = None
-        self.inimigo = None
-        self.fase_atual = 0
-
     def iniciar_jogo(self):
         introducao_jogo()
         self.preparar_jogador()
@@ -146,6 +157,7 @@ class Jogo:
                         opcao_recomecar_escolhida = confirmacao_recomecar_jogo()
 
                         if opcao_recomecar_escolhida == "1":
+                            introducao_jogo()
                             self.reiniciar_jogo()
                             self.preparar_jogador()
                             break
