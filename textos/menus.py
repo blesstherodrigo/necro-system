@@ -32,7 +32,7 @@ def menu_mochila(itens):
 
     for item, quantidade in itens.items():
         nome = getattr(item, "tipo", getattr(item, "nome", "Item"))
-        print(f"{nome}: {quantidade}")
+        print(f"{nome} ({quantidade})")
 
     enter_voltar()
 
