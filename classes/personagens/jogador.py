@@ -21,8 +21,6 @@ class Jogador(Personagem):
     @staticmethod
     def criar_jogador():
         nome = input_nome_do_jogdor()
-
-        # aqui deve mostrar a imagem dos personagens, Homem e Mulher
         while True:
             limpar_tela()
             imprimir_arte("homem.txt")
@@ -39,6 +37,10 @@ class Jogador(Personagem):
                 mensagem_opcao_invalida()
 
         return Jogador(nome, 100, 100, 10, imagem, Mochila(), 50)
+
+    def atacar_com_faca(self, inimigo):
+        dano = self.dano + self.dano_bonus
+        inimigo.receber_dano_faca(dano)
 
     def escolher_municao(self):
         municao_disponivel = [
@@ -112,38 +114,17 @@ class Jogador(Personagem):
 
             return None
 
-    def receber_dano(self, dano):
-        dano_final = dano - self.defesa_bonus
-
-        if dano_final < 0:
-            dano_final = 0
-
-        super().receber_dano(dano_final)
-        mensagem_recebeu_dano(self.nome, dano_final)
-        enter_continuar()
-
-    def dano_total(self):
-        return self.dano + self.dano_bonus
-
-    def atacar_com_faca(self, inimigo):
-        dano = self.dano_total()
-        inimigo.receber_dano_bruto(dano)
-
     # cura nao completa vida total se a vida estiver perto do limite
     def curar(self, quantidade):
         self.vida += quantidade
         if self.vida > self.vida_max:
             self.vida = self.vida_max
 
+    # este metodo é util???
     def regenerar(self):
         if self.regeneracao > 0:
             self.curar(self.regeneracao)
             print(f"\n{self.nome} regenerou {self.regeneracao} de vida.")
-
-    def resetar_efeitos_luta(self):
-        self.dano_bonus = 0
-        self.defesa_bonus = 0
-        self.regeneracao = 0
 
     def usar_medicina(self, medicina):
         if medicina.nome == "Adrenalina":
@@ -161,5 +142,19 @@ class Jogador(Personagem):
         elif medicina.nome == "Analgésico":
             self.defesa_bonus += medicina.bonus
             print(f"\n{self.nome} {medicina.nome}. Defesa aumentada em {medicina.bonus} pelo resto da luta.")
-
         enter_continuar()
+
+    def receber_dano(self, dano):
+        dano_final = dano - self.defesa_bonus
+
+        if dano_final < 0:
+            dano_final = 0
+
+        super().receber_dano(dano_final)
+        mensagem_recebeu_dano(self.nome, dano_final)
+        enter_continuar()
+
+    def resetar_efeitos_luta(self):
+        self.dano_bonus = 0
+        self.defesa_bonus = 0
+        self.regeneracao = 0

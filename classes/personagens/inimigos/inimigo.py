@@ -9,7 +9,7 @@ class Inimigo(Personagem):
         self.fraqueza = fraqueza or []
         self.imune = imune or []
 
-    def receber_dano(self, municao):
+    def receber_dano_municao(self, municao):
         if municao is None:
             print("Nenhuma munição válida foi escolhida.")
             return
@@ -29,7 +29,7 @@ class Inimigo(Personagem):
         enter_continuar()
 
     # teria como juntar essa função ???
-    def receber_dano_bruto(self, dano):
+    def receber_dano_faca(self, dano):
         super().receber_dano(dano)
         mensagem_recebeu_dano(self.nome, dano)
         enter_continuar()

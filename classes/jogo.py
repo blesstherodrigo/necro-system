@@ -66,7 +66,7 @@ class Jogo:
                         if municao is None:
                             continue
 
-                        self.inimigo.receber_dano(municao)
+                        self.inimigo.receber_dano_municao(municao)
                         break
 
                     elif opcao_combate_escolhida == "2":
