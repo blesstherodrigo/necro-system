@@ -12,7 +12,7 @@ class Loja:
         while True:
             limpar_tela()
             print("=== Comprar Munições ===")
-            print(f"Suas moedas: {jogador.moedas}")
+            print(f"Moedas: {jogador.moedas}")
             print("-" * 25)
 
             for indice, municao in enumerate(self.catalogo_municao, start=1):
@@ -20,9 +20,9 @@ class Loja:
                     f"{indice}. {municao.tipo} | "
                     f"Dano: {municao.dano_base} | "
                     f"Crítico: {municao.dano_vantajoso} | "
+                    f"Efetividade: {municao.efetividade} | "
                     f"Preço: {municao.preco}"
                 )
-
             print("0. Voltar")
             print("-" * 25)
 
@@ -67,7 +67,7 @@ class Loja:
         while True:
             limpar_tela()
             print("=== Comprar Medicinas ===")
-            print(f"Suas moedas: {jogador.moedas}")
+            print(f"Moedas: {jogador.moedas}")
             print("-" * 25)
 
             for indice, medicina in enumerate(self.catalogo_medicina, start=1):
@@ -77,7 +77,6 @@ class Loja:
                     f"Bônus: {medicina.bonus} | "
                     f"Preço: {medicina.preco}"
                 )
-
             print("0. Voltar")
             print("-" * 25)
 
@@ -121,7 +120,7 @@ class Loja:
         while True:
             limpar_tela()
             print("=== Comprar ===")
-            print(f"Suas moedas: {jogador.moedas}")
+            print(f"Moedas: {jogador.moedas}")
             print("-" * 25)
             print("1. Munições")
             print("2. Medicinas")
@@ -144,7 +143,7 @@ class Loja:
         while True:
             limpar_tela()
             print("=== Vender Itens ===")
-            print(f"Suas moedas: {jogador.moedas}")
+            print(f"Moedas: {jogador.moedas}")
             print("-" * 25)
 
             itens_disponiveis = [
@@ -219,7 +218,7 @@ class Loja:
         while True:
             limpar_tela()
             print("=== LOJA ===")
-            print(f"Suas moedas: {jogador.moedas}")
+            print(f"Moedas: {jogador.moedas}")
             print("-" * 25)
             print("1. Comprar")
             print("2. Vender")
