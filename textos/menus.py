@@ -1,5 +1,6 @@
 # textos/menus.py
 from textos.fixar_tela import limpar_tela, enter_voltar
+from textos.artes.artes import imprimir_arte
 
 def menu_principal(fase_atual, total_fases):
     limpar_tela()
@@ -36,11 +37,14 @@ def menu_mochila(itens):
 
     enter_voltar()
 
-def menu_combate(nome_inimigo, vida_inimigo, vida_max_inimigo, vida_jogador, vida_max_jogador):
+def menu_combate(nome_inimigo, vida_inimigo, vida_max_inimigo, inimigo_imagem, vida_jogador, vida_max_jogador, jogador_imagem):
     limpar_tela()
     print(f"=== COMBATE CONTRA {nome_inimigo.upper()} ===\n")
     print(f"Sua vida: {vida_jogador}/{vida_max_jogador}")
     print(f"{nome_inimigo}: {vida_inimigo}/{vida_max_inimigo}")
+    print("-" * 30)
+    imprimir_arte(jogador_imagem)
+    imprimir_arte(inimigo_imagem)
     print("-" * 30)
     print("1. Atacar com arma")
     print("2. Atacar com faca")

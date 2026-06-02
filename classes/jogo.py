@@ -54,8 +54,10 @@ class Jogo:
                         self.inimigo.nome,
                         self.inimigo.vida,
                         self.inimigo.vida_max,
+                        self.inimigo.imagem,
                         self.jogador.vida,
-                        self.jogador.vida_max
+                        self.jogador.vida_max,
+                        self.jogador.imagem
                     )
 
                     if opcao_combate_escolhida == "1":
