@@ -7,7 +7,7 @@ from classes.itens.medicina import Medicina
 from textos.fixar_tela import enter_continuar, enter_voltar, limpar_tela
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
-from textos.artes.artes import imprimir_arte
+from textos.artes.artes import imprimir_arte, imprimir_artes_lado_a_lado
 
 class Jogador(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, mochila, moedas):
@@ -23,8 +23,7 @@ class Jogador(Personagem):
         nome = input_nome_do_jogdor()
         while True:
             limpar_tela()
-            imprimir_arte("homem.txt")
-            imprimir_arte("mulher.txt")
+            imprimir_artes_lado_a_lado("homem.txt", "mulher.txt")
             escolha = input_escolha_personagem()
 
             if escolha == "1":
