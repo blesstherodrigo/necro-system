@@ -11,3 +11,6 @@ def tocar_audio(nome_arquivo):
     pygame.mixer.music.load(str(caminho))
     pygame.mixer.music.set_volume(0.15)
     pygame.mixer.music.play(-1)
+
+def parar_audio():
+    pygame.mixer.music.stop()

@@ -5,6 +5,7 @@ from classes.loja import Loja
 from instancias.fases import fases
 from instancias.municoes import municao_bronze
 from instancias.medicinas import antidoto
+from audios.audio import parar_audio
 from textos.menus import menu_combate, menu_principal, menu_status
 from textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
 from textos.introducoes import introducao_jogo, introducao_fase
@@ -110,6 +111,7 @@ class Jogo:
                     introducao_jogo()
                     self.reiniciar_jogo()
                     self.preparar_jogador()
+                    parar_audio()
                     break
                 elif opcao_recomecar_escolhida == "2":
                     return "zerou"
@@ -141,6 +143,7 @@ class Jogo:
     def iniciar_jogo(self):
         introducao_jogo()
         self.preparar_jogador()
+        parar_audio()
         loja = Loja()
 
         while self.rodando:
@@ -160,6 +163,7 @@ class Jogo:
                             introducao_jogo()
                             self.reiniciar_jogo()
                             self.preparar_jogador()
+                            parar_audio()
                             break
                         elif opcao_recomecar_escolhida == "2":
                             mensagem_saindo_do_jogo()
