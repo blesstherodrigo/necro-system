@@ -1,18 +1,16 @@
-# textos/artes/artes.py
+# textos/ascii/ascii.py
 from pathlib import Path
 from shutil import get_terminal_size
 from itertools import zip_longest
 from pystyle import Colorate, Colors
 from textos.fixar_tela import limpar_tela
 
-
-def caminho_arte(nome_arquivo):
+def caminho_ascii(nome_arquivo):
     raiz_projeto = Path(__file__).resolve().parents[2]
-    return raiz_projeto / "textos" / "artes" / nome_arquivo
+    return raiz_projeto / "textos" / "ascii" / "personagens_ascii" / nome_arquivo
 
-
-def carregar_arte(nome_arquivo):
-    caminho = caminho_arte(nome_arquivo)
+def carregar_ascii(nome_arquivo):
+    caminho = caminho_ascii(nome_arquivo)
 
     try:
         with open(caminho, "r", encoding="utf-8") as arquivo:
@@ -21,11 +19,10 @@ def carregar_arte(nome_arquivo):
     except FileNotFoundError:
         return [f"[Arte não encontrada: {nome_arquivo}]"]
 
-
-def imprimir_arte(nome_arquivo):
+def imprimir_ascii(nome_arquivo):
     limpar_tela()
 
-    linhas = carregar_arte(nome_arquivo)
+    linhas = carregar_ascii(nome_arquivo)
     largura_terminal = get_terminal_size().columns
 
     arte_centralizada = ""
@@ -35,11 +32,10 @@ def imprimir_arte(nome_arquivo):
 
     print(Colorate.Color(Colors.green, arte_centralizada))
 
-
-def imprimir_artes_lado_a_lado(*nomes_arquivos, espaco=6):
+def imprimir_ascii_lado_a_lado(*nomes_arquivos, espaco=6):
     limpar_tela()
 
-    artes = [carregar_arte(nome) for nome in nomes_arquivos]
+    artes = [carregar_ascii(nome) for nome in nomes_arquivos]
 
     larguras = [
         max(len(linha) for linha in arte)

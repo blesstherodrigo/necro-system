@@ -5,19 +5,19 @@ from classes.personagens.inimigos.Lista_de_Boss.boss_radioativo import Boss_Radi
 zumbi_radioativo_1 = Zumbi_Radioativo(
     "Operario Radioativo",
     10, 10, 5,
-    "operario_radioativo.txt", "Chumbo", "Titânio"
+    "zumbi_radioativo_1.txt", "Chumbo", "Titânio"
 )
 
 zumbi_radioativo_2 = Zumbi_Radioativo(
     "Administrador Radioativo",
     10, 10, 5,
-    "administrador_radioativo.txt", "Chumbo", "Titânio"
+    "zumbi_radioativo_2.txt", "Chumbo", "Titânio"
 )
 
 boss_radioativo = Boss_Radioativo(
     "Segurança Radioativo",
     20, 20, 10,
-    "seguranca_radioativo.txt", "Chumbo", "Titânio"
+    "boss_radioativo.txt", "Chumbo", "Titânio"
 )
 
 radioativos = [zumbi_radioativo_1, zumbi_radioativo_2, boss_radioativo]

@@ -4,13 +4,13 @@ from classes.personagens.inimigos.Lista_de_Zumbis.zumbi_infectado import Zumbi_I
 zumbi_infectado_1 = Zumbi_Infectado(
     "Paciente Infectado",
     10, 10, 5,
-    "paciente_infectado.txt", "Ferro", "Cobre"
+    "zumbi_infectado_1.txt", "Ferro", "Cobre"
 )
 
 zumbi_infectada_2 = Zumbi_Infectado(
     "Enfermeira Infectada",
     10, 10, 5,
-    "enfermeira_infectada.txt", "Ferro", "Cobre"
+    "zumbi_infectada_2.txt", "Ferro", "Cobre"
 )
 
 infectados = [zumbi_infectado_1, zumbi_infectada_2]

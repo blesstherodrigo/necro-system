@@ -5,19 +5,19 @@ from classes.personagens.inimigos.Lista_de_Boss.boss_eletrico import Boss_Eletri
 zumbi_eletrico_1 = Zumbi_Eletrico(
     "Auxiliar Elétrica",
     10, 10, 5,
-    "auxiliar_eletrica.txt", "Cobre", "Chumbo"
+    "zumbi_eletrico_1.txt", "Cobre", "Chumbo"
 )
 
 zumbi_eletrico_2 = Zumbi_Eletrico(
     "Técnico Elétrico",
     10, 10, 5,
-    "tecnico_eletrico.txt", "Cobre", "Chumbo"
+    "zumbi_eletrico_2.txt", "Cobre", "Chumbo"
 )
 
 boss_eletrico = Boss_Eletrico(
     "Engenheiro Elétrico",
     20, 20, 10,
-    "engenheiro_eletrico.txt", "Cobre", "Chumbo"
+    "boss_eletrico.txt", "Cobre", "Chumbo"
 )
 
 eletricos = [zumbi_eletrico_1, zumbi_eletrico_2, boss_eletrico]
