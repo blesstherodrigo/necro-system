@@ -122,7 +122,7 @@ class Jogo:
 
         jogar_fase = self.buscar_fase()
 
-        introducao_fase(jogar_fase.numero, jogar_fase.nome, jogar_fase.descricao)
+        introducao_fase(jogar_fase.numero, jogar_fase.nome, jogar_fase.imagem, jogar_fase.descricao)
 
         resultado_combate = self.realizar_combate()      # inicia o combate
 

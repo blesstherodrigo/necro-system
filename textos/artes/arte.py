@@ -1,4 +1,4 @@
-# textos/ascii/ascii.py
+# textos/artes/arte.py
 from pathlib import Path
 from shutil import get_terminal_size
 from itertools import zip_longest
@@ -7,7 +7,7 @@ from textos.fixar_tela import limpar_tela
 
 def caminho_ascii(nome_arquivo):
     raiz_projeto = Path(__file__).resolve().parents[2]
-    return raiz_projeto / "textos" / "ascii" / "personagens_ascii" / nome_arquivo
+    return raiz_projeto / "textos" / "artes" / nome_arquivo
 
 def carregar_ascii(nome_arquivo):
     caminho = caminho_ascii(nome_arquivo)

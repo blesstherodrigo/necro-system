@@ -1,6 +1,6 @@
 # textos/menus.py
 from textos.fixar_tela import limpar_tela, enter_voltar
-from textos.ascii.ascii import imprimir_ascii_lado_a_lado
+from textos.artes.arte import imprimir_ascii_lado_a_lado
 
 def menu_principal(fase_atual, total_fases):
     limpar_tela()

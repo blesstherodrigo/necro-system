@@ -7,7 +7,7 @@ from classes.itens.medicina import Medicina
 from textos.fixar_tela import enter_continuar, enter_voltar, limpar_tela
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
-from textos.ascii.ascii import imprimir_ascii_lado_a_lado
+from textos.artes.arte import imprimir_ascii_lado_a_lado
 
 class Jogador(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, mochila, moedas):
