@@ -5,19 +5,19 @@ from classes.personagens.inimigos.Lista_de_Boss.boss_acido import Boss_Acido
 zumbi_acido_1 = Zumbi_Acido(
     "Cobaia Ácida",
     10, 10, 5,
-    "imagem", "Titânio", "Ferro"
+    "cobaia_acida.txt", "Titânio", "Ferro"
 )
 
 zumbi_acido_2 = Zumbi_Acido(
     "Analista Ácido",
     10, 10, 5,
-    "imagem", "Titânio", "Ferro"
+    "analista_acido.txt", "Titânio", "Ferro"
 )
 
 boss_acido = Boss_Acido(
-    "Cientista Ácido",
+    "Cientista Ácida",
     20, 20, 10,
-    "imagem", "Titânio", "Ferro"
+    "cientista_acida.txt", "Titânio", "Ferro"
 )
 
 acidos = [zumbi_acido_1, zumbi_acido_2, boss_acido]
