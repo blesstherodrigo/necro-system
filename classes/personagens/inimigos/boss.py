@@ -6,49 +6,75 @@ from textos.tela import enter_continuar
 class Boss(Inimigo):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
         super().__init__(nome, vida, vida_max, dano, imagem, fraqueza, imune)
+        self.buff_ativo = False
+        self.buff_multiplicador = 1.5
         self.acao_anterior = "atacar"
         self.defendendo = False
         self.transicoes = {
             "atacar": {
-                "atacar": 0.45,
-                "defender": 0.35,
-                "curar": 0.20
+                "atacar": 0.35,
+                "defender": 0.25,
+                "curar": 0.15,
+                "concentrar": 0.25
             },
             "defender": {
-                "atacar": 0.60,
-                "defender": 0.15,
-                "curar": 0.25
+                "atacar": 0.45,
+                "defender": 0.10,
+                "curar": 0.20,
+                "concentrar": 0.25
             },
             "curar": {
-                "atacar": 0.65,
-                "defender": 0.25,
-                "curar": 0.10
+                "atacar": 0.50,
+                "defender": 0.20,
+                "curar": 0.05,
+                "concentrar": 0.25
+            },
+            "concentrar": {
+                "atacar": 0.85,
+                "defender": 0.05,
+                "curar": 0.10,
+                "concentrar": 0
             }
         }
 
     def escolher_acao(self):
         vida_percentual = self.vida / self.vida_max
-        probabilidades = self.transicoes[self.acao_anterior].copy()
 
-        # Se estiver com pouca vida, aumenta chance de curar
-        if vida_percentual <= 0.3:
-            probabilidades["curar"] += 0.45
-            probabilidades["atacar"] -= 0.25
-            probabilidades["defender"] -= 0.20
+        if self.buff_ativo:
+            probabilidades = {
+                "atacar": 0.85,
+                "defender": 0.05,
+                "curar": 0.10,
+                "concentrar": 0
+            }
 
-        # Se estiver com vida cheia/quase cheia, evita curar e fica mais agressivo
-        elif vida_percentual >= 0.75:
-            probabilidades["atacar"] += 0.25
-            probabilidades["curar"] -= 0.20
-            probabilidades["defender"] -= 0.05
+            if vida_percentual <= 0.2:
+                probabilidades["curar"] += 0.25
+                probabilidades["atacar"] -= 0.25
 
-        # Se já está com vida cheia, não faz sentido curar
-        if self.vida >= self.vida_max:
-            probabilidades["curar"] = 0
-            probabilidades["atacar"] += 0.15
-            probabilidades["defender"] += 0.10
+        else:
+            probabilidades = self.transicoes[self.acao_anterior].copy()
 
-        # Evita valores negativos
+            # Se estiver com pouca vida, aumenta chance de curar
+            if vida_percentual <= 0.3:
+                probabilidades["curar"] += 0.45
+                probabilidades["atacar"] -= 0.20
+                probabilidades["defender"] -= 0.15
+                probabilidades["concentrar"] -= 0.10
+
+            # Se estiver com vida cheia/quase cheia, evita curar e fica mais agressivo
+            elif vida_percentual >= 0.75:
+                probabilidades["atacar"] += 0.15
+                probabilidades["concentrar"] += 0.15
+                probabilidades["curar"] -= 0.20
+                probabilidades["defender"] -= 0.10
+
+            # Se já está com vida cheia, não faz sentido curar
+            if self.vida >= self.vida_max:
+                probabilidades["curar"] = 0
+                probabilidades["atacar"] += 0.10
+                probabilidades["concentrar"] += 0.10
+
         for acao in probabilidades:
             probabilidades[acao] = max(0, probabilidades[acao])
 
@@ -73,8 +99,13 @@ class Boss(Inimigo):
         if acao == "atacar":
             self.defendendo = False
 
-            multiplicador = random.choice([1.5, 2.0, 2.5])      # multiplicasdor de dado
+            multiplicador = random.choice([1.5, 2.0, 2.5])
             dano_total = self.dano * multiplicador
+
+            if self.buff_ativo:
+                dano_total *= self.buff_multiplicador
+                self.buff_ativo = False
+                print(f"\n{self.nome} usa sua concentração para desferir um ataque poderoso!") # mudar texto
 
             print(f"\n{self.nome} atacou, causando {dano_total} de dano!")
             enter_continuar()
@@ -94,6 +125,17 @@ class Boss(Inimigo):
             self.curar(quantidade_cura)
 
             print(f"\n{self.nome} se curou em {quantidade_cura} de vida!")
+            enter_continuar()
+            return 0
+
+        elif acao == "concentrar":
+            self.defendendo = False
+
+            self.buff_ativo = True
+            self.buff_multiplicador = 1.5
+
+            print(f"\n{self.nome} fecha os olhos e se concentra.") # mudar texto
+            print(f"{self.nome} causará mais dano na próxima rodada!") # mudar texto
             enter_continuar()
             return 0
 
