@@ -1,28 +1,114 @@
 # classes/personagens/inimigos/boss.py
 import random
 from classes.personagens.inimigos.inimigo import Inimigo
+from textos.tela import enter_continuar
 
 class Boss(Inimigo):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
         super().__init__(nome, vida, vida_max, dano, imagem, fraqueza, imune)
+        self.acao_anterior = "atacar"
+        self.defendendo = False
+        self.transicoes = {
+            "atacar": {
+                "atacar": 0.45,
+                "defender": 0.35,
+                "curar": 0.20
+            },
+            "defender": {
+                "atacar": 0.60,
+                "defender": 0.15,
+                "curar": 0.25
+            },
+            "curar": {
+                "atacar": 0.65,
+                "defender": 0.25,
+                "curar": 0.10
+            }
+        }
+
+    def escolher_acao(self):
+        vida_percentual = self.vida / self.vida_max
+        probabilidades = self.transicoes[self.acao_anterior].copy()
+
+        # Se estiver com pouca vida, aumenta chance de curar
+        if vida_percentual <= 0.3:
+            probabilidades["curar"] += 0.45
+            probabilidades["atacar"] -= 0.25
+            probabilidades["defender"] -= 0.20
+
+        # Se estiver com vida cheia/quase cheia, evita curar e fica mais agressivo
+        elif vida_percentual >= 0.75:
+            probabilidades["atacar"] += 0.25
+            probabilidades["curar"] -= 0.20
+            probabilidades["defender"] -= 0.05
+
+        # Se já está com vida cheia, não faz sentido curar
+        if self.vida >= self.vida_max:
+            probabilidades["curar"] = 0
+            probabilidades["atacar"] += 0.15
+            probabilidades["defender"] += 0.10
+
+        # Evita valores negativos
+        for acao in probabilidades:
+            probabilidades[acao] = max(0, probabilidades[acao])
+
+        # Normaliza para a soma voltar a ser 1
+        total = sum(probabilidades.values())
+
+        for acao in probabilidades:
+            probabilidades[acao] /= total
+
+        acoes = list(probabilidades.keys())
+        pesos = list(probabilidades.values())
+
+        acao_escolhida = random.choices(acoes, weights=pesos, k=1)[0]
+
+        self.acao_anterior = acao_escolhida
+
+        return acao_escolhida
 
     def realizar_ataque(self):
-        movimento = random.randint(1, 3)
+        acao = self.escolher_acao()
 
-        if movimento == 1:
-            dano_total = self.dano * 1.5
-            print(f"\n{self.nome} usou movimento 1, causando {dano_total} de dano!")
+        if acao == "atacar":
+            self.defendendo = False
+
+            multiplicador = random.choice([1.5, 2.0, 2.5])      # multiplicasdor de dado
+            dano_total = self.dano * multiplicador
+
+            print(f"\n{self.nome} atacou, causando {dano_total} de dano!")
+            enter_continuar()
             return dano_total
 
-        elif movimento == 2:
-            dano_total = self.dano * 2.0
-            print(f"\n{self.nome} usou movimento 2, causando {dano_total} de dano!")
-            return dano_total
+        elif acao == "defender":
+            self.defendendo = True
 
-        elif movimento == 3:
-            dano_total = self.dano * 2.5
-            print(f"\n{self.nome} usou movimento 3, causando {dano_total} de dano!")
-            return dano_total
+            print(f"\n{self.nome} se defendeu!")
+            enter_continuar()
+            return 0
+
+        elif acao == "curar":
+            self.defendendo = False
+
+            quantidade_cura = int(self.vida_max * 0.25)
+            self.curar(quantidade_cura)
+
+            print(f"\n{self.nome} se curou em {quantidade_cura} de vida!")
+            enter_continuar()
+            return 0
+
+    def curar(self, quantidade):
+        self.vida += quantidade
+
+        if self.vida > self.vida_max:
+            self.vida = self.vida_max
+
+    def receber_dano(self, dano):
+        if self.defendendo:
+            dano = dano * 0.5
+            self.defendendo = False
+
+        return super().receber_dano(dano)
 
 # Boss_Acido
 # print(f"\O {self.nome} lançou O Ataque Chuva de Toxina! Ele ataca em área, causando {Dano_Total} de dano!")

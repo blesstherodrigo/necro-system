@@ -16,7 +16,7 @@ zumbi_eletrico_2 = Zumbi(
 
 boss_eletrico = Boss(
     "Engenheiro Elétrico",
-    20, 20, 10,
+    60, 60, 10,
     "boss_eletrico.txt", "Cobre", "Chumbo"
 )
 

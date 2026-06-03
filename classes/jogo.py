@@ -86,9 +86,13 @@ class Jogo:
                         mensagem_opcao_invalida()
 
                 if self.inimigo.esta_vivo():
-                    self.jogador.regenerar()
-                    dano_do_ataque = self.inimigo.realizar_ataque() # Mudanças para utilizar ataques únicos de cada zumbi existente
-                    self.jogador.receber_dano(dano_do_ataque)
+                    if self.inimigo.esta_vivo():
+                        self.jogador.regenerar()
+
+                        dano_do_ataque = self.inimigo.realizar_ataque()     # Mudanças para utilizar ataques únicos de cada zumbi existente
+
+                        if dano_do_ataque > 0:
+                            self.jogador.receber_dano(dano_do_ataque)
 
             # recompensas por fase ou por combate???
             if self.jogador.esta_vivo():

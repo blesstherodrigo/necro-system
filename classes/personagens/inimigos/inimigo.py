@@ -3,6 +3,7 @@ from classes.personagens.personagem import Personagem
 from textos.tela import enter_continuar
 from textos.mensagens import mensagem_recebeu_dano
 
+
 class Inimigo(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
         super().__init__(nome, vida, vida_max, dano, imagem)
@@ -17,19 +18,20 @@ class Inimigo(Personagem):
         if municao.tipo in self.imune:
             dano_recebido = 0
             print(f"{self.nome} é imune a munição {municao.tipo}!")
+
         elif municao.tipo in self.fraqueza:
             dano_recebido = municao.dano_vantajoso
             print(f"Dano crítico! Munição de {municao.tipo} é muito efetiva contra {self.nome}!")
+
         else:
             dano_recebido = municao.dano_base
             print(f"Munição {municao.tipo} causou dano normal.")
 
-        super().receber_dano(dano_recebido)
-        mensagem_recebeu_dano(self.nome, dano_recebido)
+        dano_final = self.receber_dano(dano_recebido)
+        mensagem_recebeu_dano(self.nome, dano_final)
         enter_continuar()
 
-    # teria como juntar essa função ???
     def receber_dano_faca(self, dano):
-        super().receber_dano(dano)
-        mensagem_recebeu_dano(self.nome, dano)
+        dano_final = self.receber_dano(dano)
+        mensagem_recebeu_dano(self.nome, dano_final)
         enter_continuar()

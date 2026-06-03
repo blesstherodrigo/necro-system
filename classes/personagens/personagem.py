@@ -10,8 +10,11 @@ class Personagem:
 
     def receber_dano(self, dano):
         self.vida -= dano
+
         if self.vida < 0:
             self.vida = 0
+
+        return dano
 
     def esta_vivo(self):
         return self.vida > 0
