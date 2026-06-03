@@ -9,7 +9,6 @@ from audios.audio import parar_audio
 from textos.menus import menu_combate, menu_principal, menu_status
 from textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
 from textos.introducoes import introducao_jogo, introducao_fase
-from textos.cenas import exemplo_cena
 from textos.mensagens import (
     mensagem_opcao_invalida, mensagem_apareceu_inimigo,
     mensagem_concluiu_fase, mensagem_nova_fase_desbloqueada,
@@ -40,7 +39,6 @@ class Jogo:
         self.inimigo = None
         self.fase_atual = 0
 
-    # combates para tipos diferentes de inimigos (zumbi comum e boss)???
     def realizar_combate(self):
         inimigos_da_fase = self.buscar_fase()
 
@@ -124,18 +122,12 @@ class Jogo:
                 else:
                     mensagem_opcao_invalida()
 
-        jogar_fase = self.buscar_fase()
-
-        introducao_fase(jogar_fase.numero, jogar_fase.nome, jogar_fase.imagem, jogar_fase.descricao)
-
         resultado_combate = self.realizar_combate()      # inicia o combate
 
         if resultado_combate == "morreu":
             return "morreu"
 
-        if resultado_combate == "fugiu":
-            return "fugiu"
-
+        jogar_fase = self.buscar_fase()
         mensagem_concluiu_fase(jogar_fase.numero, jogar_fase.nome)
         self.fase_atual += 1
 
@@ -143,7 +135,6 @@ class Jogo:
             mensagem_zerou_jogo()
         else:
             mensagem_nova_fase_desbloqueada()
-            exemplo_cena()
             return "venceu"
 
     def iniciar_jogo(self):
@@ -153,6 +144,9 @@ class Jogo:
         loja = Loja()
 
         while self.rodando:
+            cena_fase = self.buscar_fase()
+            introducao_fase(cena_fase.imagem, cena_fase.descricao)
+
             opcao_menu_escolhida = menu_principal(
                 self.fase_atual,
                 len(self.fases)

@@ -9,9 +9,8 @@ def introducao_jogo():
     mostrar_arte("logo.txt")
     enter_continuar()
 
-def introducao_fase(numero_fase, nome_fase, imagem_fase, descricao_fase):
+def introducao_fase(imagem_fase, descricao_fase):
     limpar_tela()
-    print(f"=== FASE {numero_fase}: {nome_fase.upper()} ===")
     mostrar_arte(imagem_fase)
     print(descricao_fase)
     enter_continuar()
