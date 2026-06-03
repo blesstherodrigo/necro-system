@@ -3,7 +3,7 @@ from pathlib import Path
 from shutil import get_terminal_size
 from itertools import zip_longest
 from pystyle import Colorate, Colors
-from textos.fixar_tela import limpar_tela
+from textos.tela import limpar_tela
 
 def caminho_arte(nome_arquivo):
     raiz_projeto = Path(__file__).resolve().parents[2]

@@ -1,5 +1,5 @@
 # textos/introducoes.py
-from textos.fixar_tela import limpar_tela, enter_continuar
+from textos.tela import limpar_tela, enter_continuar
 from audios.audio import tocar_audio
 from textos.artes.arte import mostrar_arte
 

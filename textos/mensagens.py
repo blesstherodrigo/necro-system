@@ -1,5 +1,5 @@
 # textos/mensagens.py
-from textos.fixar_tela import limpar_tela, enter_continuar, enter_voltar
+from textos.tela import limpar_tela, enter_continuar, enter_voltar
 
 def mensagem_opcao_invalida():
     limpar_tela()

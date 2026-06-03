@@ -1,5 +1,5 @@
 # textos/menus.py
-from textos.fixar_tela import limpar_tela, enter_voltar
+from textos.tela import limpar_tela, enter_voltar
 from textos.artes.arte import mostrar_artes_lado_a_lado
 
 def menu_principal(fase_atual, total_fases):

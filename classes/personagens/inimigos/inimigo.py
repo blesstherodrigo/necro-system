@@ -1,6 +1,6 @@
 # classes/personagens/inimigos/inimigo.py
 from classes.personagens.personagem import Personagem
-from textos.fixar_tela import enter_continuar
+from textos.tela import enter_continuar
 from textos.mensagens import mensagem_recebeu_dano
 
 class Inimigo(Personagem):

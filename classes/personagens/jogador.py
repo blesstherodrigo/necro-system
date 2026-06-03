@@ -4,7 +4,7 @@ from classes.itens.mochila import Mochila
 from classes.itens.municao import Municao
 from classes.itens.medicina import Medicina
 
-from textos.fixar_tela import enter_continuar, enter_voltar, limpar_tela
+from textos.tela import enter_continuar, enter_voltar, limpar_tela
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
 from textos.artes.arte import mostrar_artes_lado_a_lado

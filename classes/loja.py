@@ -1,7 +1,7 @@
 # classes/loja.py
 from instancias.municoes import municoes
 from instancias.medicinas import medicinas
-from textos.fixar_tela import limpar_tela, enter_continuar
+from textos.tela import limpar_tela, enter_continuar
 
 class Loja:
     def __init__(self):
@@ -101,7 +101,8 @@ class Loja:
                     print(f"Você comprou {quantidade}x {medicina.nome}.")
                 enter_continuar()
 
-    def menu_vender_itens(self, jogador):
+    @staticmethod
+    def menu_vender_itens(jogador):
         while True:
             limpar_tela()
             print("=== Vender Itens ===")

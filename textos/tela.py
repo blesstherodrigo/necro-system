@@ -1,4 +1,4 @@
-# textos/fixar_tela.py
+# textos/tela.py
 import os
 
 def limpar_tela():

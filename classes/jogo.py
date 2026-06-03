@@ -9,7 +9,7 @@ from audios.audio import parar_audio
 from textos.menus import menu_combate, menu_principal, menu_status
 from textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
 from textos.introducoes import introducao_jogo, introducao_fase
-from textos.cutscenes import exemplo_cutscene
+from textos.cenas import exemplo_cena
 from textos.mensagens import (
     mensagem_opcao_invalida, mensagem_apareceu_inimigo,
     mensagem_concluiu_fase, mensagem_nova_fase_desbloqueada,
@@ -139,7 +139,7 @@ class Jogo:
             mensagem_zerou_jogo()
         else:
             mensagem_nova_fase_desbloqueada()
-            exemplo_cutscene()
+            exemplo_cena()
             return "venceu"
 
     def iniciar_jogo(self):

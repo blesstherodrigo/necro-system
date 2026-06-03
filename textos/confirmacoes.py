@@ -1,5 +1,5 @@
 # textos/confirmacoes.py
-from textos.fixar_tela import limpar_tela
+from textos.tela import limpar_tela
 
 def confirmacao_recomecar_jogo():
     limpar_tela()
