@@ -7,13 +7,13 @@ zumbi_infectado_1 = Zumbi_Infectado(
     "zumbi_infectado_1.txt", "Ferro", "Cobre"
 )
 
-zumbi_infectada_2 = Zumbi_Infectado(
+zumbi_infectado_2 = Zumbi_Infectado(
     "Enfermeira Infectada",
     10, 10, 5,
-    "zumbi_infectada_2.txt", "Ferro", "Cobre"
+    "zumbi_infectado_2.txt", "Ferro", "Cobre"
 )
 
-infectados = [zumbi_infectado_1, zumbi_infectada_2]
+infectados = [zumbi_infectado_1, zumbi_infectado_2]
 
 ''' MOVIMENTOS
 Zumbi Comum
