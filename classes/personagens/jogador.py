@@ -39,6 +39,8 @@ class Jogador(Personagem):
 
     def atacar_com_faca(self, inimigo):
         dano = self.dano + self.dano_bonus
+        print(f"{self.nome} atacou com uma facada!")
+        enter_continuar()
         inimigo.receber_dano_faca(dano)
 
     def escolher_municao(self):
