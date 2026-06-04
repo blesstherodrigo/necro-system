@@ -7,7 +7,7 @@ class Boss(Inimigo):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
         super().__init__(nome, vida, vida_max, dano, imagem, fraqueza, imune)
         self.buff_ativo = False
-        self.buff_multiplicador = 2
+        self.buff_multiplicador = 1.5
         self.acao_anterior = "atacar"
         self.defendendo = False
         self.transicoes = {
@@ -48,11 +48,6 @@ class Boss(Inimigo):
                 "curar": 0.10,
                 "concentrar": 0
             }
-
-            if vida_percentual <= 0.2:
-                probabilidades["curar"] += 0.25
-                probabilidades["atacar"] -= 0.25
-
         else:
             probabilidades = self.transicoes[self.acao_anterior].copy()
 
@@ -70,20 +65,14 @@ class Boss(Inimigo):
                 probabilidades["curar"] -= 0.20
                 probabilidades["defender"] -= 0.10
 
-            # Se já está com vida cheia, não faz sentido curar
-            if self.vida >= self.vida_max:
-                probabilidades["curar"] = 0
-                probabilidades["atacar"] += 0.10
-                probabilidades["concentrar"] += 0.10
-
-        for acao in probabilidades:
-            probabilidades[acao] = max(0, probabilidades[acao])
+        # Se já está com vida cheia, não faz sentido curar
+        if self.vida >= self.vida_max:
+            probabilidades["curar"] = 0
+            probabilidades["atacar"] += 0.10
+            probabilidades["concentrar"] += 0.10
 
         # Normaliza para a soma voltar a ser 1
-        total = sum(probabilidades.values())
-
-        for acao in probabilidades:
-            probabilidades[acao] /= total
+        probabilidades = self.normalizar_probabilidades(probabilidades)
 
         acoes = list(probabilidades.keys())
         pesos = list(probabilidades.values())
@@ -94,13 +83,33 @@ class Boss(Inimigo):
 
         return acao_escolhida
 
+    @staticmethod
+    def normalizar_probabilidades(probabilidades):
+        for acao in probabilidades:
+            probabilidades[acao] = max(0, probabilidades[acao])
+
+        total = sum(probabilidades.values())
+
+        if total == 0:
+            return {
+                "atacar": 1,
+                "defender": 0,
+                "curar": 0,
+                "concentrar": 0
+            }
+
+        for acao in probabilidades:
+            probabilidades[acao] /= total
+
+        return probabilidades
+
     def realizar_ataque(self):
         acao = self.escolher_acao()
 
         if acao == "atacar":
             self.defendendo = False
 
-            multiplicador = random.choice([1.5, 1.75, 2])      # antes tava: 1.5, 2.0, 2.5
+            multiplicador = random.choice([1, 1.25, 1.50, 1.75, 2])      # deixar multiplicador apenas no buff ???
             dano_total = self.dano * multiplicador
 
             if self.buff_ativo:
@@ -120,7 +129,7 @@ class Boss(Inimigo):
         elif acao == "curar":
             self.defendendo = False
 
-            quantidade_cura = int(self.vida_max * 0.25)
+            quantidade_cura = int(self.vida_max * 0.50)
             self.curar(quantidade_cura)
 
             print(f"\n{self.nome} se curou em {quantidade_cura} de vida!")
