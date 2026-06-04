@@ -4,7 +4,7 @@ from classes.itens.mochila import Mochila
 from classes.itens.municao import Municao
 from classes.itens.medicina import Medicina
 
-from textos.tela import enter_continuar, enter_voltar, limpar_tela
+from textos.tela import enter_continuar, enter_voltar, limpar_tela, limpar_intervalo
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
 from textos.artes.arte import mostrar_artes_lado_a_lado
@@ -39,8 +39,7 @@ class Jogador(Personagem):
 
     def atacar_com_faca(self, inimigo):
         dano = self.dano + self.dano_bonus
-        print(f"{self.nome} atacou com uma facada!")
-        enter_continuar()
+        print(f"\n{self.nome} atacou com uma facada!")
         inimigo.receber_dano_faca(dano)
 
     def escolher_municao(self):
@@ -62,9 +61,11 @@ class Jogador(Personagem):
             for indice, municao in enumerate(municao_disponivel, start=1):
                 quantidade = self.mochila.itens[municao]
                 print(f"{indice}. {municao.tipo} ({quantidade})")
+            escolha = int(input("> "))
+
+            limpar_intervalo(40, 40 + len(municao_disponivel) + 3)
 
             try:
-                escolha = int(input("> "))
                 if escolha == 0:
                     break
                 municao = municao_disponivel[escolha - 1]
@@ -99,9 +100,11 @@ class Jogador(Personagem):
                     f"{indice}. {medicina.nome} "
                     f"({quantidade}) | Efeito: {medicina.efeito} | Bônus: {medicina.bonus}"
                 )
+            escolha = int(input("> "))
+
+            limpar_intervalo(40, 40 + len(medicinas_disponiveis) + 3)
 
             try:
-                escolha = int(input("> "))
                 if escolha == 0:
                     break
                 medicina = medicinas_disponiveis[escolha - 1]

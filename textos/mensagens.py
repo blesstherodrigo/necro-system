@@ -2,8 +2,7 @@
 from textos.tela import limpar_tela, enter_continuar, enter_voltar
 
 def mensagem_opcao_invalida():
-    limpar_tela()
-    print("Opção inválida.")
+    print("\nOpção inválida.")
     enter_voltar()
 
 def mensagem_recebeu_dano(nome, dano):
@@ -15,7 +14,6 @@ def mensagem_morreu():
 
 def mensagem_venceu(nome_inimigo):
     print(f"\nVocê derrotou {nome_inimigo}!")
-    enter_continuar()
 
 def mensagem_ganhou_moedas(recompensa):
     print(f"\nGanhou {recompensa} moedas.")

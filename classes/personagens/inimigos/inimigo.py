@@ -12,20 +12,20 @@ class Inimigo(Personagem):
 
     def receber_dano_municao(self, municao):
         if municao is None:
-            print("Nenhuma munição válida foi escolhida.")
+            print("\nNenhuma munição válida foi escolhida.")
             return
 
         if municao.tipo in self.imune:
             dano_recebido = 0
-            print(f"{self.nome} é imune a munição {municao.tipo}!")
+            print(f"\n{self.nome} é imune a munição {municao.tipo}!")
 
         elif municao.tipo in self.fraqueza:
             dano_recebido = municao.dano_vantajoso
-            print(f"Dano crítico! Munição de {municao.tipo} é muito efetiva contra {self.nome}!")
+            print(f"\nDano crítico! Munição de {municao.tipo} é muito efetiva contra {self.nome}!")
 
         else:
             dano_recebido = municao.dano_base
-            print(f"Munição {municao.tipo} causou dano normal.")
+            print(f"\nMunição {municao.tipo} causou dano normal.")
 
         dano_final = self.receber_dano(dano_recebido)
         mensagem_recebeu_dano(self.nome, dano_final)

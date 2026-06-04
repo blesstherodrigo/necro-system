@@ -105,10 +105,9 @@ class Boss(Inimigo):
             if self.buff_ativo:
                 dano_total *= self.buff_multiplicador
                 self.buff_ativo = False
-                print(f"\n{self.nome} usa sua concentração para desferir um ataque poderoso!") # mudar texto
+                #print(f"\n{self.nome} usa sua concentração para desferir um ataque poderoso!") # mudar texto
 
-            print(f"\n{self.nome} atacou, causando {dano_total} de dano!")
-            enter_continuar()
+            print(f"\n{self.nome} atacou!")
             return dano_total
 
         elif acao == "defender":

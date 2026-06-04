@@ -1,5 +1,5 @@
 # textos/menus.py
-from textos.tela import limpar_tela, enter_voltar
+from textos.tela import limpar_tela, enter_voltar, limpar_intervalo
 from textos.artes.arte import mostrar_artes_lado_a_lado
 
 def menu_principal(fase_atual, total_fases):
@@ -25,7 +25,8 @@ def menu_status(nome, vida, vida_max, dano):
     enter_voltar()
 
 def menu_mochila(itens):
-    print("\n=== Mochila ===")
+    limpar_tela()
+    print("=== Mochila ===")
 
     if not itens:
         print("Você não tem itens.")
@@ -49,4 +50,5 @@ def menu_combate(nome_inimigo, vida_inimigo, vida_max_inimigo, inimigo_imagem, v
     print("3. Usar medicina")
     print("-" * 30)
     opcao_combate = input("> ")
+    limpar_intervalo(40, 49)    # o menu começa na linha 40 e termina na linha 49 do terminal
     return opcao_combate
