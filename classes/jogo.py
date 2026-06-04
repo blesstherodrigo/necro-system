@@ -23,6 +23,7 @@ class Jogo:
         self.inimigo = None
         self.fases = fases
         self.fase_atual = 0
+        self.fase_mostrar_cena = True
 
     def preparar_jogador(self):
         self.jogador = Jogador.criar_jogador()
@@ -122,12 +123,13 @@ class Jogo:
                 else:
                     mensagem_opcao_invalida()
 
+        jogar_fase = self.buscar_fase()
+
         resultado_combate = self.realizar_combate()      # inicia o combate
 
         if resultado_combate == "morreu":
             return "morreu"
 
-        jogar_fase = self.buscar_fase()
         mensagem_concluiu_fase(jogar_fase.numero, jogar_fase.nome)
         self.fase_atual += 1
 
@@ -135,17 +137,21 @@ class Jogo:
             mensagem_zerou_jogo()
         else:
             mensagem_nova_fase_desbloqueada()
+            self.fase_mostrar_cena = True
             return "venceu"
 
     def iniciar_jogo(self):
         introducao_jogo()
         self.preparar_jogador()
         parar_audio()
+
         loja = Loja()
 
         while self.rodando:
             cena_fase = self.buscar_fase()
-            introducao_fase(cena_fase.imagem, cena_fase.descricao)
+            if self.fase_mostrar_cena:
+                introducao_fase(cena_fase.imagem, cena_fase.descricao)
+                self.fase_mostrar_cena = False
 
             opcao_menu_escolhida = menu_principal(
                 self.fase_atual,
