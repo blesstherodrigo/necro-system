@@ -7,7 +7,7 @@ class Boss(Inimigo):
     def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
         super().__init__(nome, vida, vida_max, dano, imagem, fraqueza, imune)
         self.buff_ativo = False
-        self.buff_multiplicador = 1.5
+        self.buff_multiplicador = 2
         self.acao_anterior = "atacar"
         self.defendendo = False
         self.transicoes = {
@@ -37,6 +37,7 @@ class Boss(Inimigo):
             }
         }
 
+    # Cadeias de Markov
     def escolher_acao(self):
         vida_percentual = self.vida / self.vida_max
 
@@ -99,13 +100,12 @@ class Boss(Inimigo):
         if acao == "atacar":
             self.defendendo = False
 
-            multiplicador = random.choice([1.5, 2.0, 2.5])
+            multiplicador = random.choice([1.5, 1.75, 2])      # antes tava: 1.5, 2.0, 2.5
             dano_total = self.dano * multiplicador
 
             if self.buff_ativo:
                 dano_total *= self.buff_multiplicador
                 self.buff_ativo = False
-                #print(f"\n{self.nome} usa sua concentração para desferir um ataque poderoso!") # mudar texto
 
             print(f"\n{self.nome} atacou!")
             return dano_total
@@ -131,10 +131,8 @@ class Boss(Inimigo):
             self.defendendo = False
 
             self.buff_ativo = True
-            self.buff_multiplicador = 1.5
 
-            print(f"\n{self.nome} fecha os olhos e se concentra.") # mudar texto
-            print(f"{self.nome} causará mais dano na próxima rodada!") # mudar texto
+            print(f"\n{self.nome} ficou furioso e concentrou mais força.")
             enter_continuar()
             return 0
 
