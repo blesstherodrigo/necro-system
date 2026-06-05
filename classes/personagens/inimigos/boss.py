@@ -2,10 +2,11 @@
 import random
 from classes.personagens.inimigos.inimigo import Inimigo
 from textos.tela import enter_continuar
+from textos.movimentos import movimento_ataque, movimento_defesa, movimento_cura, movimento_concentrar
 
 class Boss(Inimigo):
-    def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
-        super().__init__(nome, vida, vida_max, dano, imagem, fraqueza, imune)
+    def __init__(self, nome, vida, vida_max, dano, imagem, movimentos, fraqueza=None, imune=None):
+        super().__init__(nome, vida, vida_max, dano, imagem, movimentos, fraqueza, imune)
         self.buff_ativo = False
         self.buff_multiplicador = 1.5
         self.acao_anterior = "atacar"
@@ -116,13 +117,13 @@ class Boss(Inimigo):
                 dano_total *= self.buff_multiplicador
                 self.buff_ativo = False
 
-            print(f"\n{self.nome} atacou!")
+            movimento_ataque(self.nome, self.movimentos[0])    # indice [0] é Ataque
             return dano_total
 
         elif acao == "defender":
             self.defendendo = True
 
-            print(f"\n{self.nome} se defendeu!")
+            movimento_defesa(self.nome, self.movimentos[1])      # indice [1] é Defesa
             enter_continuar()
             return 0
 
@@ -132,7 +133,7 @@ class Boss(Inimigo):
             quantidade_cura = int(self.vida_max * 0.50)
             self.curar(quantidade_cura)
 
-            print(f"\n{self.nome} se curou em {quantidade_cura} de vida!")
+            movimento_cura(self.nome, self.movimentos[2], quantidade_cura)     # indice [2] é Cura
             enter_continuar()
             return 0
 
@@ -141,7 +142,7 @@ class Boss(Inimigo):
 
             self.buff_ativo = True
 
-            print(f"\n{self.nome} ficou furioso e concentrou mais força.")
+            movimento_concentrar(self.nome, self.movimentos[3])     # indice [3] é Concentração
             enter_continuar()
             return 0
 
@@ -158,22 +159,24 @@ class Boss(Inimigo):
 
         return super().receber_dano(dano)
 
-# Boss_Acido
-# print(f"\O {self.nome} lançou O Ataque Chuva de Toxina! Ele ataca em área, causando {Dano_Total} de dano!")
-# print(f"\O {self.nome} lançou O Ataque de Cuspe Corrosivo! Ele ataca com sua toxina do corpo, causando {Dano_Total} de dano!")
-# print(f" O {self.nome} utiliza o Caldeirão Ambulante! Ele utiliza os fluídos ácido ao redor e se cura! Causou {Dano_Total} de dano!")
-#
-# Boss_Infectado
-# print(f"\O {self.nome} lançou um Ataque Triagem Cruel: Ele utiliza uma seringa gigante e desfere o golpe, causando {Dano_Total} de dano!")
-# print(f"\O {self.nome} ataca Sinfonia do Sangue: ele consome bolsa de sangue e triplica o dano! Causou {Dano_Total} de dano!")
-# print(f"\O {self.nome} ataca com Tratamento de Choque: ele pega desfribilador quebrado e junta os cabos para te atacar, causa {Dano_Total} de dano!")
-#
-# Boss_Radioativo
-# print(f"\O {self.nome} lançou o Ataque 'Alerta Vermelho'! Joga uma bomba causando {Dano_Total} de dano!")
-# print(f"\O {self.nome} lançou o Ataque Tiro Radioativo! Ele saca uma espingarda e atira, causando {Dano_Total} de dano!")
-# print(f"\O {self.nome} usa a Recuperação química! Ele absorve a radiação do ambiente e regenera {Dano_Total} de dano!")
-#
-# Boss_Eletrico
-# print(f"\O {self.nome} lançou o Ataque de Curto-Circuito! Ele ataca com correntes elétricas, causando {Dano_Total} de dano!")
-# print(f"\ O {self.nome} fez o ataque da Tempestade de Íons! Canalizando a eletrecidade do poste e lança em você! Causou {Dano_Total} de dano!")
-# print(f"\O {self.nome} lançou o Ataque de Choque Estático! Ele ataca jogando água em você em seguida te eletrifica pelo chão, causando {Dano_Total} de dano!")
+# exemplos do Jhoel
+
+#   Boss_Acido
+# Chuva de Toxina
+# Cuspe Corrosivo
+# Caldeirão Ambulante
+
+#   Boss_Infectado
+# Triagem Cruel
+# Sinfonia do Sangue
+# Tratamento de Choque
+
+#   Boss_Radioativo
+# Alerta Vermelho
+# Tiro Radioativo
+# Recuperação química
+
+#   Boss_Eletrico
+# Curto-Circuito
+# Tempestade de Íons
+# Choque Estático

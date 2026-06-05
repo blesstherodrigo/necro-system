@@ -1,28 +1,29 @@
 # classes/personagens/inimigos/zumbi.py
 from classes.personagens.inimigos.inimigo import Inimigo
+from textos.movimentos import movimento_ataque
 
 class Zumbi(Inimigo):
-    def __init__(self, nome, vida, vida_max, dano, imagem, fraqueza=None, imune=None):
-        super().__init__(nome, vida, vida_max, dano, imagem, fraqueza, imune)
+    def __init__(self, nome, vida, vida_max, dano, imagem, movimentos, fraqueza=None, imune=None):
+        super().__init__(nome, vida, vida_max, dano, imagem, movimentos, fraqueza, imune)
         
     def realizar_ataque(self):
-        print(f"\n{self.nome} arranhou!")
+        movimento_ataque(self.nome, self.movimentos)
         return self.dano
 
-# ex. print {fulano} atacou com garras ferozes
+# exemplos do Jhoel
 
-# Zumbi_Acido
-# print(f"O {self.nome} lançou um Ataque de Baba Ácida! Causando {Dano_Total} de dano!")
-# print(f" O {self.nome} ataca com uma Mordida Letal! Casuou {Dano_Total} de dano!")
-#
-# Zumbi_Eletrico
-# print(f"O {self.nome} lançou um Ataque Abraço Elétrico! Causando {Dano_Total} de dano!")
-# print(f" O {self.nome} ataca com uma Mordida Letal! Casuou {Dano_Total} de dano!")
-#
-# Zumbi_Infectado
-# print(f"O {self.nome} lançou um Ataque de Mordida Infecciosa! Causando {Dano_Total} de dano!")
-# print(f" O {self.nome} ataca com uma Garras Necróticas! Causou {Dano_Total} de dano!")
-#
-# Zumbi_Radioativo
-# print(f"O {self.nome} lançou um Ataque Mordida Radioativa! Causando {Dano_Total} de dano!")
-# print(f" O {self.nome} ataca com uma Chute! Casuou {Dano_Total} de dano!")
+#   Zumbi_Acido
+# Ataque de Baba Ácida
+# Mordida Letal
+
+#   Zumbi_Eletrico
+# Abraço Elétrico
+# Mordida Letal
+
+#   Zumbi_Infectado
+# Mordida Infecciosa
+# Garras Necróticas
+
+#   Zumbi_Radioativo
+# Mordida Radioativa
+# Chute Radioativo

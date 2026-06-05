@@ -8,6 +8,7 @@ from textos.tela import enter_continuar, enter_voltar, limpar_tela, limpar_inter
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
 from textos.artes.arte import mostrar_artes_lado_a_lado
+from textos.movimentos import movimento_ataque
 
 class Jogador(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, mochila, moedas):
@@ -84,7 +85,7 @@ class Jogador(Personagem):
 
     def atacar_com_faca(self, inimigo):
         dano = self.dano + self.dano_bonus
-        print(f"\n{self.nome} atacou com uma facada!")
+        movimento_ataque(self.nome, "Facada")
         inimigo.receber_dano_faca(dano)
 
     def escolher_medicina(self):

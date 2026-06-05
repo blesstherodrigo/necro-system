@@ -5,19 +5,25 @@ from classes.personagens.inimigos.boss import Boss
 zumbi_acido_1 = Zumbi(
     "Cobaia Ácida",
     10, 10, 5,
-    "zumbi_acido_1.txt", "Titânio", "Ferro"
+    "zumbi_acido_1.txt",
+    "Ataque Ácido 1",
+    "Titânio", "Ferro"
 )
 
 zumbi_acido_2 = Zumbi(
     "Analista Ácido",
     10, 10, 5,
-    "zumbi_acido_2.txt", "Titânio", "Ferro"
+    "zumbi_acido_2.txt",
+    "Ataque Ácido 2",
+    "Titânio", "Ferro"
 )
 
 boss_acido = Boss(
     "Cientista Ácida",
     20, 20, 10,
-    "boss_acido.txt", "Titânio", "Ferro"
+    "boss_acido.txt",
+    ["Ataque Ácido 3", "Defesa Ácida", "Cura Ácida", "Concentração Ácida"],
+    "Titânio", "Ferro"
 )
 
 acidos = [zumbi_acido_1, zumbi_acido_2, boss_acido]
