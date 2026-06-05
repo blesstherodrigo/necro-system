@@ -9,6 +9,8 @@ class Zumbi(Inimigo):
         print(f"\n{self.nome} arranhou!")
         return self.dano
 
+# ex. print {fulano} atacou com garras ferozes
+
 # Zumbi_Acido
 # print(f"O {self.nome} lançou um Ataque de Baba Ácida! Causando {Dano_Total} de dano!")
 # print(f" O {self.nome} ataca com uma Mordida Letal! Casuou {Dano_Total} de dano!")

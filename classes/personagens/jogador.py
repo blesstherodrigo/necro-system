@@ -37,11 +37,6 @@ class Jogador(Personagem):
 
         return Jogador(nome, 100, 100, 10, imagem, Mochila(), 50)
 
-    def atacar_com_faca(self, inimigo):
-        dano = self.dano + self.dano_bonus
-        print(f"\n{self.nome} atacou com uma facada!")
-        inimigo.receber_dano_faca(dano)
-
     def escolher_municao(self):
         municao_disponivel = [
             item
@@ -61,11 +56,11 @@ class Jogador(Personagem):
             for indice, municao in enumerate(municao_disponivel, start=1):
                 quantidade = self.mochila.itens[municao]
                 print(f"{indice}. {municao.tipo} ({quantidade})")
-            escolha = int(input("> "))
-
-            limpar_intervalo(40, 40 + len(municao_disponivel) + 3)
 
             try:
+                escolha = int(input("> "))
+                limpar_intervalo(40, 40 + len(municao_disponivel) + 3)
+
                 if escolha == 0:
                     break
                 municao = municao_disponivel[escolha - 1]
@@ -77,6 +72,20 @@ class Jogador(Personagem):
                 return municao
 
             return None
+
+    def atacar_com_municao(self, inimigo):
+        municao = self.escolher_municao()
+
+        if municao is None:
+            return False
+
+        inimigo.receber_dano_municao(municao)
+        return True
+
+    def atacar_com_faca(self, inimigo):
+        dano = self.dano + self.dano_bonus
+        print(f"\n{self.nome} atacou com uma facada!")
+        inimigo.receber_dano_faca(dano)
 
     def escolher_medicina(self):
         medicinas_disponiveis = [
@@ -100,11 +109,11 @@ class Jogador(Personagem):
                     f"{indice}. {medicina.nome} "
                     f"({quantidade}) | Efeito: {medicina.efeito} | Bônus: {medicina.bonus}"
                 )
-            escolha = int(input("> "))
-
-            limpar_intervalo(40, 40 + len(medicinas_disponiveis) + 3)
 
             try:
+                escolha = int(input("> "))
+                limpar_intervalo(40, 40 + len(medicinas_disponiveis) + 3)
+
                 if escolha == 0:
                     break
                 medicina = medicinas_disponiveis[escolha - 1]
@@ -118,19 +127,20 @@ class Jogador(Personagem):
 
             return None
 
-    # cura nao completa vida total se a vida estiver perto do limite
     def curar(self, quantidade):
         self.vida += quantidade
         if self.vida > self.vida_max:
             self.vida = self.vida_max
 
-    # este metodo é util???
+    # este metodo é útil para o efeito do Soro (utilizado no combate da classe Jogo)
     def regenerar(self):
         if self.regeneracao > 0:
             self.curar(self.regeneracao)
             print(f"\n{self.nome} regenerou {self.regeneracao} de vida.")
 
-    def usar_medicina(self, medicina):
+    def usar_medicina(self):
+        medicina = self.escolher_medicina()
+
         if medicina.nome == "Adrenalina":
             self.dano_bonus += medicina.bonus
             print(f"\n{self.nome} usou {medicina.nome}. Dano aumentado em {medicina.bonus} pelo resto da luta.")
@@ -147,6 +157,7 @@ class Jogador(Personagem):
             self.defesa_bonus += medicina.bonus
             print(f"\n{self.nome} {medicina.nome}. Defesa aumentada em {medicina.bonus} pelo resto da luta.")
         enter_continuar()
+        return True
 
     def receber_dano(self, dano):
         dano_final = dano - self.defesa_bonus
@@ -156,7 +167,6 @@ class Jogador(Personagem):
 
         super().receber_dano(dano_final)
         mensagem_recebeu_dano(self.nome, dano_final)
-        enter_continuar()
 
     def resetar_efeitos_luta(self):
         self.dano_bonus = 0

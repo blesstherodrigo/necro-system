@@ -60,12 +60,11 @@ class Jogo:
                     )
 
                     if opcao_combate_escolhida == "1":
-                        municao = self.jogador.escolher_municao()
+                        ataque_realizado = self.jogador.atacar_com_municao(self.inimigo)
 
-                        if municao is None:
+                        if not ataque_realizado:
                             continue
 
-                        self.inimigo.receber_dano_municao(municao)
                         break
 
                     elif opcao_combate_escolhida == "2":
@@ -73,12 +72,11 @@ class Jogo:
                         break
 
                     elif opcao_combate_escolhida == "3":
-                        medicina = self.jogador.escolher_medicina()
+                        medicina_utilizada = self.jogador.usar_medicina()
 
-                        if medicina is None:
+                        if not medicina_utilizada:
                             continue
 
-                        self.jogador.usar_medicina(medicina)
                         break
 
                     else:
@@ -88,7 +86,7 @@ class Jogo:
                     if self.inimigo.esta_vivo():
                         self.jogador.regenerar()
 
-                        dano_do_ataque = self.inimigo.realizar_ataque()     # Mudanças para utilizar ataques únicos de cada zumbi existente
+                        dano_do_ataque = self.inimigo.realizar_ataque()
 
                         if dano_do_ataque > 0:
                             self.jogador.receber_dano(dano_do_ataque)

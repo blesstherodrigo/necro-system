@@ -7,6 +7,7 @@ def mensagem_opcao_invalida():
 
 def mensagem_recebeu_dano(nome, dano):
     print(f"\n{nome} recebeu {dano} de dano.")
+    enter_continuar()
 
 def mensagem_morreu():
     print("\nVocê morreu.")
