@@ -133,6 +133,7 @@ class Jogo:
 
         if self.fase_atual >= len(self.fases):
             mensagem_zerou_jogo()
+            return "zerou"
         else:
             mensagem_nova_fase_desbloqueada()
             self.fase_mostrar_cena = True
@@ -146,10 +147,12 @@ class Jogo:
         loja = Loja()
 
         while self.rodando:
-            cena_fase = self.buscar_fase()
-            if self.fase_mostrar_cena:
-                introducao_fase(cena_fase.imagem, cena_fase.descricao)
-                self.fase_mostrar_cena = False
+            if self.fase_atual < len(self.fases):
+                cena_fase = self.buscar_fase()
+
+                if self.fase_mostrar_cena:
+                    introducao_fase(cena_fase.imagem, cena_fase.descricao)
+                    self.fase_mostrar_cena = False
 
             opcao_menu_escolhida = menu_principal(
                 self.fase_atual,
