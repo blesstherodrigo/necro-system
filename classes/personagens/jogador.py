@@ -63,7 +63,8 @@ class Jogador(Personagem):
                 limpar_intervalo(40, 40 + len(municao_disponivel) + 3)
 
                 if escolha == 0:
-                    break
+                    return None
+
                 municao = municao_disponivel[escolha - 1]
             except (ValueError, IndexError):
                 mensagem_opcao_invalida()
@@ -116,7 +117,8 @@ class Jogador(Personagem):
                 limpar_intervalo(40, 40 + len(medicinas_disponiveis) + 3)
 
                 if escolha == 0:
-                    break
+                    return None
+
                 medicina = medicinas_disponiveis[escolha - 1]
             except (ValueError, IndexError):
                 mensagem_opcao_invalida()
@@ -141,6 +143,9 @@ class Jogador(Personagem):
 
     def usar_medicina(self):
         medicina = self.escolher_medicina()
+
+        if medicina is None:
+            return False
 
         if medicina.nome == "Adrenalina":
             self.dano_bonus += medicina.bonus
