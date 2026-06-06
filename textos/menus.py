@@ -1,6 +1,6 @@
 # textos/menus.py
 from textos.tela import limpar_tela, enter_voltar, limpar_intervalo
-from textos.artes.arte import mostrar_artes_lado_a_lado
+from textos.artes.arte import mostrar_artes_lado_a_lado, mostrar_barra_hp
 
 def menu_principal(fase_atual, total_fases):
     limpar_tela()
@@ -38,17 +38,30 @@ def menu_mochila(itens):
 
     enter_voltar()
 
-def menu_combate(nome_inimigo, vida_inimigo, vida_max_inimigo, inimigo_imagem, vida_jogador, vida_max_jogador, jogador_imagem):
+def menu_combate(
+    nome_jogador,
+    nome_inimigo,
+    vida_inimigo,
+    vida_max_inimigo,
+    inimigo_imagem,
+    vida_jogador,
+    vida_max_jogador,
+    jogador_imagem
+):
     limpar_tela()
     mostrar_artes_lado_a_lado(jogador_imagem, inimigo_imagem)
+    largura_nome = max(len("Sua vida"), len(nome_inimigo))
+
     print(f"=== COMBATE CONTRA {nome_inimigo.upper()} ===")
-    print(f"Sua vida: {vida_jogador}/{vida_max_jogador}")
-    print(f"{nome_inimigo}: {vida_inimigo}/{vida_max_inimigo}")
+    print(f"{nome_jogador:<{largura_nome}} | {mostrar_barra_hp(vida_jogador, vida_max_jogador)}")
+    print(f"{nome_inimigo:<{largura_nome}} | {mostrar_barra_hp(vida_inimigo, vida_max_inimigo)}")
     print("-" * 30)
     print("1. Atacar com arma")
     print("2. Atacar com faca")
     print("3. Usar medicina")
     print("-" * 30)
+
     opcao_combate = input("> ")
     limpar_intervalo(40, 49)    # o menu começa na linha 40 e termina na linha 49 do terminal
+
     return opcao_combate

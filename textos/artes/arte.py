@@ -60,3 +60,18 @@ def mostrar_artes_lado_a_lado(*nomes_arquivos, espaco=6):
         arte_final += linha.center(largura_terminal) + "\n"
 
     print(Colorate.Color(Colors.green, arte_final))
+
+def mostrar_barra_hp(vida, vida_max, tamanho=20):
+    if vida_max <= 0:
+        barra = "░" * tamanho
+        return f"[{barra}] {vida}/{vida_max}"
+
+    vida = max(0, min(vida, vida_max))
+
+    percentual = vida / vida_max
+    preenchido = int(tamanho * percentual)
+    vazio = tamanho - preenchido
+
+    barra = "█" * preenchido + "░" * vazio
+
+    return f"[{barra}] {vida}/{vida_max}"

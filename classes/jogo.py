@@ -50,6 +50,7 @@ class Jogo:
             while self.jogador.esta_vivo() and self.inimigo.esta_vivo():
                 while True:
                     opcao_combate_escolhida = menu_combate(
+                        self.jogador.nome,
                         self.inimigo.nome,
                         self.inimigo.vida,
                         self.inimigo.vida_max,
