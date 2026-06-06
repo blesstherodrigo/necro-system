@@ -34,3 +34,41 @@ def movimento_usar_soro(nome, medicina, bonus):
 
 def movimento_usar_analgesico(nome, medicina, bonus):
     print(f"\n{nome} usou {medicina}. Defesa aumentada em {bonus} pelo resto da luta.")
+
+# exemplos de ataques do Jhoel:
+
+#   Zumbi_Acido
+# Ataque de Baba Ácida
+# Mordida Letal
+
+#   Zumbi_Eletrico
+# Abraço Elétrico
+# Mordida Letal
+
+#   Zumbi_Infectado
+# Mordida Infecciosa
+# Garras Necróticas
+
+#   Zumbi_Radioativo
+# Mordida Radioativa
+# Chute Radioativo
+
+#   Boss_Acido
+# Chuva de Toxina
+# Cuspe Corrosivo
+# Caldeirão Ambulante
+
+#   Boss_Infectado
+# Triagem Cruel
+# Sinfonia do Sangue
+# Tratamento de Choque
+
+#   Boss_Radioativo
+# Alerta Vermelho
+# Tiro Radioativo
+# Recuperação química
+
+#   Boss_Eletrico
+# Curto-Circuito
+# Tempestade de Íons
+# Choque Estático

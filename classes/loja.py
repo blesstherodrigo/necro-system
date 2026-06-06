@@ -3,7 +3,15 @@ from instancias.municoes import municoes
 from instancias.medicinas import medicinas
 from textos.tela import enter_continuar
 from textos.menus import menu_loja_comprar, menu_loja_vender, menu_loja
-from textos.mensagens import mensagem_opcao_invalida
+from textos.inputs import input_quantidade
+from textos.mensagens import (
+    mensagem_opcao_invalida,
+    mensagem_sem_moedas_suficiente,
+    mensagem_comprou_item,
+    mensagem_vendeu_item,
+    mensagem_sem_itens,
+    mensagem_sem_quantidade
+)
 
 class Loja:
     def __init__(self):
@@ -20,7 +28,7 @@ class Loja:
             return True
 
         try:
-            quantidade = int(input(f"Quantidade: "))
+            quantidade = input_quantidade()
         except ValueError:
             mensagem_opcao_invalida()
             return True
@@ -32,13 +40,11 @@ class Loja:
         preco_total = municao.preco * quantidade
 
         if preco_total > jogador.moedas:
-            print("Você não tem moedas suficientes.")
-            enter_continuar()
+            mensagem_sem_moedas_suficiente()
         else:
             jogador.moedas -= preco_total
             jogador.mochila.adicionar_item(municao, quantidade)
-            print(f"Você comprou {quantidade}x {municao.tipo}.")
-            enter_continuar()
+            mensagem_comprou_item(quantidade, municao.tipo)
             return True
 
     def comprar_medicina(self, escolha, jogador):
@@ -51,7 +57,7 @@ class Loja:
             return True
 
         try:
-            quantidade = int(input("Quantidade: "))
+            quantidade = input_quantidade()
         except ValueError:
             mensagem_opcao_invalida()
             return True
@@ -63,14 +69,13 @@ class Loja:
         preco_total = medicina.preco * quantidade
 
         if preco_total > jogador.moedas:
-            print("Você não tem moedas suficientes.")
+            mensagem_sem_moedas_suficiente()
             enter_continuar()
             return True
 
         jogador.moedas -= preco_total
         jogador.mochila.adicionar_item(medicina, quantidade)
-        print(f"Você comprou {quantidade}x {medicina.nome}.")
-        enter_continuar()
+        mensagem_comprou_item(quantidade, medicina.nome)
         return True
 
     def comprar_item(self, jogador):
@@ -109,8 +114,7 @@ class Loja:
             ]
 
             if not itens_disponiveis:
-                print("Você não tem itens para vender.")
-                enter_continuar()
+                mensagem_sem_itens()
                 break
 
             escolha = menu_loja_vender(
@@ -134,7 +138,7 @@ class Loja:
             item = itens_disponiveis[indice_escolha]
 
             try:
-                quantidade = int(input("Quantidade: "))
+                quantidade = input_quantidade()
             except ValueError:
                 mensagem_opcao_invalida()
                 continue
@@ -146,8 +150,7 @@ class Loja:
             quantidade_atual = jogador.mochila.itens[item]
 
             if quantidade > quantidade_atual:
-                print("Você não tem essa quantidade.")
-                enter_continuar()
+                mensagem_sem_quantidade()
                 continue
 
             preco = getattr(item, "preco", 0)
@@ -158,8 +161,7 @@ class Loja:
             jogador.moedas += total_venda
 
             nome = getattr(item, "tipo", getattr(item, "nome", "Item"))
-            print(f"Você vendeu {quantidade}x {nome} por {total_venda} moedas.")
-            enter_continuar()
+            mensagem_vendeu_item(quantidade, nome, total_venda)
 
     def abrir_loja(self, jogador):
         while True:

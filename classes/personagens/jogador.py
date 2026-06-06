@@ -6,7 +6,7 @@ from classes.itens.medicina import Medicina
 
 from textos.tela import enter_continuar, enter_voltar, limpar_tela, limpar_intervalo
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
-from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
+from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano, mensagem_digite_nome
 from textos.artes.arte import mostrar_artes_lado_a_lado
 from textos.movimentos import movimento_ataque, movimento_usar_adrenalina, movimento_usar_antidoto, movimento_usar_soro, movimento_usar_analgesico
 from textos.menus import menu_escolher_municao, menu_escolher_medicina
@@ -22,8 +22,14 @@ class Jogador(Personagem):
 
     @staticmethod
     def criar_jogador():
-        nome = input_nome_do_jogdor()
         while True:
+            while True:
+                nome = input_nome_do_jogdor()
+                if len(nome) < 1:
+                    mensagem_digite_nome()
+                else:
+                    break
+
             limpar_tela()
             mostrar_artes_lado_a_lado("jogador_homem.txt", "jogador_mulher.txt")
             escolha = input_escolha_personagem()

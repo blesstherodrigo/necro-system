@@ -5,6 +5,10 @@ def mensagem_opcao_invalida():
     print("\nOpção inválida.")
     enter_voltar()
 
+def mensagem_digite_nome():
+    print("\nDigite seu nome!")
+    enter_voltar()
+
 def mensagem_recebeu_dano(nome, dano):
     print(f"\n{nome} recebeu {dano} de dano.")
     enter_continuar()
@@ -31,7 +35,7 @@ def mensagem_saindo_do_jogo():
 
 def mensagem_apareceu_inimigo(nome_inimigo):
     limpar_tela()
-    print(f"Um {nome_inimigo} apareceu!")
+    print(f"{nome_inimigo} apareceu!")
     enter_continuar()
 
 def mensagem_concluiu_fase(numero_fase, nome_fase):
@@ -42,4 +46,24 @@ def mensagem_concluiu_fase(numero_fase, nome_fase):
 def mensagem_nova_fase_desbloqueada():
     limpar_tela()
     print("Uma nova fase foi desbloqueada.")
+    enter_continuar()
+
+def mensagem_sem_moedas_suficiente():
+    print("Você não tem moedas suficientes.")
+    enter_continuar()
+
+def mensagem_comprou_item(quantidade, tipo):
+    print(f"Você comprou {quantidade}x {tipo}.")
+    enter_continuar()
+
+def mensagem_vendeu_item(quantidade, nome, total):
+    print(f"Você vendeu {quantidade}x {nome} por {total} moedas.")
+    enter_continuar()
+
+def mensagem_sem_itens():
+    print("Você não tem itens para vender.")
+    enter_continuar()
+
+def mensagem_sem_quantidade():
+    print("Você não tem essa quantidade.")
     enter_continuar()

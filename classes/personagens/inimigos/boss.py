@@ -158,25 +158,3 @@ class Boss(Inimigo):
             self.defendendo = False
 
         return super().receber_dano(dano)
-
-# exemplos do Jhoel
-
-#   Boss_Acido
-# Chuva de Toxina
-# Cuspe Corrosivo
-# Caldeirão Ambulante
-
-#   Boss_Infectado
-# Triagem Cruel
-# Sinfonia do Sangue
-# Tratamento de Choque
-
-#   Boss_Radioativo
-# Alerta Vermelho
-# Tiro Radioativo
-# Recuperação química
-
-#   Boss_Eletrico
-# Curto-Circuito
-# Tempestade de Íons
-# Choque Estático

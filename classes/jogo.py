@@ -7,7 +7,7 @@ from instancias.municoes import municao_bronze
 from instancias.medicinas import antidoto
 from audios.audio import parar_audio
 from textos.menus import menu_combate, menu_principal, menu_status
-from textos.confirmacoes import confirmacao_sair_do_jogo, confirmacao_recomecar_jogo
+from textos.inputs import input_sair_do_jogo, input_recomecar_jogo
 from textos.introducoes import introducao_jogo, introducao_fase
 from textos.mensagens import (
     mensagem_opcao_invalida, mensagem_apareceu_inimigo,
@@ -109,7 +109,7 @@ class Jogo:
         if self.fase_atual >= len(self.fases):
             mensagem_zerou_jogo()
             while True:
-                opcao_recomecar_escolhida = confirmacao_recomecar_jogo()
+                opcao_recomecar_escolhida = input_recomecar_jogo()
 
                 if opcao_recomecar_escolhida == "1":
                     introducao_jogo()
@@ -165,7 +165,7 @@ class Jogo:
 
                 if resultado == "morreu":
                     while True:
-                        opcao_recomecar_escolhida = confirmacao_recomecar_jogo()
+                        opcao_recomecar_escolhida = input_recomecar_jogo()
 
                         if opcao_recomecar_escolhida == "1":
                             introducao_jogo()
@@ -196,7 +196,7 @@ class Jogo:
 
             elif opcao_menu_escolhida == "5":
                 while True:
-                    opcao_sair_escolhida = confirmacao_sair_do_jogo()
+                    opcao_sair_escolhida = input_sair_do_jogo()
 
                     if opcao_sair_escolhida == "1":
                         mensagem_saindo_do_jogo()

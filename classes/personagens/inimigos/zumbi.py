@@ -9,21 +9,3 @@ class Zumbi(Inimigo):
     def realizar_ataque(self):
         movimento_ataque(self.nome, self.movimentos)
         return self.dano
-
-# exemplos do Jhoel
-
-#   Zumbi_Acido
-# Ataque de Baba Ácida
-# Mordida Letal
-
-#   Zumbi_Eletrico
-# Abraço Elétrico
-# Mordida Letal
-
-#   Zumbi_Infectado
-# Mordida Infecciosa
-# Garras Necróticas
-
-#   Zumbi_Radioativo
-# Mordida Radioativa
-# Chute Radioativo
