@@ -8,7 +8,8 @@ from textos.tela import enter_continuar, enter_voltar, limpar_tela, limpar_inter
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano
 from textos.artes.arte import mostrar_artes_lado_a_lado
-from textos.movimentos import movimento_ataque
+from textos.movimentos import movimento_ataque, movimento_usar_adrenalina, movimento_usar_antidoto, movimento_usar_soro, movimento_usar_analgesico
+from textos.menus import menu_escolher_municao, menu_escolher_medicina
 
 class Jogador(Personagem):
     def __init__(self, nome, vida, vida_max, dano, imagem, mochila, moedas):
@@ -38,6 +39,20 @@ class Jogador(Personagem):
 
         return Jogador(nome, 100, 100, 10, imagem, Mochila(), 50)
 
+    def atacar_com_municao(self, inimigo):
+        municao = self.escolher_municao()
+
+        if municao is None:
+            return False
+
+        inimigo.receber_dano_municao(municao)
+        return True
+
+    def atacar_com_faca(self, inimigo):
+        dano = self.dano + self.dano_bonus
+        movimento_ataque(self.nome, "Facada")
+        inimigo.receber_dano_faca(dano)
+
     def escolher_municao(self):
         municao_disponivel = [
             item
@@ -51,15 +66,8 @@ class Jogador(Personagem):
             return None
 
         while True:
-            print("\nEscolha a munição:")
-
-            print("0. Voltar")
-            for indice, municao in enumerate(municao_disponivel, start=1):
-                quantidade = self.mochila.itens[municao]
-                print(f"{indice}. {municao.tipo} ({quantidade})")
-
             try:
-                escolha = int(input("> "))
+                escolha = menu_escolher_municao(municao_disponivel, self.mochila.itens)
 
                 if escolha == 0:
                     return None
@@ -76,20 +84,6 @@ class Jogador(Personagem):
 
             return None
 
-    def atacar_com_municao(self, inimigo):
-        municao = self.escolher_municao()
-
-        if municao is None:
-            return False
-
-        inimigo.receber_dano_municao(municao)
-        return True
-
-    def atacar_com_faca(self, inimigo):
-        dano = self.dano + self.dano_bonus
-        movimento_ataque(self.nome, "Facada")
-        inimigo.receber_dano_faca(dano)
-
     def escolher_medicina(self):
         medicinas_disponiveis = [
             item
@@ -103,18 +97,8 @@ class Jogador(Personagem):
             return None
 
         while True:
-            print("\nEscolha a medicina:")
-
-            print("0. Voltar")
-            for indice, medicina in enumerate(medicinas_disponiveis, start=1):
-                quantidade = self.mochila.itens[medicina]
-                print(
-                    f"{indice}. {medicina.nome} "
-                    f"({quantidade}) | Efeito: {medicina.efeito} | Bônus: {medicina.bonus}"
-                )
-
             try:
-                escolha = int(input("> "))
+                escolha = menu_escolher_medicina(medicinas_disponiveis, self.mochila.itens)
 
                 if escolha == 0:
                     return None
@@ -141,7 +125,6 @@ class Jogador(Personagem):
     def regenerar(self):
         if self.regeneracao > 0:
             self.curar(self.regeneracao)
-            print(f"\n{self.nome} regenerou {self.regeneracao} de vida.")
 
     def usar_medicina(self):
         medicina = self.escolher_medicina()
@@ -151,19 +134,19 @@ class Jogador(Personagem):
 
         if medicina.nome == "Adrenalina":
             self.dano_bonus += medicina.bonus
-            print(f"\n{self.nome} usou {medicina.nome}. Dano aumentado em {medicina.bonus} pelo resto da luta.")
+            movimento_usar_adrenalina(self.nome, medicina.nome, medicina.bonus)
 
         elif medicina.nome == "Antídoto":
             self.curar(medicina.bonus)
-            print(f"\n{self.nome} usou {medicina.nome}. Recuperou {medicina.bonus} de vida.")
+            movimento_usar_antidoto(self.nome, medicina.nome, medicina.bonus)
 
         elif medicina.nome == "Soro":
             self.regeneracao += medicina.bonus
-            print(f"\n{self.nome} {medicina.nome}. Vai regenerar {medicina.bonus} de vida por turno.")
+            movimento_usar_soro(self.nome, medicina.nome, medicina.bonus)
 
         elif medicina.nome == "Analgésico":
             self.defesa_bonus += medicina.bonus
-            print(f"\n{self.nome} {medicina.nome}. Defesa aumentada em {medicina.bonus} pelo resto da luta.")
+            movimento_usar_analgesico(self.nome, medicina.nome, medicina.bonus)
         enter_continuar()
         return True
 
