@@ -42,7 +42,7 @@ class Loja:
             return True
 
     def comprar_medicina(self, escolha, jogador):
-        indice_escolha = escolha - 1
+        indice_escolha = escolha - len(self.catalogo_municao) - 1
 
         try:
             medicina = self.catalogo_medicina[indice_escolha]
@@ -51,7 +51,7 @@ class Loja:
             return True
 
         try:
-            quantidade = int(input(f"Quantidade: "))
+            quantidade = int(input("Quantidade: "))
         except ValueError:
             mensagem_opcao_invalida()
             return True
@@ -65,12 +65,11 @@ class Loja:
         if preco_total > jogador.moedas:
             print("Você não tem moedas suficientes.")
             enter_continuar()
-        else:
-            jogador.moedas -= preco_total
-            jogador.mochila.adicionar_item(medicina, quantidade)
-            print(f"Você comprou {quantidade}x {medicina.nome}.")
-            enter_continuar()
+            return True
 
+        jogador.moedas -= preco_total
+        jogador.mochila.adicionar_item(medicina, quantidade)
+        print(f"Você comprou {quantidade}x {medicina.nome}.")
         enter_continuar()
         return True
 
@@ -89,10 +88,13 @@ class Loja:
             if escolha == 0:
                 break
 
-            elif 1 <= escolha <= len(self.catalogo_municao):
+            total_municoes = len(self.catalogo_municao)
+            total_itens = len(self.catalogo_municao) + len(self.catalogo_medicina)
+
+            if 1 <= escolha <= total_municoes:
                 self.comprar_municao(escolha, jogador)
 
-            elif escolha > len(self.catalogo_municao):
+            elif total_municoes < escolha <= total_itens:
                 self.comprar_medicina(escolha, jogador)
 
             else:
