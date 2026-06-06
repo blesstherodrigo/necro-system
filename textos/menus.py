@@ -106,8 +106,8 @@ def menu_loja_comprar(moedas, catalogo_municao, catalogo_medicina):
             f"Bônus: {str(medicina.bonus):>{largura_bonus}} | "
             f"Preço: {str(medicina.preco):>{largura_preco}}"
         )
-    print("-" * 80)
     print("0. Voltar")
+    print("-" * 80)
     try:
         escolha = int(input("Escolha um item: "))
         return escolha
@@ -141,3 +141,26 @@ def menu_loja_vender(moedas, itens_disponiveis, itens):
         return escolha
     except ValueError:
         return None
+
+def menu_escolher_municao(municao, itens):
+    for indice, municao in enumerate(municao, start=1):
+        quantidade = itens[municao]
+        print(f"{indice}. {municao.tipo} ({quantidade})")
+    print("0. Voltar")
+    print("-" * 25)
+    print("Escolha a munição:")
+    escolha = int(input("> "))
+    return escolha
+
+def menu_escolher_medicina(medicina, itens):
+    for indice, medicina in enumerate(medicina, start=1):
+        quantidade = itens[medicina]
+        print(
+            f"{indice}. {medicina.nome} "
+            f"({quantidade}) | Efeito: {medicina.efeito} | Bônus: {medicina.bonus}"
+        )
+    print("0. Voltar")
+    print("-" * 25)
+    print("Escolha a medicina:")
+    escolha = int(input("> "))
+    return escolha

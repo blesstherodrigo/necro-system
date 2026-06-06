@@ -21,3 +21,16 @@ def movimento_arma_fraqueza(nome, municao):
 
 def movimento_arma_neutro(nome, municao):
     print(f"\nVocê atacou com arma, {nome} tem neutralidade a munição de {municao}!")
+
+# medicina
+def movimento_usar_adrenalina(nome, medicina, bonus):
+    print(f"\n{nome} usou {medicina}. Dano aumentado em {bonus} pelo resto da luta.")
+
+def movimento_usar_antidoto(nome, medicina, bonus):
+    print(f"\n{nome} usou {medicina}. Recuperou {bonus} de vida.")
+
+def movimento_usar_soro(nome, medicina, bonus):
+    print(f"\n{nome} usou {medicina}. Vai regenerar {bonus} de vida por turno.")
+
+def movimento_usar_analgesico(nome, medicina, bonus):
+    print(f"\n{nome} usou {medicina}. Defesa aumentada em {bonus} pelo resto da luta.")
