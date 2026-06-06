@@ -60,10 +60,11 @@ class Jogador(Personagem):
 
             try:
                 escolha = int(input("> "))
-                limpar_intervalo(40, 40 + len(municao_disponivel) + 3)
 
                 if escolha == 0:
                     return None
+
+                limpar_intervalo(40, 40 + len(municao_disponivel) + 3)
 
                 municao = municao_disponivel[escolha - 1]
             except (ValueError, IndexError):
@@ -114,10 +115,11 @@ class Jogador(Personagem):
 
             try:
                 escolha = int(input("> "))
-                limpar_intervalo(40, 40 + len(medicinas_disponiveis) + 3)
 
                 if escolha == 0:
                     return None
+
+                limpar_intervalo(40, 40 + len(medicinas_disponiveis) + 3)
 
                 medicina = medicinas_disponiveis[escolha - 1]
             except (ValueError, IndexError):
