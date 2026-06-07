@@ -1,69 +1,71 @@
 # textos/mensagens.py
-from textos.tela import limpar_tela, enter_continuar, enter_voltar
+from textos.tela import limpar_tela, passar_texto, enter_continuar, enter_voltar
 
 def mensagem_opcao_invalida():
-    print("\nOpção inválida.")
+    passar_texto("\nOpção inválida.")
     enter_voltar()
 
 def mensagem_digite_nome():
-    print("\nDigite seu nome!")
+    passar_texto("\nDigite seu nome!")
     enter_voltar()
 
 def mensagem_recebeu_dano(nome, dano):
-    print(f"\n{nome} recebeu {dano} de dano.")
+    passar_texto(f"\n IMPACTO: {nome} recebeu {dano} de dano.")
     enter_continuar()
 
 def mensagem_morreu():
-    print("\nVocê morreu.")
+    # Uma velocidade um pouco menor (0.05) dá mais drama para a morte
+    passar_texto("\n VOCÊ MORREU... O sistema necro-orgânico consumiu você. ", velocidade=0.05)
     enter_continuar()
 
 def mensagem_venceu(nome_inimigo):
-    print(f"\nVocê derrotou {nome_inimigo}!")
+    passar_texto(f"\n VITÓRIA: Você derrotou {nome_inimigo}!")
+    # Se o seu jogo não dava enter_continuar aqui, mantemos sem ele para não quebrar o fluxo
 
 def mensagem_ganhou_moedas(recompensa):
-    print(f"\nGanhou {recompensa} moedas.")
+    passar_texto(f"\n SAQUE: Você vasculhou a área e encontrou {recompensa} moedas.")
     enter_continuar()
 
 def mensagem_zerou_jogo():
     limpar_tela()
-    print("Você sobreviveu todas as fases do NecroSystem!")
+    passar_texto("Você sobreviveu a todas as fases do NecroSystem!")
     enter_continuar()
 
 def mensagem_saindo_do_jogo():
     limpar_tela()
-    print("Saindo do jogo...")
+    passar_texto("Saindo do jogo...")
 
 def mensagem_apareceu_inimigo(nome_inimigo):
     limpar_tela()
-    print(f"{nome_inimigo} apareceu!")
+    passar_texto(f" AMEAÇA: {nome_inimigo} apareceu!")
     enter_continuar()
 
 def mensagem_concluiu_fase(numero_fase, nome_fase):
     limpar_tela()
-    print(f"Você concluiu a Fase {numero_fase}: {nome_fase}!")
+    passar_texto(f" Você concluiu a Fase {numero_fase}: {nome_fase}!")
     enter_continuar()
 
 def mensagem_nova_fase_desbloqueada():
     limpar_tela()
-    print("Uma nova fase foi desbloqueada.")
+    passar_texto("Uma nova fase foi desbloqueada no sistema.")
     enter_continuar()
 
 def mensagem_sem_moedas_suficiente():
-    print("Você não tem moedas suficientes.")
+    passar_texto("Você não tem moedas suficientes.")
     enter_continuar()
 
 def mensagem_comprou_item(quantidade, tipo):
-    print(f"Você comprou {quantidade}x {tipo}.")
+    passar_texto(f"🛒 Você comprou {quantidade}x {tipo}.")
     enter_continuar()
 
 def mensagem_vendeu_item(quantidade, nome, total):
-    print(f"Você vendeu {quantidade}x {nome} por {total} moedas.")
+    passar_texto(f" Você vendeu {quantidade}x {nome} por {total} moedas.")
     enter_continuar()
 
 def mensagem_sem_itens():
-    print("Você não tem itens para vender.")
+    passar_texto("Você não tem itens para vender.")
     enter_continuar()
 
 def mensagem_sem_quantidade():
-    print("Você não tem essa quantidade.")
+    passar_texto("Você não tem essa quantidade no inventário.")
     enter_continuar()

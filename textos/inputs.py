@@ -1,29 +1,33 @@
 # textos/inputs.py
-from textos.tela import limpar_tela
+from textos.tela import limpar_tela, passar_texto, console
 
 def input_escolha_personagem():
-    print("[1] Homem | [2] Mulher")
-    escolha_personagem = input("> ")
+
+    console.print("[1] Homem | [2] Mulher", style ="green")
+    escolha_personagem = console.input("[green]> [/]")
     return escolha_personagem
 
 def input_nome_do_jogdor():
-    nome_jogador = input("\nDigite seu nome: ")
+    nome_jogador = console.input("[green]\nDigite seu nome: [/]")
     return nome_jogador
 
 def input_quantidade():
-    quantidade = int(input(f"Quantidade: "))
-    return quantidade
+    try:
+        quantidade = int(console.input("[green]Quantidade: [/]"))
+        return quantidade
+    except ValueError:
+        return 0
 
 def input_recomecar_jogo():
     limpar_tela()
-    print("Deseja recomeçar o jogo?")
-    print("[1] Sim | [2] Não")
-    resposta_recomecar = input("> ")
+    passar_texto("Deseja recomeçar o jogo?")
+    passar_texto("[1] Sim | [2] Não")
+    resposta_recomecar = console.input("[green]> [/]")
     return resposta_recomecar
 
 def input_sair_do_jogo():
     limpar_tela()
-    print("Tem certeza que deseja sair?")
-    print("[1] Sim | [2] Não")
-    resposta_sair = input("> ")
+    passar_texto("Tem certeza que deseja sair?")
+    passar_texto("[1] Sim | [2] Não")
+    resposta_sair = console.input("[green]> [/]")
     return resposta_sair

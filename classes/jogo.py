@@ -15,6 +15,15 @@ from textos.mensagens import (
     mensagem_venceu, mensagem_morreu, mensagem_ganhou_moedas,
     mensagem_zerou_jogo, mensagem_saindo_do_jogo
 )
+from rich.console import Console
+from rich.panel import Panel
+from rich.columns import Columns
+
+from textos.tela import passar_texto
+
+console = Console()
+
+
 
 class Jogo:
     def __init__(self):
@@ -49,6 +58,10 @@ class Jogo:
 
             while self.jogador.esta_vivo() and self.inimigo.esta_vivo():
                 while True:
+                    console.clear()
+                    status_txt = f"[bold green] Jogador:[/] {self.jogador.nome} | HP: [bold red]{self.jogador.vida}/{self.jogador.vida_max}[/] | Moedas: [bold yellow] {self.jogador.moedas}[/]\n" \
+                                 f"[bold magenta] Inimigo:[/] {self.inimigo.nome} | HP: [bold red]{self.inimigo.vida}/{self.inimigo.vida_max}[/]"
+                    console.print(Panel(status_txt, title=" STATUS DO COMBATE ", border_style="red"))
                     opcao_combate_escolhida = menu_combate(
                         self.jogador.nome,
                         self.inimigo.nome,
@@ -134,11 +147,11 @@ class Jogo:
 
         if self.fase_atual >= len(self.fases):
             mensagem_zerou_jogo()
-            return "zerou"
+            return passar_texto("zerou")
         else:
             mensagem_nova_fase_desbloqueada()
             self.fase_mostrar_cena = True
-            return "venceu"
+            return passar_texto("venceu")
 
     def iniciar_jogo(self):
         introducao_jogo()
@@ -163,7 +176,7 @@ class Jogo:
             if opcao_menu_escolhida == "1":
                 resultado = self.explorar_fases()
 
-                if resultado == "morreu":
+                if resultado == passar_texto("morreu"):
                     while True:
                         opcao_recomecar_escolhida = input_recomecar_jogo()
 

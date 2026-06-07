@@ -4,7 +4,7 @@ from classes.itens.mochila import Mochila
 from classes.itens.municao import Municao
 from classes.itens.medicina import Medicina
 
-from textos.tela import enter_continuar, enter_voltar, limpar_tela, limpar_intervalo
+from textos.tela import enter_continuar, enter_voltar, limpar_tela, limpar_intervalo, passar_texto
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano, mensagem_digite_nome
 from textos.artes.arte import mostrar_artes_lado_a_lado
@@ -67,7 +67,7 @@ class Jogador(Personagem):
         ]
 
         if not municao_disponivel:
-            print("Você não tem munição!")
+            passar_texto("Você não tem munição!")
             enter_voltar()
             return None
 
@@ -98,7 +98,7 @@ class Jogador(Personagem):
         ]
 
         if not medicinas_disponiveis:
-            print("Você não tem medicinas!")
+            passar_texto("Você não tem medicinas!")
             enter_voltar()
             return None
 
