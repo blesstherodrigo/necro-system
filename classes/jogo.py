@@ -7,17 +7,16 @@ from instancias.municoes import municao_bronze
 from instancias.medicinas import antidoto
 from audios.audio import parar_audio
 from textos.menus import menu_combate, menu_principal, menu_status
-from textos.inputs import input_sair_do_jogo, input_recomecar_jogo
-from textos.introducoes import introducao_jogo, introducao_fase
+from textos.inputs import input_recomecar_jogo, input_sair_do_jogo
+from textos.introducoes import introducao_fase, introducao_jogo
 from textos.mensagens import (
-    mensagem_opcao_invalida, mensagem_apareceu_inimigo,
-    mensagem_concluiu_fase, mensagem_nova_fase_desbloqueada,
-    mensagem_venceu, mensagem_morreu, mensagem_ganhou_moedas,
-    mensagem_zerou_jogo, mensagem_saindo_do_jogo
+    mensagem_apareceu_inimigo, mensagem_concluiu_fase,
+    mensagem_ganhou_moedas, mensagem_morreu,
+    mensagem_nova_fase_desbloqueada, mensagem_opcao_invalida,
+    mensagem_saindo_do_jogo, mensagem_venceu, mensagem_zerou_jogo
 )
 from rich.console import Console
 from rich.panel import Panel
-
 from textos.tela import passar_texto
 
 console = Console()
@@ -46,7 +45,7 @@ class Jogo:
         self.jogador = None
         self.inimigo = None
         self.fase_atual = 0
-       
+
         for f in self.fases:
             for inimigo in f.inimigos:
                 inimigo.vida = inimigo.vida_max
@@ -56,8 +55,6 @@ class Jogo:
 
         for inimigo_atual in inimigos_da_fase.inimigos:
             self.inimigo = inimigo_atual
-
-
             self.inimigo.vida = self.inimigo.vida_max
 
             mensagem_apareceu_inimigo(self.inimigo.nome)
@@ -118,19 +115,7 @@ class Jogo:
 
     def explorar_fases(self):
         if self.fase_atual >= len(self.fases):
-            mensagem_zerou_jogo()
-            while True:
-                opcao_recomecar_escolhida = input_recomecar_jogo()
-                if opcao_recomecar_escolhida == "1":
-                    introducao_jogo()
-                    self.reiniciar_jogo()
-                    self.preparar_jogador()
-                    parar_audio()
-                    break
-                elif opcao_recomecar_escolhida == "2":
-                    return "zerou"
-                else:
-                    mensagem_opcao_invalida()
+            return "zerou"
 
         jogar_fase = self.buscar_fase()
         resultado_combate = self.realizar_combate()
@@ -142,9 +127,24 @@ class Jogo:
         self.fase_atual += 1
 
         if self.fase_atual >= len(self.fases):
+            console.clear()
             mensagem_zerou_jogo()
-            passar_texto("")
+
+            texto_vitoria = (
+                "[bold gold1]🏆 PARABÉNS! VOCÊ SOBREVIVEU AO APOCALIPSE! 🏆[/]\n\n"
+                "Você derrotou todas as ameaças, superou as adversidades\n"
+                "e conseguiu escapar do sistema com vida.\n\n"
+                "[bold green]Obrigado por jogar NecroSystem![/]"
+            )
+            console.print(Panel(
+                texto_vitoria,
+                title="[bold white]🎉 VITÓRIA 🎉[/]",
+                border_style="gold1",
+                expand=False
+            ))
+            input("\nPressione [Enter] para continuar...")
             return "zerou"
+
         else:
             mensagem_nova_fase_desbloqueada()
             self.fase_mostrar_cena = True
@@ -159,11 +159,7 @@ class Jogo:
         loja = Loja()
 
         while self.rodando:
-
-            if self.fase_atual >= len(self.fases):
-                self.rodando = False
-                break
-
+            # ✨ Removido o break seco daqui de cima para permitir que as telas apareçam
             cena_fase = self.buscar_fase()
             if self.fase_mostrar_cena:
                 introducao_fase(cena_fase.imagem, cena_fase.descricao)
@@ -177,7 +173,7 @@ class Jogo:
             if opcao_menu_escolhida == "1":
                 resultado = self.explorar_fases()
 
-                if resultado == "morreu":  # ✨ Corrigido para checar string pura
+                if resultado == "morreu":
                     while True:
                         opcao_recomecar_escolhida = input_recomecar_jogo()
                         if opcao_recomecar_escolhida == "1":
@@ -195,6 +191,7 @@ class Jogo:
 
                 elif resultado == "zerou":
                     while True:
+                        # ✨ Pergunta se quer jogar de novo APÓS ver as mensagens de parabéns
                         opcao_recomecar_escolhida = input_recomecar_jogo()
                         if opcao_recomecar_escolhida == "1":
                             introducao_jogo()
