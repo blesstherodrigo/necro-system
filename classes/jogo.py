@@ -131,15 +131,15 @@ class Jogo:
             mensagem_zerou_jogo()
 
             texto_vitoria = (
-                "[bold gold1]🏆 PARABÉNS! VOCÊ SOBREVIVEU AO APOCALIPSE! 🏆[/]\n\n"
+                "[bold green] PARABÉNS! VOCÊ SOBREVIVEU AO APOCALIPSE! [/]\n\n"
                 "Você derrotou todas as ameaças, superou as adversidades\n"
                 "e conseguiu escapar do sistema com vida.\n\n"
                 "[bold green]Obrigado por jogar NecroSystem![/]"
             )
             console.print(Panel(
                 texto_vitoria,
-                title="[bold white]🎉 VITÓRIA 🎉[/]",
-                border_style="gold1",
+                title="[bold green] VITÓRIA [/]",
+                border_style="green",
                 expand=False
             ))
             input("\nPressione [Enter] para continuar...")
@@ -159,10 +159,10 @@ class Jogo:
         loja = Loja()
 
         while self.rodando:
-            # ✨ Removido o break seco daqui de cima para permitir que as telas apareçam
             cena_fase = self.buscar_fase()
             if self.fase_mostrar_cena:
-                introducao_fase(cena_fase.imagem, cena_fase.descricao)
+                descricao_verde = f"\033[1;32m{cena_fase.descricao}\033[0m"
+                introducao_fase(cena_fase.imagem, descricao_verde)
                 self.fase_mostrar_cena = False
 
             opcao_menu_escolhida = menu_principal(
