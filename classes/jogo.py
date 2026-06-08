@@ -17,12 +17,10 @@ from textos.mensagens import (
 )
 from rich.console import Console
 from rich.panel import Panel
-from rich.columns import Columns
 
 from textos.tela import passar_texto
 
 console = Console()
-
 
 
 class Jogo:
@@ -48,12 +46,20 @@ class Jogo:
         self.jogador = None
         self.inimigo = None
         self.fase_atual = 0
+       
+        for f in self.fases:
+            for inimigo in f.inimigos:
+                inimigo.vida = inimigo.vida_max
 
     def realizar_combate(self):
         inimigos_da_fase = self.buscar_fase()
 
         for inimigo_atual in inimigos_da_fase.inimigos:
             self.inimigo = inimigo_atual
+
+
+            self.inimigo.vida = self.inimigo.vida_max
+
             mensagem_apareceu_inimigo(self.inimigo.nome)
 
             while self.jogador.esta_vivo() and self.inimigo.esta_vivo():
@@ -62,6 +68,7 @@ class Jogo:
                     status_txt = f"[bold green] Jogador:[/] {self.jogador.nome} | HP: [bold red]{self.jogador.vida}/{self.jogador.vida_max}[/] | Moedas: [bold yellow] {self.jogador.moedas}[/]\n" \
                                  f"[bold magenta] Inimigo:[/] {self.inimigo.nome} | HP: [bold red]{self.inimigo.vida}/{self.inimigo.vida_max}[/]"
                     console.print(Panel(status_txt, title=" STATUS DO COMBATE ", border_style="red"))
+
                     opcao_combate_escolhida = menu_combate(
                         self.jogador.nome,
                         self.inimigo.nome,
@@ -75,10 +82,8 @@ class Jogo:
 
                     if opcao_combate_escolhida == "1":
                         ataque_realizado = self.jogador.atacar_com_municao(self.inimigo)
-
                         if not ataque_realizado:
                             continue
-
                         break
 
                     elif opcao_combate_escolhida == "2":
@@ -87,25 +92,18 @@ class Jogo:
 
                     elif opcao_combate_escolhida == "3":
                         medicina_utilizada = self.jogador.usar_medicina()
-
                         if not medicina_utilizada:
                             continue
-
                         break
-
                     else:
                         mensagem_opcao_invalida()
 
                 if self.inimigo.esta_vivo():
-                    if self.inimigo.esta_vivo():
-                        self.jogador.regenerar()
+                    self.jogador.regenerar()
+                    dano_do_ataque = self.inimigo.realizar_ataque()
+                    if dano_do_ataque > 0:
+                        self.jogador.receber_dano(dano_do_ataque)
 
-                        dano_do_ataque = self.inimigo.realizar_ataque()
-
-                        if dano_do_ataque > 0:
-                            self.jogador.receber_dano(dano_do_ataque)
-
-            # recompensas por fase ou por combate???
             if self.jogador.esta_vivo():
                 self.jogador.resetar_efeitos_luta()
                 recompensa = random.randint(15, 35)
@@ -123,7 +121,6 @@ class Jogo:
             mensagem_zerou_jogo()
             while True:
                 opcao_recomecar_escolhida = input_recomecar_jogo()
-
                 if opcao_recomecar_escolhida == "1":
                     introducao_jogo()
                     self.reiniciar_jogo()
@@ -136,8 +133,7 @@ class Jogo:
                     mensagem_opcao_invalida()
 
         jogar_fase = self.buscar_fase()
-
-        resultado_combate = self.realizar_combate()      # inicia o combate
+        resultado_combate = self.realizar_combate()
 
         if resultado_combate == "morreu":
             return "morreu"
@@ -147,11 +143,13 @@ class Jogo:
 
         if self.fase_atual >= len(self.fases):
             mensagem_zerou_jogo()
-            return passar_texto("zerou")
+            passar_texto("")
+            return "zerou"
         else:
             mensagem_nova_fase_desbloqueada()
             self.fase_mostrar_cena = True
-            return passar_texto("venceu")
+            passar_texto("")
+            return "venceu"
 
     def iniciar_jogo(self):
         introducao_jogo()
@@ -161,12 +159,15 @@ class Jogo:
         loja = Loja()
 
         while self.rodando:
-            if self.fase_atual < len(self.fases):
-                cena_fase = self.buscar_fase()
 
-                if self.fase_mostrar_cena:
-                    introducao_fase(cena_fase.imagem, cena_fase.descricao)
-                    self.fase_mostrar_cena = False
+            if self.fase_atual >= len(self.fases):
+                self.rodando = False
+                break
+
+            cena_fase = self.buscar_fase()
+            if self.fase_mostrar_cena:
+                introducao_fase(cena_fase.imagem, cena_fase.descricao)
+                self.fase_mostrar_cena = False
 
             opcao_menu_escolhida = menu_principal(
                 self.fase_atual,
@@ -176,10 +177,25 @@ class Jogo:
             if opcao_menu_escolhida == "1":
                 resultado = self.explorar_fases()
 
-                if resultado == passar_texto("morreu"):
+                if resultado == "morreu":  # ✨ Corrigido para checar string pura
                     while True:
                         opcao_recomecar_escolhida = input_recomecar_jogo()
+                        if opcao_recomecar_escolhida == "1":
+                            introducao_jogo()
+                            self.reiniciar_jogo()
+                            self.preparar_jogador()
+                            parar_audio()
+                            break
+                        elif opcao_recomecar_escolhida == "2":
+                            mensagem_saindo_do_jogo()
+                            self.rodando = False
+                            break
+                        else:
+                            mensagem_opcao_invalida()
 
+                elif resultado == "zerou":
+                    while True:
+                        opcao_recomecar_escolhida = input_recomecar_jogo()
                         if opcao_recomecar_escolhida == "1":
                             introducao_jogo()
                             self.reiniciar_jogo()
@@ -210,7 +226,6 @@ class Jogo:
             elif opcao_menu_escolhida == "5":
                 while True:
                     opcao_sair_escolhida = input_sair_do_jogo()
-
                     if opcao_sair_escolhida == "1":
                         mensagem_saindo_do_jogo()
                         self.rodando = False
@@ -219,6 +234,5 @@ class Jogo:
                         break
                     else:
                         mensagem_opcao_invalida()
-
             else:
                 mensagem_opcao_invalida()
