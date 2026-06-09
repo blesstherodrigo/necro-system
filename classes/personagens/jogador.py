@@ -3,7 +3,6 @@ from classes.personagens.personagem import Personagem
 from classes.itens.mochila import Mochila
 from classes.itens.municao import Municao
 from classes.itens.medicina import Medicina
-
 from textos.tela import enter_continuar, enter_voltar, limpar_tela, limpar_intervalo, passar_texto
 from textos.inputs import input_escolha_personagem, input_nome_do_jogdor
 from textos.mensagens import mensagem_opcao_invalida, mensagem_recebeu_dano, mensagem_digite_nome
@@ -43,7 +42,7 @@ class Jogador(Personagem):
             else:
                 mensagem_opcao_invalida()
 
-        return Jogador(nome, 100, 100, 10, imagem, Mochila(), 50)
+        return Jogador(nome, 100, 100, 10, imagem, Mochila(), 60)
 
     def atacar_com_municao(self, inimigo):
         municao = self.escolher_municao()

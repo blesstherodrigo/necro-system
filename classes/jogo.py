@@ -103,7 +103,7 @@ class Jogo:
 
             if self.jogador.esta_vivo():
                 self.jogador.resetar_efeitos_luta()
-                recompensa = random.randint(15, 35)
+                recompensa = random.randint(20, 40)
                 self.jogador.moedas += recompensa
                 mensagem_venceu(self.inimigo.nome)
                 mensagem_ganhou_moedas(recompensa)
@@ -191,7 +191,6 @@ class Jogo:
 
                 elif resultado == "zerou":
                     while True:
-                        # ✨ Pergunta se quer jogar de novo APÓS ver as mensagens de parabéns
                         opcao_recomecar_escolhida = input_recomecar_jogo()
                         if opcao_recomecar_escolhida == "1":
                             introducao_jogo()

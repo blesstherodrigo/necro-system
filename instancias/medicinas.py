@@ -12,15 +12,15 @@ adrenalina = Medicina(
 antidoto = Medicina(
     "Antídoto",
     "Cura Instantânea",
-    30,
-    15,
+    50,
+    10,
     "instantaneo"
 )
 
 soro = Medicina(
     "Soro",
     "Regeneração Duradouro",
-    5,
+    10,
     25,
     "luta"
 )

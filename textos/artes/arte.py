@@ -74,4 +74,4 @@ def mostrar_barra_hp(vida, vida_max, tamanho=20):
 
     barra = "█" * preenchido + "░" * vazio
 
-    return f"[{barra}] {vida}/{vida_max}"
+    return f"[{barra}] {vida:.1f}/{vida_max}"

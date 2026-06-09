@@ -110,7 +110,7 @@ class Boss(Inimigo):
         if acao == "atacar":
             self.defendendo = False
 
-            multiplicador = random.choice([1, 1.25, 1.50, 1.75, 2])      # deixar multiplicador apenas no buff ???
+            multiplicador = random.choice([0.75, 0.9, 1, 1, 1, 1.25])      # deixar multiplicador apenas no buff ???
             dano_total = self.dano * multiplicador
 
             if self.buff_ativo:
@@ -130,7 +130,7 @@ class Boss(Inimigo):
         elif acao == "curar":
             self.defendendo = False
 
-            quantidade_cura = int(self.vida_max * 0.50)
+            quantidade_cura = int(self.vida_max * 0.40)
             self.curar(quantidade_cura)
 
             movimento_cura(self.nome, self.movimentos[2], quantidade_cura)     # indice [2] é Cura

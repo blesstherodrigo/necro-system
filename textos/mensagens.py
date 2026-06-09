@@ -15,11 +15,11 @@ def mensagem_digite_nome():
     enter_voltar()
 
 def mensagem_recebeu_dano(nome, dano):
-    passar_texto(f"\n{RED} IMPACTO:{RESET} {VERDE}{nome} recebeu {dano} de dano.{RESET}")
+    passar_texto(f"\n{RED} IMPACTO:{RESET} {VERDE}{nome} recebeu {dano:.1f} de dano.{RESET}")
     enter_continuar()
 
 def mensagem_morreu():
-    passar_texto(f"\n{RED} VOCÊ MORREU... O sistema necro-orgânico consumiu você. {RESET}", velocidade=0.05)
+    passar_texto(f"\n{RED} VOCÊ MORREU... O sistema necrosystem te destrui você. {RESET}", velocidade=0.05)
     enter_continuar()
 
 def mensagem_venceu(nome_inimigo):

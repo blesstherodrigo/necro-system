@@ -8,7 +8,14 @@ def introducao_jogo():
     tocar_audio("intro.mp3")
     mostrar_arte("logo.txt")
     enter_continuar()
-
+    passar_texto(
+        "\n> SISTEMA INICIADO..."
+        "\n> AMBIENTE: APOCALIPSE"
+        "\n> AMEAÇA: ZUMBIS"
+        "\n> OBJETIVO: SOBREVIVER"
+        "\n> STATUS: DESCONHECIDO",
+        0.04
+    )
 def introducao_fase(imagem_fase, descricao_fase):
     limpar_tela()
     mostrar_arte(imagem_fase)
